@@ -38,6 +38,14 @@
     .sNumInput {
       width: 30%;
     }
+
+    .actionComment {
+      width: 50%;
+    }
+    
+    .sizeRadio {
+      padding-right: 5%;
+    }
   </style>
 
 </head>
@@ -165,19 +173,43 @@
             </div>
           </div>
 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+          <h4>Description</h4>
+
+          <div class="mdl-textfield mdl-js-textfield actionComment">
+            <textarea class="mdl-textfield__input" type="text" rows= "1" id="description" ></textarea>
+            <label class="mdl-textfield__label" for="description">A brief description of your declared action...</label>
+          </div>
+
+          <h5>Size</h5>
+
+          <div>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect sizeRadio" for="tiny">
+              <input type="radio" id="tiny" class="mdl-radio__button" name="options" value="1" />
+              <span class="mdl-radio__label">Tiny</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect sizeRadio" for="small">
+              <input type="radio" id="small" class="mdl-radio__button" name="options" value="2" />
+              <span class="mdl-radio__label">Small</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect sizeRadio" for="med">
+              <input type="radio" id="med" class="mdl-radio__button" name="options" value="3" checked />
+              <span class="mdl-radio__label">Medium</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect sizeRadio" for="large">
+              <input type="radio" id="large" class="mdl-radio__button" name="options" value="4" />
+              <span class="mdl-radio__label">Large</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect sizeRadio" for="huge">
+              <input type="radio" id="huge" class="mdl-radio__button" name="options" value="5" />
+              <span class="mdl-radio__label">Huge</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="garg">
+              <input type="radio" id="garg" class="mdl-radio__button" name="options" value="6" />
+              <span class="mdl-radio__label">Gargantuan</span>
+            </label>
+          </div>
+
         </div>
       </section>
     </main>
