@@ -12,6 +12,7 @@
 
   <link href="//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <link id="theme" rel="stylesheet" href="https://cdn.rawgit.com/MikeMitterer/dart-mdl-theme/master/blue_grey-light_green/material.min.css">
 
   <style>
     div.loading {
@@ -24,6 +25,18 @@
 
     body.mdl-upgrading div.loading {
       display: block;
+    }
+
+    .charContainer {
+      display: block;
+    }
+
+    .charName {
+      font-size: x-large;
+    }
+
+    .sNumInput {
+      width: 30%;
     }
   </style>
 
@@ -67,7 +80,90 @@
     <main class="mdl-layout__content">
       <section>
         <div class="mdl-panel mdl-panel--shadow">
-          <h3 class="mdl-color-text--primary">BB5e</h3>
+          <h3 class="mdl-color-text--primary">Initiative</h3>
+
+        <!-- Character Name Text Input -->
+          <div class="mdl-textfield mdl-js-textfield charContainer">
+            <input class="mdl-textfield__input charName" type="text" id="charName"/>
+            <label class="mdl-textfield__label charName" for="charName">Character Name</label>
+          </div>
+
+          <!-- d20 roll Input -->
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="d20" />
+            <label class="mdl-textfield__label" for="d20">d20 Roll</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+          </div>
+
+          <!-- Dex. modifier Input -->
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" pattern="-?+3[0-9]*(\.[0-9]+)?" id="dexMod" />
+            <label class="mdl-textfield__label" for="dexMod">Dex Modifier</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+          </div>
+
+          <h4>Declared Action</h4>
+
+          <!-- Check boxes for the player to declare their actions for the round. -->
+          <!-- Top Row -->
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col">
+              <!-- Spell -->
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Spell">
+                <input type="checkbox" id="Spell" class="mdl-checkbox__input" />
+                <span class="mdl-checkbox__label">Spell</span>
+              </label>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input sNumInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spellLevel" />
+                <label class="mdl-textfield__label sNumInput" for="spellLevel">Spell Level</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <!-- Ranged -->
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Ranged">
+                <input type="checkbox" id="Ranged" class="mdl-checkbox__input" />
+                <span class="mdl-checkbox__label">Ranged</span>
+              </label>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <!-- Custom -->
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Custom">
+                <input type="checkbox" id="Custom" class="mdl-checkbox__input" />
+                <span class="mdl-checkbox__label">Custom</span>
+              </label>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input sNumInput" type="text" pattern="-?+?[0-9]*(\.[0-9]+)?" id="customMod" />
+                <label class="mdl-textfield__label sNumInput" for="customMod">Modifier</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row -->
+          <div class="demo-grid-1 mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col">
+              <!-- Melee, heavy weapon -->
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="heavyWeap">
+                <input type="checkbox" id="heavyWeap" class="mdl-checkbox__input" />
+                <span class="mdl-checkbox__label">Melee, heavy weapon</span>
+              </label>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <!-- Melee, light or finesse weapon -->
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="lightWeap">
+                <input type="checkbox" id="lightWeap" class="mdl-checkbox__input" />
+                <span class="mdl-checkbox__label">Melee, light or finesse weapon</span>
+              </label>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col">
+              <!-- Melee, two-handed weapon -->
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="twoHand">
+                <input type="checkbox" id="twoHand" class="mdl-checkbox__input" />
+                <span class="mdl-checkbox__label">Melee, two-handed weapon</span>
+              </label>
+            </div>
+          </div>
 
           <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
             dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
@@ -92,9 +188,6 @@
           <li><a href="#">Help</a></li>
           <li><a href="#">Privacy &amp; Terms</a></li>
         </ul>
-      </div>
-      <div class="mdl-mini-footer--right-section">
-        <button class="mdl-mini-footer--social-btn"></button>
       </div>
     </footer>
   </div>
