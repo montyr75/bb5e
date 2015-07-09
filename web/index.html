@@ -46,6 +46,15 @@
     .sizeRadio {
       padding-right: 5%;
     }
+
+    .tableContainer {
+      display: inline-block;
+      margin-right: 10%;
+    }
+
+    .sectionBreak {
+      padding-top: 5%;
+    }
   </style>
 
 </head>
@@ -209,6 +218,80 @@
               <span class="mdl-radio__label">Gargantuan</span>
             </label>
           </div>
+
+          <h4 class="sectionBreak">Speed Factor Initiative Modifiers</h4>
+
+          <!-- Speed Factor Initiative Modifiers table  -->
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp tableContainer">
+            <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Factor</th>
+              <th>Initiative Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Spell</td>
+              <td>Subtract the spell's level</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Melee, heavy weapon</td>
+              <td>-2</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Melee, light or finesse weapon</td>
+              <td>+2</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Melee, two-handed weapon</td>
+              <td>-2</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Ranged, loading weapon</td>
+              <td>-5</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Custom</td>
+              <td>DM's discretion</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <!-- Size table  -->
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp tableContainer">
+            <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Creature Size</th>
+              <th>Initiative Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Tiny</td>
+              <td>+5</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Small</td>
+              <td>+2</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Medium</td>
+              <td>+0</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Large</td>
+              <td>-2</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Huge</td>
+              <td>-5</td>
+            </tr>
+            <tr>
+              <td class="mdl-data-table__cell--non-numeric">Gargantuan</td>
+              <td>-8</td>
+            </tr>
+            </tbody>
+          </table>
 
         </div>
       </section>
