@@ -26,16 +26,16 @@
       display: block;
     }
 
-    .charContainer {
+    .char-container {
       display: block;
     }
 
     .char-name {
-      font-size: x-large;
+      font-size: 20px;
     }
 
-    .sNumInput {
-      width: 30%;
+    .s-num-input {
+      width: 3em;
     }
 
     .actionComment {
@@ -99,94 +99,23 @@
           <h3 class="mdl-color-text--primary">Initiative</h3>
 
         <!-- Character Name Text Input -->
-          <div class="mdl-textfield mdl-js-textfield charContainer">
-            <input id="charName" class="mdl-textfield__input char-name" type="text" />
-            <label class="mdl-textfield__label char-name" for="charName">Character Name</label>
+          <div class="mdl-textfield mdl-js-textfield char-container">
+            <input id="char-name" class="mdl-textfield__input char-name" type="text" />
+            <label class="mdl-textfield__label char-name" for="char-name">Character Name</label>
           </div>
 
           <!-- d20 roll Input -->
           <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="d20" />
-            <label class="mdl-textfield__label" for="d20">d20 Roll</label>
+            <input class="mdl-textfield__input s-num-input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="d20" />
+            <label class="mdl-textfield__label s-num-input" for="d20">d20</label>
             <span class="mdl-textfield__error">Input is not a number!</span>
           </div>
 
           <!-- Dex. modifier Input -->
           <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?+3[0-9]*(\.[0-9]+)?" id="dexMod" />
-            <label class="mdl-textfield__label" for="dexMod">Dex Modifier</label>
+            <input class="mdl-textfield__input s-num-input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="dex-mod"/>
+            <label class="mdl-textfield__label s-num-input" for="dex-mod">Dex Mod</label>
             <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-
-          <h4>Declared Action</h4>
-
-          <!-- Check boxes for the player to declare their actions for the round. -->
-          <!-- Top Row -->
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-              <!-- Spell -->
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Spell">
-                <input type="checkbox" id="Spell" class="mdl-checkbox__input" />
-                <span class="mdl-checkbox__label">Spell</span>
-              </label>
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input sNumInput" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spellLevel" />
-                <label class="mdl-textfield__label sNumInput" for="spellLevel">Spell Level</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
-              </div>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-              <!-- Ranged -->
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Ranged">
-                <input type="checkbox" id="Ranged" class="mdl-checkbox__input" />
-                <span class="mdl-checkbox__label">Ranged</span>
-              </label>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-              <!-- Custom -->
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Custom">
-                <input type="checkbox" id="Custom" class="mdl-checkbox__input" />
-                <span class="mdl-checkbox__label">Custom</span>
-              </label>
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input sNumInput" type="text" pattern="-?+?[0-9]*(\.[0-9]+)?" id="customMod" />
-                <label class="mdl-textfield__label sNumInput" for="customMod">Modifier</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Row -->
-          <div class="demo-grid-1 mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-              <!-- Melee, heavy weapon -->
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="heavyWeap">
-                <input type="checkbox" id="heavyWeap" class="mdl-checkbox__input" />
-                <span class="mdl-checkbox__label">Melee, heavy weapon</span>
-              </label>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-              <!-- Melee, light or finesse weapon -->
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="lightWeap">
-                <input type="checkbox" id="lightWeap" class="mdl-checkbox__input" />
-                <span class="mdl-checkbox__label">Melee, light or finesse weapon</span>
-              </label>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-              <!-- Melee, two-handed weapon -->
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="twoHand">
-                <input type="checkbox" id="twoHand" class="mdl-checkbox__input" />
-                <span class="mdl-checkbox__label">Melee, two-handed weapon</span>
-              </label>
-            </div>
-          </div>
-
-
-          <h4>Description</h4>
-
-          <div class="mdl-textfield mdl-js-textfield actionComment">
-            <textarea class="mdl-textfield__input" rows= "1" id="description" ></textarea>
-            <label class="mdl-textfield__label" for="description">A brief description of your declared action...</label>
           </div>
 
           <h5>Size</h5>
@@ -221,7 +150,7 @@
           <h4 class="sectionBreak">Speed Factor Initiative Modifiers</h4>
 
           <!-- Speed Factor Initiative Modifiers table  -->
-          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp tableContainer">
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-data-table--selectable tableContainer">
             <thead>
             <tr>
               <th class="mdl-data-table__cell--non-numeric">Factor</th>
@@ -231,7 +160,14 @@
             <tbody>
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Spell</td>
-              <td>Subtract the spell's level</td>
+              <td>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input s-num-input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spell-level"/>
+                  <label class="mdl-textfield__label s-num-input" for="spell-level">Level</label>
+                  <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+                Subtract the spell's level
+              </td>
             </tr>
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Melee, heavy weapon</td>
@@ -251,7 +187,14 @@
             </tr>
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Custom</td>
-              <td>DM's discretion</td>
+              <td>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input s-num-input" type="text" pattern="-?+?[0-9]*(\.[0-9]+)?" id="customMod" />
+                  <label class="mdl-textfield__label s-num-input" for="customMod">Mod</label>
+                  <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+                DM's discretion
+              </td>
             </tr>
             </tbody>
           </table>
@@ -268,6 +211,12 @@
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Tiny</td>
               <td>+5</td>
+              <td>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect sizeRadio" for="tiny">
+                  <input type="radio" id="tiny" class="mdl-radio__button" name="options" value="1" />
+                  <span class="mdl-radio__label">Tiny</span>
+                </label>
+              </td>
             </tr>
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Small</td>
@@ -291,6 +240,14 @@
             </tr>
             </tbody>
           </table>
+
+          <h4>Description</h4>
+
+          <div class="mdl-textfield mdl-js-textfield actionComment">
+            <textarea class="mdl-textfield__input" rows= "1" id="description" ></textarea>
+            <label class="mdl-textfield__label" for="description">A brief description of your declared action...</label>
+          </div>
+
 
         </div>
       </section>
