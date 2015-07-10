@@ -1,8 +1,8 @@
 library bb5e.client.player.views;
 
 import 'dart:html';
-import 'package:bb5e/client/shared.dart';
-import 'package:bb5e/models/models.dart';
+import '../../client/shared.dart';
+import '../../models/entries/initiative_total_entry.dart';
 
 class PlayerInitiativeView implements View {
   InitiativeTotalEntry _init;

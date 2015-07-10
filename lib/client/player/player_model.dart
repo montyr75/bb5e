@@ -1,7 +1,7 @@
 library bb5e.client.player.model;
 
-import 'package:bb5e/models/models.dart';
+import '../../models/entries/initiative_total_entry.dart';
 
 class PlayerModel {
-  //InitiativeTotalEntry init = new InitiativeTotalEntry();
+  InitiativeTotalEntry init = new InitiativeTotalEntry();
 }

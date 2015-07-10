@@ -5,7 +5,6 @@ import 'package:console_log_handler/console_log_handler.dart';
 
 import 'package:mdl/mdl.dart';
 
-import 'package:bb5e/client/shared.dart';
 import 'package:bb5e/client/player/player_model.dart';
 import 'package:bb5e/client/player/views.dart';
 
