@@ -22,7 +22,7 @@ class PlayerInitiativeView implements View {
   }
 
   void _setupListeners() {
-    charName.onChange.listen((Event event) {
+    charName.onInput.listen((Event event) {
 
     });
 
