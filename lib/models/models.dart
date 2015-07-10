@@ -1,12 +1,7 @@
 library bb5e.models.models;
 
-class PlayerInitiativeModel {
-  String characterName;
-  // ... and so on ...
+// this type will be derived from CalculatedEntry (DD5)
+// need to override addMod() to preserve uniqueness
+class InitiativeTotalEntry {
 
-  int initiativeTotal;
-
-  void calculate() {
-
-  }
 }
