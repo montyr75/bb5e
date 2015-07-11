@@ -22,39 +22,40 @@ class Entry<T> {
 
 // takes only a single Mod and uses that as the Entry's value
 class ModifiableEntry<T> extends Entry implements Modifiable {
-  List<Mod> mods;
+  Mod mod;
 
-  ModifiableEntry() {
-    mods = new List(1);
-  }
+  ModifiableEntry();
 
 //  ModifiableEntry.fromMap(Map map) : super.fromMap(map) {
-//    mods = map["mods"].map((Map map) => new Mod.fromMap(map)).toList();
+//    mod = new Mod.fromMap(map);
 //  }
 
-  void addMod(Mod mod) {
-    mods[0] = mod;
-
-    _value = mods[0].value;
+  void addMod(Mod newMod) {
+    mod = mod;
+    _value = value;
   }
 
-  void removeMod(Mod mod) {
-    mods[0] = _value = null;
+  void removeMod(Mod oldMod) {
+    mod = _value = null;
   }
 
-  @override void set value(T newVal) {
-    // throw exception
+  @override set value(T newValue) {
+    // throw exception -- only mods should ever set the value
   }
 }
 
 // takes any number of mods and uses them to calculate the value (simple math)
-class CalculatedEntry<T> extends ModifiableEntry {
+class CalculatedEntry<T> extends Entry implements Modifiable {
+  List<Mod> mods;
   num min;
   num max;
 
   CalculatedEntry({this.min: null, this.max: null}) {
     _value = null;
-    mods = [];
+
+    if (mods == null) {
+      mods = [];
+    }
   }
 
 //  CalculatedEntry.fromMap(Map map) : super.fromMap(map) {
@@ -78,15 +79,20 @@ class CalculatedEntry<T> extends ModifiableEntry {
       return;
     }
 
+    // calculate value as sum of Mod values
     List<num> values = mods.map((Mod mod) => mod.value).toList();
     _value = values.reduce((num totalValue, num currentValue) => totalValue + currentValue);
 
+    // enforce min/max
     if (min != null) {
       _value = _value < min ? min : _value;
     }
-
     if (max != null) {
       _value = _value > max ? max : _value;
     }
+  }
+
+  @override set value(T newValue) {
+    // throw exception -- only mods should ever set the value
   }
 }
