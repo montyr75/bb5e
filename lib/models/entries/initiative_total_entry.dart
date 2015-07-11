@@ -3,7 +3,7 @@ library bb5e.models.entries.inititative_total_entry;
 import '../mod.dart';
 import '../entry.dart';
 
-class InitiativeTotalEntry extends CalculatedEntry {
+class InitiativeTotalEntry<T> extends CalculatedEntry {
   @override void addMod(Mod mod) {
     // preserve uniqueness
     if (mods.indexOf(mod) == -1) {
@@ -14,11 +14,15 @@ class InitiativeTotalEntry extends CalculatedEntry {
 
       super.addMod(mod);
     }
-
   }
 
   @override void calculate() {
-    super.calculate();
+    if (mods.any((Mod mod) => mod.name == "Incapacitated")) {
+      value = 0;
+    }
+    else {
+      super.calculate();
+    }
   }
 
   @override String toString() => "Initiative Total: $value\n  $mods";
@@ -167,30 +171,8 @@ String initiativeTotalModsJSON = '''
       "source": "null",
       "affectedStat": "initiativeTotal",
       "value": 0,
-      "description": "Incapacitated characters cannot move or take actions, and they have an initiative total of 0.",
+      "description": "An incapacitated creature can’t take actions or reactions, and it has an initiative total of 0.",
       "ref": "PHB 291"
-    },
-    {
-      "level": null,
-      "name": "Unconscious",
-      "type": "PENALTY",
-      "subtype": "Condition",
-      "source": "null",
-      "affectedStat": "initiativeTotal",
-      "value": 0,
-      "description": "Unconscious characters are incapcitated.",
-      "ref": "PHB 292"
-    },
-    {
-      "level": null,
-      "name": "Surprised",
-      "type": "PENALTY",
-      "subtype": "Condition",
-      "source": "null",
-      "affectedStat": "initiativeTotal",
-      "value": 0,
-      "description": "Surprised characters are incapcitated for one round.",
-      "ref": "PHB 189"
     },
     {
       "level": null,
@@ -201,17 +183,6 @@ String initiativeTotalModsJSON = '''
       "affectedStat": "initiativeTotal",
       "value": 0,
       "description": null,
-      "ref": null
-    },
-    {
-      "level": null,
-      "name": "Stunned",
-      "type": "MODIFIER",
-      "subtype": "Condition",
-      "source": null,
-      "affectedStat": "initiativeTotal",
-      "value": null,
-      "description": "Stunned characters are incapcitated.",
       "ref": null
     }
   ]

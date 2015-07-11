@@ -49,7 +49,7 @@ class Mod<T> {
 
   @override bool operator ==(Mod other) => id == other.id;
 
-  @override String toString() => "MOD--> id: $id, name: $name";
+  @override String toString() => "$name: $value";
 }
 
 class ModType {
@@ -60,8 +60,6 @@ class ModType {
 }
 
 abstract class Modifiable {
-  List<Mod> mods;     // base values are treated as just another mod
-
   void addMod(Mod mod);
   void removeMod(Mod mod);
 }
