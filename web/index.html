@@ -30,29 +30,22 @@
       display: block;
     }
 
-    .char-name {
-      font-size: 20px;
+    .char-name-input {
+      width: 10em;
     }
 
     .s-num-input {
-      width: 3em;
+      margin-right: 2em;
+      width: 4em;
     }
 
     .action-comment {
       width: 50%;
     }
     
-    .size-radio {
-      padding-right: 5%;
-    }
-
     .table-container {
       display: inline-block;
       margin-right: 10%;
-    }
-
-    .section-break {
-      padding-top: 5%;
     }
   </style>
 
@@ -100,8 +93,8 @@
 
         <!-- Character Name Text Input -->
           <div class="mdl-textfield mdl-js-textfield char-container">
-            <input id="char-name" class="mdl-textfield__input char-name" type="text" />
-            <label class="mdl-textfield__label char-name" for="char-name">Character Name</label>
+            <input id="char-name" class="mdl-textfield__input char-name-input" type="text" />
+            <label class="mdl-textfield__label char-name-input" for="char-name">Character Name</label>
           </div>
 
           <!-- d20 roll Input -->
@@ -118,36 +111,7 @@
             <span class="mdl-textfield__error">Input is not a number!</span>
           </div>
 
-          <h5>Size</h5>
-
-          <div>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect size-radio" for="tiny">
-              <input type="radio" id="tiny" class="mdl-radio__button" name="options" value="1" />
-              <span class="mdl-radio__label">Tiny</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect size-radio" for="small">
-              <input type="radio" id="small" class="mdl-radio__button" name="options" value="2" />
-              <span class="mdl-radio__label">Small</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect size-radio" for="med">
-              <input type="radio" id="med" class="mdl-radio__button" name="options" value="3" checked />
-              <span class="mdl-radio__label">Medium</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect size-radio" for="large">
-              <input type="radio" id="large" class="mdl-radio__button" name="options" value="4" />
-              <span class="mdl-radio__label">Large</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect size-radio" for="huge">
-              <input type="radio" id="huge" class="mdl-radio__button" name="options" value="5" />
-              <span class="mdl-radio__label">Huge</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="garg">
-              <input type="radio" id="garg" class="mdl-radio__button" name="options" value="6" />
-              <span class="mdl-radio__label">Gargantuan</span>
-            </label>
-          </div>
-
-          <h4 class="section-break">Speed Factor Initiative Modifiers</h4>
+          <h4>Speed Factor Initiative Modifiers</h4>
 
           <!-- Speed Factor Initiative Modifiers table  -->
           <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-data-table--selectable table-container">
@@ -161,12 +125,24 @@
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Spell</td>
               <td>
-                <div class="mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input s-num-input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spell-level"/>
-                  <label class="mdl-textfield__label s-num-input" for="spell-level">Level</label>
-                  <span class="mdl-textfield__error">Input is not a number!</span>
+                <div>
+                  Subtract the spell's level
+                  <button id="spell-level" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                    <i class="material-icons">arrow_drop_down_circle</i>
+                  </button>
+                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="spell-level">
+                    <li class="mdl-menu__item">Cantrip</li>
+                    <li class="mdl-menu__item">1</li>
+                    <li class="mdl-menu__item">2</li>
+                    <li class="mdl-menu__item">3</li>
+                    <li class="mdl-menu__item">4</li>
+                    <li class="mdl-menu__item">5</li>
+                    <li class="mdl-menu__item">6</li>
+                    <li class="mdl-menu__item">7</li>
+                    <li class="mdl-menu__item">8</li>
+                    <li class="mdl-menu__item">9</li>
+                  </ul>
                 </div>
-                Subtract the spell's level
               </td>
             </tr>
             <tr>
@@ -188,55 +164,39 @@
             <tr>
               <td class="mdl-data-table__cell--non-numeric">Custom</td>
               <td>
-                <div class="mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input s-num-input" type="text" pattern="-?+?[0-9]*(\.[0-9]+)?" id="customMod" />
-                  <label class="mdl-textfield__label s-num-input" for="customMod">Mod</label>
-                  <span class="mdl-textfield__error">Input is not a number!</span>
+                <div>
+                  DM's discretion
+                  <button id="custom-action" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                    <i class="material-icons">arrow_drop_down_circle</i>
+                  </button>
+                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="custom-action">
+                    <li class="mdl-menu__item">-5</li>
+                    <li class="mdl-menu__item">-2</li>
+                    <li class="mdl-menu__item">0</li>
+                    <li class="mdl-menu__item">+2</li>
+                    <li class="mdl-menu__item">+5</li>
+                  </ul>
                 </div>
-                DM's discretion
               </td>
             </tr>
-            </tbody>
-          </table>
-
-          <!-- Size table  -->
-          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table-container">
-            <thead>
-            <tr>
-              <th class="mdl-data-table__cell--non-numeric">Creature Size</th>
-              <th>Initiative Modifier</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td class="mdl-data-table__cell--non-numeric">Tiny</td>
-              <td>+5</td>
+            <tr id="creature-size">
+              <td class="mdl-data-table__cell--non-numeric is-checked label.is-checked">Creature Size</td>
               <td>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect size-radio" for="tiny">
-                  <input type="radio" id="tiny" class="mdl-radio__button" name="options" value="1" />
-                  <span class="mdl-radio__label">Tiny</span>
-                </label>
+                <div>
+                  Select
+                  <button id="creature-size-selection" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                    <i class="material-icons">arrow_drop_down_circle</i>
+                  </button>
+                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="creature-size-selection">
+                    <li class="mdl-menu__item">Tiny (+5)</li>
+                    <li class="mdl-menu__item">Small (+2)</li>
+                    <li class="mdl-menu__item">Medium (0)</li>
+                    <li class="mdl-menu__item">Large (-2)</li>
+                    <li class="mdl-menu__item">Huge (-5)</li>
+                    <li class="mdl-menu__item">Gargantuan (-8)</li>
+                  </ul>
+                </div>
               </td>
-            </tr>
-            <tr>
-              <td class="mdl-data-table__cell--non-numeric">Small</td>
-              <td>+2</td>
-            </tr>
-            <tr>
-              <td class="mdl-data-table__cell--non-numeric">Medium</td>
-              <td>+0</td>
-            </tr>
-            <tr>
-              <td class="mdl-data-table__cell--non-numeric">Large</td>
-              <td>-2</td>
-            </tr>
-            <tr>
-              <td class="mdl-data-table__cell--non-numeric">Huge</td>
-              <td>-5</td>
-            </tr>
-            <tr>
-              <td class="mdl-data-table__cell--non-numeric">Gargantuan</td>
-              <td>-8</td>
             </tr>
             </tbody>
           </table>
@@ -248,6 +208,20 @@
             <label class="mdl-textfield__label" for="description">A brief description of your declared action...</label>
           </div>
 
+          <div class="demo-grid-ruler mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+              <i class="material-icons">flash_on</i>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+              <i class="material-icons">flash_on</i>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+              <i class="material-icons">flash_on</i>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+              <i class="material-icons">flash_on</i>
+            </div>
+          </div>
 
         </div>
       </section>
