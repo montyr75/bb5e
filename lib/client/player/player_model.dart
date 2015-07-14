@@ -1,7 +1,17 @@
 library bb5e.client.player.model;
 
-import '../../models/entries/initiative_total_entry.dart';
+import 'package:bb5e/models/game_model.dart';
+import '../../models/initiative_total_entry.dart';
+import '../../models/conditions_model.dart';
 
 class PlayerModel {
-  InitiativeTotalEntry init = new InitiativeTotalEntry();
+  GameModel gameModel = new GameModel();
+
+  String charName = "";
+  InitiativeTotalEntry<int> init;
+  ConditionsModel conditions = new ConditionsModel();
+
+  PlayerModel() {
+    init = new InitiativeTotalEntry<int>(gameModel.initiativeTotalMods);
+  }
 }

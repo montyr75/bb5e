@@ -1,9 +1,17 @@
-library bb5e.models.entries.inititative_total_entry;
+library bb5e.models.inititative_total_entry;
 
-import '../mod.dart';
-import '../entry.dart';
+import 'mod.dart';
+import 'entry.dart';
+import '../client/shared.dart';
 
 class InitiativeTotalEntry<T> extends CalculatedEntry {
+  InitiativeTotalEntry(List<Mod<int>> initiativeTotalMods) {
+    // listen for incapacitated events
+    eventBus.on(IncapacitatedEvent).listen((_) {
+      addMod(initiativeTotalMods[12].clone());
+    });
+  }
+
   @override void addMod(Mod mod) {
     // preserve uniqueness
     if (mods.indexOf(mod) == -1) {

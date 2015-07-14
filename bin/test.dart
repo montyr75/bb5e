@@ -1,15 +1,17 @@
-import 'package:bb5e/models/entries/initiative_total_entry.dart';
-import 'package:bb5e/models/mod.dart';
-import 'package:bb5e/models/game_model.dart';
+import 'package:bb5e/client/player/player_model.dart';
 
-GameModel model = new GameModel();
-InitiativeTotalEntry<int> entry = new InitiativeTotalEntry<int>();
+import 'dart:async';
+
+PlayerModel model = new PlayerModel();
 
 void main() {
-  entry.addMod(model.initiativeTotalMods[0].clone()..value = 15);
-  entry.addMod(model.initiativeTotalMods[1].clone()..value = 2);
-  entry.addMod(model.initiativeTotalMods[2].clone()..value = -1);
-  entry.addMod(model.initiativeTotalMods[12].clone());
+  model.init.addMod(model.gameModel.initiativeTotalMods[0].clone()..value = 15);
 
-  print(entry);
+  print(model.init);
+
+  model.conditions.incapacitated = true;
+
+  model.init.removeMod(model.gameModel.initiativeTotalMods[8]);
+
+  scheduleMicrotask(() => print(model.init));
 }

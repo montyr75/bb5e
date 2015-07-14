@@ -17,7 +17,7 @@ void main() {
   configLogging();
   registerMdl();
   componentFactory().run().then((_) {
-//    currentView = new PlayerInitiativeView(model.init);
+//    currentView = new PlayerInitiativeView(model);
   });
 }
 

@@ -2,7 +2,7 @@ library bb5e.models.game_model;
 
 import 'dart:convert';
 import 'mod.dart';
-import 'entries/initiative_total_entry.dart';
+import 'initiative_total_entry.dart';
 
 class GameModel {
   List<Mod<int>> initiativeTotalMods;
