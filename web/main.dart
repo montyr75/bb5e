@@ -10,14 +10,14 @@ import 'package:bb5e/client/player/views.dart';
 
 final Logger _logger = new Logger('bb5e');
 
-//PlayerModel model = new PlayerModel();
-//View currentView;
+PlayerModel model = new PlayerModel();
+View currentView;
 
 void main() {
   configLogging();
   registerMdl();
   componentFactory().run().then((_) {
-//    currentView = new PlayerInitiativeView(model);
+  currentView = new PlayerInitiativeView(model);
   });
 }
 

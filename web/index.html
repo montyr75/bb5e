@@ -122,7 +122,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr id="spell">
               <td class="mdl-data-table__cell--non-numeric">Spell</td>
               <td>
                 <div>
@@ -131,56 +131,55 @@
                     <i class="material-icons">arrow_drop_down_circle</i>
                   </button>
                   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="spell-level">
-                    <li class="mdl-menu__item">Cantrip</li>
-                    <li class="mdl-menu__item">1</li>
-                    <li class="mdl-menu__item">2</li>
-                    <li class="mdl-menu__item">3</li>
-                    <li class="mdl-menu__item">4</li>
-                    <li class="mdl-menu__item">5</li>
-                    <li class="mdl-menu__item">6</li>
-                    <li class="mdl-menu__item">7</li>
-                    <li class="mdl-menu__item">8</li>
-                    <li class="mdl-menu__item">9</li>
+                    <li id="cantrip" value="0" class="mdl-menu__item">Cantrip</li>
+                    <li id="spell-level-1" value="-1" class="mdl-menu__item">1</li>
+                    <li id="spell-level-2" value="-2" class="mdl-menu__item">2</li>
+                    <li id="spell-level-3" value="-3" class="mdl-menu__item">3</li>
+                    <li id="spell-level-4" value="-4" class="mdl-menu__item">4</li>
+                    <li id="spell-level-5" value="-5" class="mdl-menu__item">5</li>
+                    <li id="spell-level-6" value="-6" class="mdl-menu__item">6</li>
+                    <li id="spell-level-7" value="-7" class="mdl-menu__item">7</li>
+                    <li id="spell-level-8" value="-8" class="mdl-menu__item">8</li>
+                    <li id="spell-level-9" value="-9" class="mdl-menu__item">9</li>
                   </ul>
                 </div>
               </td>
             </tr>
-            <tr>
+            <tr id="melee-hw" value="-2">
               <td class="mdl-data-table__cell--non-numeric">Melee, heavy weapon</td>
               <td>-2</td>
             </tr>
-            <tr>
+            <tr id="melee-lw" value="2">
               <td class="mdl-data-table__cell--non-numeric">Melee, light or finesse weapon</td>
               <td>+2</td>
             </tr>
-            <tr>
+            <tr id="melee-twohand" value="-2">
               <td class="mdl-data-table__cell--non-numeric">Melee, two-handed weapon</td>
               <td>-2</td>
             </tr>
-            <tr>
+            <tr id="ranged" value="-5">
               <td class="mdl-data-table__cell--non-numeric">Ranged, loading weapon</td>
               <td>-5</td>
             </tr>
             <tr id="creature-size">
-              <td class="mdl-data-table__cell--non-numeric is-checked label.is-checked">Creature Size</td>
+              <td class="mdl-data-table__cell--non-numeric">Creature Size</td>
               <td>
                 <div>
-                  Select
+                  If other than Medium, select
                   <button id="creature-size-selection" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                     <i class="material-icons">arrow_drop_down_circle</i>
                   </button>
                   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="creature-size-selection">
-                    <li class="mdl-menu__item">Tiny (+5)</li>
-                    <li class="mdl-menu__item">Small (+2)</li>
-                    <li class="mdl-menu__item">Medium (0)</li>
-                    <li class="mdl-menu__item">Large (-2)</li>
-                    <li class="mdl-menu__item">Huge (-5)</li>
-                    <li class="mdl-menu__item">Gargantuan (-8)</li>
+                    <li id="tiny" class="mdl-menu__item" value="5">Tiny (+5)</li>
+                    <li id="small" class="mdl-menu__item" value="2">Small (+2)</li>
+                    <li id="large" class="mdl-menu__item" value="-2">Large (-2)</li>
+                    <li id="huge" class="mdl-menu__item" value="-5">Huge (-5)</li>
+                    <li id="garg" class="mdl-menu__item" value="-8">Gargantuan (-8)</li>
                   </ul>
                 </div>
               </td>
             </tr>
-            <tr>
+            <tr id="custom">
               <td class="mdl-data-table__cell--non-numeric">Custom</td>
               <td>
                 <div>
@@ -189,11 +188,10 @@
                     <i class="material-icons">arrow_drop_down_circle</i>
                   </button>
                   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="custom-action">
-                    <li class="mdl-menu__item">-5</li>
-                    <li class="mdl-menu__item">-2</li>
-                    <li class="mdl-menu__item">0</li>
-                    <li class="mdl-menu__item">+2</li>
-                    <li class="mdl-menu__item">+5</li>
+                    <li id="custom-very-hard" value="-5" class="mdl-menu__item">-5</li>
+                    <li id="custom-hard" value="-2" class="mdl-menu__item">-2</li>
+                    <li id="custom-easy" value="2" class="mdl-menu__item">+2</li>
+                    <li id="custom-very-easy" value="5" class="mdl-menu__item">+5</li>
                   </ul>
                 </div>
               </td>
