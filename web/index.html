@@ -114,7 +114,7 @@
           <h4>Speed Factor Initiative Modifiers</h4>
 
           <!-- Speed Factor Initiative Modifiers table  -->
-          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-data-table--selectable table-container">
+          <table id="speed-factor-tbl" class="mdl-shadow--2dp table-container">
             <thead>
             <tr>
               <th class="mdl-data-table__cell--non-numeric">Factor</th>
@@ -122,47 +122,74 @@
             </tr>
             </thead>
             <tbody>
-            <tr id="spell">
-              <td class="mdl-data-table__cell--non-numeric">Spell</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spell-cb">
+                  <input type="checkbox" id="spell-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Spell</span>
+                </label>
+              </td>
               <td>
                 <div>
                   Subtract the spell's level
-                  <button id="spell-level" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-                    <i class="material-icons">arrow_drop_down_circle</i>
-                  </button>
-                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="spell-level">
-                    <li id="cantrip" value="0" class="mdl-menu__item">Cantrip</li>
-                    <li id="spell-level-1" value="-1" class="mdl-menu__item">1</li>
-                    <li id="spell-level-2" value="-2" class="mdl-menu__item">2</li>
-                    <li id="spell-level-3" value="-3" class="mdl-menu__item">3</li>
-                    <li id="spell-level-4" value="-4" class="mdl-menu__item">4</li>
-                    <li id="spell-level-5" value="-5" class="mdl-menu__item">5</li>
-                    <li id="spell-level-6" value="-6" class="mdl-menu__item">6</li>
-                    <li id="spell-level-7" value="-7" class="mdl-menu__item">7</li>
-                    <li id="spell-level-8" value="-8" class="mdl-menu__item">8</li>
-                    <li id="spell-level-9" value="-9" class="mdl-menu__item">9</li>
-                  </ul>
+                  <select id="spell-level-sel">
+                    <option value="0">Cantrip</option>
+                    <option value="-1">1st</option>
+                    <option value="-2">2nd</option>
+                    <option value="-3">3rd</option>
+                    <option value="-4">4th</option>
+                    <option value="-5">5th</option>
+                    <option value="-6">6th</option>
+                    <option value="-7">7th</option>
+                    <option value="-8">8th</option>
+                    <option value="-9">9th</option>
+                  </select>
                 </div>
               </td>
             </tr>
-            <tr id="melee-hw" value="-2">
-              <td class="mdl-data-table__cell--non-numeric">Melee, heavy weapon</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="melee-hw-cb">
+                  <input type="checkbox" id="melee-hw-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Melee, heavy weapon</span>
+                </label>
+              </td>
               <td>-2</td>
             </tr>
-            <tr id="melee-lw" value="2">
-              <td class="mdl-data-table__cell--non-numeric">Melee, light or finesse weapon</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="melee-lw-cb">
+                  <input type="checkbox" id="melee-lw-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Melee, light or finesse weapon</span>
+                </label>
+              </td>
               <td>+2</td>
             </tr>
-            <tr id="melee-twohand" value="-2">
-              <td class="mdl-data-table__cell--non-numeric">Melee, two-handed weapon</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="melee-twohand-cb">
+                  <input type="checkbox" id="melee-twohand-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Melee, two-handed weapon</span>
+                </label>
+              </td>
               <td>-2</td>
             </tr>
-            <tr id="ranged" value="-5">
-              <td class="mdl-data-table__cell--non-numeric">Ranged, loading weapon</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="ranged-loading-cb">
+                  <input type="checkbox" id="ranged-loading-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Ranged, loading weapon</span>
+                </label>
+              </td>
               <td>-5</td>
             </tr>
-            <tr id="creature-size">
-              <td class="mdl-data-table__cell--non-numeric">Creature Size</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="creature-size-cb">
+                  <input type="checkbox" id="creature-size-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Creature Size</span>
+                </label>
+              </td>
               <td>
                 <div>
                   If other than Medium, select
@@ -179,8 +206,13 @@
                 </div>
               </td>
             </tr>
-            <tr id="custom">
-              <td class="mdl-data-table__cell--non-numeric">Custom</td>
+            <tr>
+              <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="custom-cb">
+                  <input type="checkbox" id="custom-cb" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">Custom</span>
+                </label>
+              </td>
               <td>
                 <div>
                   DM's discretion

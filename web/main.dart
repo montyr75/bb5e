@@ -7,6 +7,7 @@ import 'package:mdl/mdl.dart';
 
 import 'package:bb5e/client/player/player_model.dart';
 import 'package:bb5e/client/player/views.dart';
+import 'package:bb5e/client/shared.dart';
 
 final Logger _logger = new Logger('bb5e');
 
@@ -17,7 +18,7 @@ void main() {
   configLogging();
   registerMdl();
   componentFactory().run().then((_) {
-  currentView = new PlayerInitiativeView(model);
+    currentView = new PlayerInitiativeView(model);
   });
 }
 

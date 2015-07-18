@@ -14,14 +14,11 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
 
   @override void addMod(Mod mod) {
     // preserve uniqueness
-    if (mods.indexOf(mod) == -1) {
-      // only one size allowed
-      if (mod.subtype == "Size") {
-        mods.removeWhere((Mod mod) => mod.subtype == "Size");
-      }
-
-      super.addMod(mod);
+    if (mods.indexOf(mod) != -1) {
+      super.removeMod(mod);
     }
+
+    super.addMod(mod);
   }
 
   @override void calculate() {
@@ -31,6 +28,8 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     else {
       super.calculate();
     }
+
+    print(this);
   }
 
   @override String toString() => "Initiative Total: $value\n  $mods";

@@ -12,22 +12,13 @@ class PlayerInitiativeView implements View {
   InputElement d20;
   InputElement dexMod;
   CheckboxInputElement spell;
-  ButtonInputElement  spellLevel;
+  SelectElement spellLevel;
   InputElement meleeHW;
   InputElement meleeLW;
   InputElement meleeTwoHand;
-  InputElement ranged;
+  InputElement rangedLoading;
   InputElement creatureSize;
-  InputElement tiny;
-  InputElement small;
-  InputElement large;
-  InputElement huge;
-  InputElement garg;
   InputElement custom;
-  InputElement customVeryHard;
-  InputElement customHard;
-  InputElement customEasy;
-  InputElement customVeryEasy;
 
   PlayerInitiativeView(PlayerModel this._model) {
     _getUIReferences();
@@ -38,30 +29,36 @@ class PlayerInitiativeView implements View {
     charName = querySelector("#char-name");
     d20 = querySelector("#d20");
     dexMod = querySelector("#dex-mod");
-    spell = querySelector("#spell");
-    spellLevel = querySelector("#spell-level");
-    meleeHW = querySelector("#melee-hw");
-    meleeLW = querySelector("#melee-lw");
-    meleeTwoHand = querySelector("#melee-twohand");
-    ranged = querySelector("#ranged");
-    creatureSize = querySelector("#creature-size");
-    tiny = querySelector("#tiny");
-    small = querySelector("#small");
-    large = querySelector("#large");
-    huge = querySelector("#huge");
-    garg = querySelector("#garg");
-    custom = querySelector("#custom");
-    customVeryHard = querySelector("#custom-very-hard");
-    customHard = querySelector("#custom-hard");
-    customEasy = querySelector("#custom-easy");
-    customVeryEasy = querySelector("#custom-very-easy");
+    spell = querySelector("#spell-cb");
+    spellLevel = querySelector("#spell-level-sel");
   }
 
   void _setupListeners() {
+    void _setSpellMod(Event event) {
+      if (spell.checked) {
+        _model.init.addMod(_model.gameModel.initiativeTotalMods[2].clone()..value = int.parse(spellLevel.value));
+      }
+      else {
+        _model.init.removeMod(_model.gameModel.initiativeTotalMods[2]);
+      }
+    }
+
     charName.onInput.listen((Event event) {
       _model.charName = (event.target as InputElement).value.trim();
-      print(_model.charName);
     });
+
+    d20.onInput.listen((Event event) {
+      int roll = int.parse(d20.value.trim(), onError: (_) => null);
+
+      if (roll != null) {
+        if (roll >= 1 && roll <= 20) {
+          _model.init.addMod(_model.gameModel.initiativeTotalMods[0].clone()..value = roll);
+        }
+      }
+    });
+
+    spell.onChange.listen(_setSpellMod);
+    spellLevel.onChange.listen(_setSpellMod);
 
     //Needs to check input first. This is not implemented yet.
 //    d20.onInput.listen((Event event) {
