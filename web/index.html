@@ -47,6 +47,12 @@
       display: inline-block;
       margin-right: 10%;
     }
+
+    .text-align-right {
+      text-align: right;
+      padding-right: 2%;
+      padding-left: 5%;
+    }
   </style>
 
 </head>
@@ -129,7 +135,7 @@
                   <span class="mdl-checkbox__label">Spell</span>
                 </label>
               </td>
-              <td>
+              <td class="text-align-right">
                 <div>
                   Subtract the spell's level
                   <select id="spell-level-sel">
@@ -154,7 +160,7 @@
                   <span class="mdl-checkbox__label">Melee, heavy weapon</span>
                 </label>
               </td>
-              <td>-2</td>
+              <td class="text-align-right">-2</td>
             </tr>
             <tr>
               <td>
@@ -163,7 +169,7 @@
                   <span class="mdl-checkbox__label">Melee, light or finesse weapon</span>
                 </label>
               </td>
-              <td>+2</td>
+              <td class="text-align-right">+2</td>
             </tr>
             <tr>
               <td>
@@ -172,7 +178,7 @@
                   <span class="mdl-checkbox__label">Melee, two-handed weapon</span>
                 </label>
               </td>
-              <td>-2</td>
+              <td class="text-align-right">-2</td>
             </tr>
             <tr>
               <td>
@@ -181,7 +187,7 @@
                   <span class="mdl-checkbox__label">Ranged, loading weapon</span>
                 </label>
               </td>
-              <td>-5</td>
+              <td class="text-align-right">-5</td>
             </tr>
             <tr>
               <td>
@@ -190,20 +196,18 @@
                   <span class="mdl-checkbox__label">Creature Size</span>
                 </label>
               </td>
-              <td>
-                <div>
-                  If other than Medium, select
-                  <button id="creature-size-selection" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-                    <i class="material-icons">arrow_drop_down_circle</i>
-                  </button>
-                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="creature-size-selection">
-                    <li id="tiny" class="mdl-menu__item" value="5">Tiny (+5)</li>
-                    <li id="small" class="mdl-menu__item" value="2">Small (+2)</li>
-                    <li id="large" class="mdl-menu__item" value="-2">Large (-2)</li>
-                    <li id="huge" class="mdl-menu__item" value="-5">Huge (-5)</li>
-                    <li id="garg" class="mdl-menu__item" value="-8">Gargantuan (-8)</li>
-                  </ul>
-                </div>
+              <td class="text-align-right">
+                  <div>
+                    If other than Medium, select
+                    <!-- Value for creature-size-sel is the index of the mod-->
+                    <select id="creature-size-sel">
+                      <option value="7">Tiny</option>
+                      <option value="8">Small</option>
+                      <option value="9">Large</option>
+                      <option value="10">Huge</option>
+                      <option value="11">Gargantuan</option>
+                    </select>
+                  </div>
               </td>
             </tr>
             <tr>
@@ -213,18 +217,15 @@
                   <span class="mdl-checkbox__label">Custom</span>
                 </label>
               </td>
-              <td>
+              <td class="text-align-right">
                 <div>
                   DM's discretion
-                  <button id="custom-action" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-                    <i class="material-icons">arrow_drop_down_circle</i>
-                  </button>
-                  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="custom-action">
-                    <li id="custom-very-hard" value="-5" class="mdl-menu__item">-5</li>
-                    <li id="custom-hard" value="-2" class="mdl-menu__item">-2</li>
-                    <li id="custom-easy" value="2" class="mdl-menu__item">+2</li>
-                    <li id="custom-very-easy" value="5" class="mdl-menu__item">+5</li>
-                  </ul>
+                  <select id="custom-sel">
+                    <option value="-5">-5</option>
+                    <option value="-2">-2</option>
+                    <option value="2">+2</option>
+                    <option value="5">+5</option>
+                  </select>
                 </div>
               </td>
             </tr>
