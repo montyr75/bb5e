@@ -16,10 +16,6 @@ class ModifiableEntry<T> extends Entry implements Modifiable {
 
   ModifiableEntry();
 
-//  ModifiableEntry.fromMap(Map map) : super.fromMap(map) {
-//    mod = new Mod.fromMap(map);
-//  }
-
   void addMod(Mod newMod) {
     mod = mod;
     value = value;
@@ -44,17 +40,12 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
     }
   }
 
-//  CalculatedEntry.fromMap(Map map) : super.fromMap(map) {
-//    min = map["min"];
-//    max = map["max"];
-//  }
-
-  @override void addMod(Mod mod) {
+  void addMod(Mod mod) {
     mods.add(mod);
     calculate();
   }
 
-  @override void removeMod(Mod mod) {
+  void removeMod(Mod mod) {
     mods.remove(mod);
     calculate();
   }
