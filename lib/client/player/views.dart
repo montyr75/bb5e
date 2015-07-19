@@ -13,10 +13,10 @@ class PlayerInitiativeView implements View {
   InputElement dexMod;
   CheckboxInputElement spell;
   SelectElement spellLevel;
-  InputElement meleeHW;
-  InputElement meleeLW;
-  InputElement meleeTwoHand;
-  InputElement rangedLoading;
+  CheckboxInputElement meleeHW;
+  CheckboxInputElement meleeLW;
+  CheckboxInputElement meleeTwoHand;
+  CheckboxInputElement rangedLoading;
   CheckboxInputElement creatureSize;
   SelectElement creatureSizeSel;
   CheckboxInputElement custom;
@@ -37,6 +37,10 @@ class PlayerInitiativeView implements View {
     creatureSizeSel = querySelector("#creature-size-sel");
     custom = querySelector("#custom-cb");
     customSel = querySelector("#custom-sel");
+    meleeHW = querySelector("#melee-hw-cb");
+    meleeLW = querySelector("#melee-lw-cb");
+    meleeTwoHand = querySelector("#melee-twohand-cb");
+    rangedLoading = querySelector("#ranged-loading-cb");
   }
 
   void _setupListeners() {
@@ -78,6 +82,42 @@ class PlayerInitiativeView implements View {
       }
     }
 
+    void _setMeleeHWMod(Event event) {
+      if (meleeHW.checked) {
+        _model.init.addMod(_model.gameModel.initiativeTotalMods[3].clone());
+      }
+      else {
+        _model.init.removeMod(_model.gameModel.initiativeTotalMods[3]);
+      }
+    }
+
+    void _setMeleeLWMod(Event event) {
+      if (meleeLW.checked) {
+        _model.init.addMod(_model.gameModel.initiativeTotalMods[4].clone());
+      }
+      else {
+        _model.init.removeMod(_model.gameModel.initiativeTotalMods[4]);
+      }
+    }
+
+    void _setMeleeTwoHandMod(Event event) {
+      if (meleeTwoHand.checked) {
+        _model.init.addMod(_model.gameModel.initiativeTotalMods[5].clone());
+      }
+      else {
+        _model.init.removeMod(_model.gameModel.initiativeTotalMods[5]);
+      }
+    }
+
+    void _setRangedLoadingMod(Event event) {
+      if (rangedLoading.checked) {
+        _model.init.addMod(_model.gameModel.initiativeTotalMods[6].clone());
+      }
+      else {
+        _model.init.removeMod(_model.gameModel.initiativeTotalMods[6]);
+      }
+    }
+
     charName.onInput.listen((Event event) {
       _model.charName = (event.target as InputElement).value.trim();
     });
@@ -92,6 +132,17 @@ class PlayerInitiativeView implements View {
       }
     });
 
+    dexMod.onInput.listen((Event event) {
+    //Need to implement real text cleanup.
+      int dMod = int.parse(dexMod.value.trim()..trimLeft(), onError: (_) => null);
+
+      if (dMod != null) {
+        if (dMod <= 5) {
+          _model.init.addMod(_model.gameModel.initiativeTotalMods[1].clone()..value = dMod);
+        }
+      }
+    });
+
     spell.onChange.listen(_setSpellMod);
     spellLevel.onChange.listen(_setSpellMod);
 
@@ -101,23 +152,9 @@ class PlayerInitiativeView implements View {
     custom.onChange.listen(_setCustomMod);
     customSel.onChange.listen(_setCustomMod);
 
-    //Needs to check input first. This is not implemented yet.
-//    d20.onInput.listen((Event event) {
-//      d20 = (event.target as InputElement).value.trim();
-//    });
-
-    //Needs to check input first. This is not implemented yet.
-//    dexMod.onInput.listen((Event event) {
-//      dexMod = (event.target as InputElement).value.trim();
-//    });
-
-    // example of adding a mod
-//    _model.init.addMod(_model.gameModel.initiativeTotalMods[0].clone());
-//    _model.init.addMod(_model.gameModel.initiativeTotalMods[3].clone());
-
-    // example of removing a mod
-//    _model.init.removeMod(_model.gameModel.initiativeTotalMods[3]);
-
-    // ... and so on ...
+    meleeHW.onChange.listen(_setMeleeHWMod);
+    meleeLW.onChange.listen(_setMeleeLWMod);
+    meleeTwoHand.onChange.listen(_setMeleeTwoHandMod);
+    rangedLoading.onChange.listen(_setRangedLoadingMod);
   }
 }
