@@ -95,7 +95,7 @@
     <main class="mdl-layout__content">
       <section>
         <div class="mdl-panel mdl-panel--shadow">
-          <h3 class="mdl-color-text--primary">Initiative</h3>
+          <h3 class="mdl-color-text--primary">Initiative: <span id="init-total"></span></h3>
 
         <!-- Character Name Text Input -->
           <div class="mdl-textfield mdl-js-textfield char-container">
@@ -235,8 +235,8 @@
           <h4>Description</h4>
 
           <div class="mdl-textfield mdl-js-textfield action-comment">
-            <textarea class="mdl-textfield__input" rows= "1" id="description" ></textarea>
-            <label class="mdl-textfield__label" for="description">A brief description of your declared action...</label>
+            <textarea id="description-txt" class="mdl-textfield__input" rows= "1"></textarea>
+            <label class="mdl-textfield__label" for="description-txt">A brief description of your declared action...</label>
           </div>
 
           <div class="demo-grid-ruler mdl-grid">

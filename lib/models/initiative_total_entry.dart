@@ -17,8 +17,17 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     if (mods.indexOf(mod) != -1) {
       super.removeMod(mod);
     }
+    // there can be only one Size mod
+    else if (mod.subtype == "Size") {
+      removeSizeMods();
+    }
 
     super.addMod(mod);
+  }
+
+  void removeSizeMods() {
+    mods.removeWhere((Mod mod) => mod.subtype == "Size");
+    calculate();
   }
 
   @override void calculate() {
@@ -28,6 +37,8 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     else {
       super.calculate();
     }
+
+    eventBus.fire(new InitiativeTotalCalculatedEvent(value));
 
     print(this);
   }

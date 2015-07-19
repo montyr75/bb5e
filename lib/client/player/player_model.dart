@@ -8,6 +8,7 @@ class PlayerModel {
   GameModel gameModel = new GameModel();
 
   String charName = "";
+  String actionDescription = "";
   InitiativeTotalEntry<int> init;
   ConditionsModel conditions = new ConditionsModel();
 

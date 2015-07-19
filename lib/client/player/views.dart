@@ -7,8 +7,11 @@ import '../../client/player/player_model.dart';
 class PlayerInitiativeView implements View {
   PlayerModel _model;
 
-  // UI refs
+  // UI refs (global)
   InputElement charName;
+  TextAreaElement actionDescription;
+
+  // UI refs (initiative)
   InputElement d20;
   InputElement dexMod;
   CheckboxInputElement spell;
@@ -22,6 +25,9 @@ class PlayerInitiativeView implements View {
   CheckboxInputElement custom;
   SelectElement customSel;
 
+  // UI refs (output)
+  SpanElement initTotal;
+
   PlayerInitiativeView(PlayerModel this._model) {
     _getUIReferences();
     _setupListeners();
@@ -29,6 +35,8 @@ class PlayerInitiativeView implements View {
 
   void _getUIReferences() {
     charName = querySelector("#char-name");
+    actionDescription = querySelector("#description-txt");
+
     d20 = querySelector("#d20");
     dexMod = querySelector("#dex-mod");
     spell = querySelector("#spell-cb");
@@ -41,6 +49,8 @@ class PlayerInitiativeView implements View {
     meleeLW = querySelector("#melee-lw-cb");
     meleeTwoHand = querySelector("#melee-twohand-cb");
     rangedLoading = querySelector("#ranged-loading-cb");
+
+    initTotal = querySelector("#init-total");
   }
 
   void _setupListeners() {
@@ -56,20 +66,10 @@ class PlayerInitiativeView implements View {
     //Worst function ever.
     void _setCreatureSizeMod(Event event) {
       if (creatureSize.checked) {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[7]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[8]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[9]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[10]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[11]);
         _model.init.addMod(_model.gameModel.initiativeTotalMods[int.parse(creatureSizeSel.value)].clone());
       }
-
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[7]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[8]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[9]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[10]);
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[11]);
+        _model.init.removeSizeMods();
       }
     }
 
@@ -122,6 +122,10 @@ class PlayerInitiativeView implements View {
       _model.charName = (event.target as InputElement).value.trim();
     });
 
+    actionDescription.onInput.listen((Event event) {
+      _model.actionDescription = (event.target as TextAreaElement).value.trim();
+    });
+
     d20.onInput.listen((Event event) {
       int roll = int.parse(d20.value.trim(), onError: (_) => null);
 
@@ -156,5 +160,14 @@ class PlayerInitiativeView implements View {
     meleeLW.onChange.listen(_setMeleeLWMod);
     meleeTwoHand.onChange.listen(_setMeleeTwoHandMod);
     rangedLoading.onChange.listen(_setRangedLoadingMod);
+
+    eventBus.on(InitiativeTotalCalculatedEvent).listen((InitiativeTotalCalculatedEvent event) {
+      if (event.value != null) {
+        initTotal.text = event.value.toString();
+      }
+      else {
+        initTotal.text = "";
+      }
+    });
   }
 }
