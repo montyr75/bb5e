@@ -3,9 +3,12 @@ library bb5e.client.player.views;
 import 'dart:html';
 import '../../client/shared.dart';
 import '../../client/player/player_model.dart';
+import '../client_connection_manager.dart';
+import '../../comms/message.dart';
 
 class PlayerInitiativeView implements View {
   PlayerModel _model;
+  ClientConnectionManager _ccm;
 
   // UI refs (global)
   InputElement charName;
@@ -24,11 +27,12 @@ class PlayerInitiativeView implements View {
   SelectElement creatureSizeSel;
   CheckboxInputElement custom;
   SelectElement customSel;
+  ButtonElement submit;
 
   // UI refs (output)
   SpanElement initTotal;
 
-  PlayerInitiativeView(PlayerModel this._model) {
+  PlayerInitiativeView(PlayerModel this._model, ClientConnectionManager this._ccm) {
     _getUIReferences();
     _setupListeners();
   }
@@ -49,6 +53,7 @@ class PlayerInitiativeView implements View {
     meleeLW = querySelector("#melee-lw-cb");
     meleeTwoHand = querySelector("#melee-twohand-cb");
     rangedLoading = querySelector("#ranged-loading-cb");
+    submit = querySelector("#submit-btn");
 
     initTotal = querySelector("#init-total");
   }
@@ -161,6 +166,8 @@ class PlayerInitiativeView implements View {
     meleeTwoHand.onChange.listen(_setMeleeTwoHandMod);
     rangedLoading.onChange.listen(_setRangedLoadingMod);
 
+    submit.onClick.listen(_submitInit);
+
     eventBus.on(InitiativeTotalCalculatedEvent).listen((InitiativeTotalCalculatedEvent event) {
       if (event.value != null) {
         initTotal.text = event.value.toString();
@@ -169,5 +176,9 @@ class PlayerInitiativeView implements View {
         initTotal.text = "";
       }
     });
+  }
+
+  void _submitInit(Event event) {
+    _ccm.sendMessage(charName.value, Message.INIT, _model.init.toMap());
   }
 }

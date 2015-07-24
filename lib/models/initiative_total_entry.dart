@@ -43,6 +43,12 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     print(this);
   }
 
+  Map toMap() {
+    return {
+      "value": value
+    };
+  }
+
   @override String toString() => "Initiative Total: $value\n  $mods";
 }
 

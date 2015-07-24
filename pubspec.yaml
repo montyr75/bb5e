@@ -1,6 +1,6 @@
 name: 'bb5e'
 version: 0.0.1
-description: Material Design Lite 'Android Dot Com' Template
+description: Battle Buddy 5e
 #author: <your name> <email@example.com>
 #homepage: https://www.example.com
 
@@ -15,6 +15,10 @@ dependencies:
   console_log_handler: any
   di: any
   event_bus: any
+  intl: any
+  redstone: any
+  redstone_web_socket: any
+  http: any
 
 transformers:
   - di
