@@ -5,6 +5,7 @@ import 'dart:convert';
 class Message {
   // message types
   static const String INIT = "INIT";              // player initiative total message
+  static const String GET_INIT = "GET_INIT";              // DM requesting initiative totals
 
   String senderUsername;    // null indicates server
   String charName;          // character this message applies to
