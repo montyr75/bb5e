@@ -14,7 +14,7 @@ void main() {
     initModel = msg.payload;
 
     initModel.keys.forEach((String charName) {
-      querySelector('#${charName.toLowerCase()}-init').text = initModel[charName];
+      querySelector('#${charName.toLowerCase()}-init').text = initModel[charName].toString();
     });
   });
 

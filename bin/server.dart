@@ -28,7 +28,7 @@ class ServerEndPoint {
 
     switch (msg.type) {
       case Message.INIT: initModel[msg.charName] = msg.payload['value']; break;
-      case Message.GET_INIT: session.connection.add(new Message(null, null, Message.INIT, initModel)); break;
+      case Message.GET_INIT: session.connection.add(new Message(null, null, Message.INIT, initModel).toJSON()); break;
     }
 
     log.info(initModel);
