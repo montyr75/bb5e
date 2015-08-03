@@ -19,6 +19,8 @@ dependencies:
   redstone: any
   redstone_web_socket: any
   http: any
+  firebase: any
+  bootstrap: any
 
 transformers:
   - di

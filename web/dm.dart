@@ -1,4 +1,5 @@
-import 'dart:html';
+import 'dart:html' as HTML;
+import 'package:firebase/firebase.dart' as FB;
 import 'package:bb5e/client/client_connection_manager.dart';
 import 'package:bb5e/comms/comms.dart';
 import 'package:bb5e/comms/message.dart';
@@ -14,11 +15,11 @@ void main() {
     initModel = msg.payload;
 
     initModel.keys.forEach((String charName) {
-      querySelector('#${charName.toLowerCase()}-init').text = initModel[charName].toString();
+      HTML.querySelector('#${charName.toLowerCase()}-init').text = initModel[charName].toString();
     });
   });
 
-  querySelector('#get-btn').onClick.listen((Event event) {
+  HTML.querySelector('#get-btn').onClick.listen((HTML.Event event) {
     ccm.sendMessage("DM", Message.GET_INIT);
   });
 }
