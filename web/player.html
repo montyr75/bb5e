@@ -30,6 +30,24 @@
         width: 250px;
       }
 
+      #total-card {
+        border: 1px solid gainsboro;
+        border-radius: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 3%;
+      }
+      
+      #submit-to-dm {
+        margin-bottom: 10px;
+      }
+
+      #card-header {
+        border-bottom: 1px solid gainsboro;
+        padding-bottom: 5px;
+        margin-top: 10px;
+      }
+
     </style>
   </head>
 
@@ -63,8 +81,13 @@
       </div>
 
       <!-- Start "card" -->
-      <div class="display-inline">
-        <h2></h2>
+      <div id="total-card" class="display-inline">
+        <h2 id="card-header">Total</h2>
+
+        <h1><span id="init-total"></span>10</h1>
+
+        <button id="submit-to-dm" class="btn btn-primary" type="button">Submit</button>
+
       </div>
       <!-- End "card" -->
     </div>
@@ -73,7 +96,7 @@
   </div>
 
 
-    <!--<script type="application/dart" src="main.dart"></script>-->
-    <!--<script data-pub-inline src="packages/browser/dart.js"></script>-->
+    <script type="application/dart" src="main.dart"></script>
+    <script data-pub-inline src="packages/browser/dart.js"></script>
   </body>
 </html>
