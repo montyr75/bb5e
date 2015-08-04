@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="packages/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="packages/bootstrap/css/bootstrap-theme.css">
+
+    <script src="packages/bootstrap/js/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+
+    <style>
+      body {
+        padding-left: 2%;
+      }
+      
+      .body-container {
+        width: 600px;
+      }
+
+      .display-inline {
+        display: inline-block;
+        width: 49%;
+      }
+
+      .text-field-container {
+        width: 250px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+  <div class="body-container">
+
+
+    <h1>Initiative</h1>
+
+    <!-- Start char input (name, d20, dex mod) and Initiative Total -->
+    <div>
+      <div class="text-field-container display-inline">
+        <div class="form-group">
+          <label for="char-name" class="input-sm">Character Name</label>
+          <input id="char-name" type="text" class="form-control input-lg" placeholder="Character Name">
+        </div>
+
+        <!-- Start d20 and dex mod input section -->
+        <div>
+          <div class="form-group display-inline">
+            <label for="d20" class="input-sm">d20</label>
+            <input id="d20" type="text" class="form-control input-lg" placeholder="d20">
+          </div>
+
+          <div class="form-group display-inline">
+            <label for="dex-mod" class="input-sm">Dex Modifier</label>
+            <input id="dex-mod" type="text" class="form-control input-lg" placeholder="Dex Mod">
+          </div>
+        </div>
+        <!-- End d20 and dex mod input section -->
+      </div>
+
+      <!-- Start "card" -->
+      <div class="display-inline">
+        <h2></h2>
+      </div>
+      <!-- End "card" -->
+    </div>
+    <!-- End char input (name, d20, dex mod) and Initiative Total-->
+
+  </div>
+
+
+    <!--<script type="application/dart" src="main.dart"></script>-->
+    <!--<script data-pub-inline src="packages/browser/dart.js"></script>-->
+  </body>
+</html>
