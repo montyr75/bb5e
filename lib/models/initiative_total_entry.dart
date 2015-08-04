@@ -12,6 +12,9 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     });
   }
 
+  // an entry created this way will not respond to IncapacitatedEvent
+  InitiativeTotalEntry.fromMap(Map map) : super.fromMap(map);
+
   @override void addMod(Mod mod) {
     // preserve uniqueness
     if (mods.indexOf(mod) != -1) {
@@ -43,13 +46,9 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     print(this);
   }
 
-  Map toMap() {
-    return {
-      "value": value
-    };
-  }
-
   @override String toString() => "Initiative Total: $value\n  $mods";
+
+  Map toMap() => super.toMap();
 }
 
 // ** MODS **
@@ -195,7 +194,7 @@ String initiativeTotalModsJSON = '''
       "source": "null",
       "affectedStat": "initiativeTotal",
       "value": 0,
-      "description": "An incapacitated creature can’t take actions or reactions, and it has an initiative total of 0.",
+      "description": "An incapacitated creature can't take actions or reactions, and it has an initiative total of 0.",
       "ref": "PHB 291"
     },
     {

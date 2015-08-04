@@ -1,4 +1,5 @@
 import 'dart:html' as HTML;
+import 'package:bb5e/client/shared.dart';
 import 'package:firebase/firebase.dart' as FB;
 //import 'package:bb5e/client/client_connection_manager.dart';
 //import 'package:bb5e/comms/comms.dart';
@@ -23,9 +24,10 @@ void main() {
 //    ccm.sendMessage("DM", Message.GET_INIT);
 //  });
 
-  FB.Firebase ref = new FB.Firebase("https://incandescent-heat-2470.firebaseio.com/characterData/orsa");
+  FB.Firebase ref = new FB.Firebase("$FIREBASE_PATH/characterData");
 
   ref.onValue.listen((FB.Event event) {
-    print(event.snapshot.val());
+    Map characterData = event.snapshot.val();
+    print(characterData);
   });
 }

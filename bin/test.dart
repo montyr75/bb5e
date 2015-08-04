@@ -11,7 +11,9 @@ void main() {
 
   model.conditions.incapacitated = true;
 
-  model.init.removeMod(model.gameModel.initiativeTotalMods[8]);
+//  model.init.removeMod(model.gameModel.initiativeTotalMods[8]);
 
-  scheduleMicrotask(() => print(model.init));
+  scheduleMicrotask(() {
+    scheduleMicrotask(() => print(model.init.toMap()));
+  });
 }

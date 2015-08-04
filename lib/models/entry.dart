@@ -8,6 +8,15 @@ class Entry<T> {
   String notes;
 
   Entry();
+
+  Entry.fromMap(Map map) : value = map['value'], notes = map['notes'];
+
+  Map toMap() {
+    return {
+      "value": value,
+      "notes": notes
+    };
+  }
 }
 
 // takes only a single Mod and uses that as the Entry's value
@@ -38,6 +47,19 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
     if (mods == null) {
       mods = [];
     }
+  }
+
+  CalculatedEntry.fromMap(Map map) : super.fromMap(map), min = map['min'], max = map['max'];
+
+  Map toMap() {
+    Map map = super.toMap();
+    map.addAll({
+      "mods": mods.map((Mod mod) => mod.toMap()).toList(),
+      "min": min,
+      "max": max
+    });
+
+    return map;
   }
 
   void addMod(Mod mod) {

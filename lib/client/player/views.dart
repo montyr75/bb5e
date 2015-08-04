@@ -3,12 +3,12 @@ library bb5e.client.player.views;
 import 'dart:html';
 import '../../client/shared.dart';
 import '../../client/player/player_model.dart';
-import '../client_connection_manager.dart';
-import '../../comms/message.dart';
+//import '../client_connection_manager.dart';
+//import '../../comms/message.dart';
 
 class PlayerInitiativeView implements View {
   PlayerModel _model;
-  ClientConnectionManager _ccm;
+//  ClientConnectionManager _ccm;
 
   // UI refs (global)
   InputElement charName;
@@ -32,7 +32,7 @@ class PlayerInitiativeView implements View {
   // UI refs (output)
   SpanElement initTotal;
 
-  PlayerInitiativeView(PlayerModel this._model, ClientConnectionManager this._ccm) {
+  PlayerInitiativeView(PlayerModel this._model/*, ClientConnectionManager this._ccm*/) {
     _getUIReferences();
     _setupListeners();
   }
@@ -128,7 +128,7 @@ class PlayerInitiativeView implements View {
     });
 
     actionDescription.onInput.listen((Event event) {
-      _model.actionDescription = (event.target as TextAreaElement).value.trim();
+      _model.init.notes = (event.target as TextAreaElement).value.trim();
     });
 
     d20.onInput.listen((Event event) {
@@ -179,6 +179,6 @@ class PlayerInitiativeView implements View {
   }
 
   void _submitInit(Event event) {
-    _ccm.sendMessage(charName.value, Message.INIT, _model.init.toMap());
+//    _ccm.sendMessage(charName.value, Message.INIT, _model.init.toMap());
   }
 }
