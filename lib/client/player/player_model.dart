@@ -8,10 +8,17 @@ class PlayerModel {
   GameModel gameModel = new GameModel();
 
   String charName = "";
-  InitiativeTotalEntry<int> init;
+  InitiativeTotalEntry<int> initiativeTotal;
   ConditionsModel conditions = new ConditionsModel();
 
   PlayerModel() {
-    init = new InitiativeTotalEntry<int>(gameModel.initiativeTotalMods);
+    initiativeTotal = new InitiativeTotalEntry<int>(gameModel.initiativeTotalMods);
+  }
+
+  Map toMap() {
+    return {
+      "charName": charName,
+      "initiativeTotal": initiativeTotal.toMap()
+    };
   }
 }

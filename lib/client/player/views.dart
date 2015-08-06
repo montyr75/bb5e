@@ -3,6 +3,7 @@ library bb5e.client.player.views;
 import 'dart:html';
 import '../../client/shared.dart';
 import '../../client/player/player_model.dart';
+import 'package:firebase/firebase.dart' as FB;
 //import '../client_connection_manager.dart';
 //import '../../comms/message.dart';
 
@@ -53,7 +54,7 @@ class PlayerInitiativeView implements View {
     meleeLW = querySelector("#melee-lw-cb");
     meleeTwoHand = querySelector("#melee-twohand-cb");
     rangedLoading = querySelector("#ranged-loading-cb");
-    submit = querySelector("#submit-btn");
+    submit = querySelector("#submit-to-dm");
 
     initTotal = querySelector("#init-total");
   }
@@ -61,65 +62,65 @@ class PlayerInitiativeView implements View {
   void _setupListeners() {
     void _setSpellMod(Event event) {
       if (spell.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[2].clone()..value = int.parse(spellLevel.value));
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[2].clone()..value = int.parse(spellLevel.value));
       }
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[2]);
+        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[2]);
       }
     }
 
     //Worst function ever.
     void _setCreatureSizeMod(Event event) {
       if (creatureSize.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[int.parse(creatureSizeSel.value)].clone());
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[int.parse(creatureSizeSel.value)].clone());
       }
       else {
-        _model.init.removeSizeMods();
+        _model.initiativeTotal.removeSizeMods();
       }
     }
 
     void _setCustomMod(Event event) {
       if (custom.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[13].clone()..value = int.parse(customSel.value));
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[13].clone()..value = int.parse(customSel.value));
       }
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[13]);
+        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[13]);
       }
     }
 
     void _setMeleeHWMod(Event event) {
       if (meleeHW.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[3].clone());
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[3].clone());
       }
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[3]);
+        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[3]);
       }
     }
 
     void _setMeleeLWMod(Event event) {
       if (meleeLW.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[4].clone());
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[4].clone());
       }
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[4]);
+        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[4]);
       }
     }
 
     void _setMeleeTwoHandMod(Event event) {
       if (meleeTwoHand.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[5].clone());
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[5].clone());
       }
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[5]);
+        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[5]);
       }
     }
 
     void _setRangedLoadingMod(Event event) {
       if (rangedLoading.checked) {
-        _model.init.addMod(_model.gameModel.initiativeTotalMods[6].clone());
+        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[6].clone());
       }
       else {
-        _model.init.removeMod(_model.gameModel.initiativeTotalMods[6]);
+        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[6]);
       }
     }
 
@@ -128,7 +129,7 @@ class PlayerInitiativeView implements View {
     });
 
     actionDescription.onInput.listen((Event event) {
-      _model.init.notes = (event.target as TextAreaElement).value.trim();
+      _model.initiativeTotal.notes = (event.target as TextAreaElement).value.trim();
     });
 
     d20.onInput.listen((Event event) {
@@ -136,18 +137,18 @@ class PlayerInitiativeView implements View {
 
       if (roll != null) {
         if (roll >= 1 && roll <= 20) {
-          _model.init.addMod(_model.gameModel.initiativeTotalMods[0].clone()..value = roll);
+          _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[0].clone()..value = roll);
         }
       }
     });
 
     dexMod.onInput.listen((Event event) {
-    //Need to implement real text cleanup.
-      int dMod = int.parse(dexMod.value.trim()..trimLeft(), onError: (_) => null);
+    // TODO: Need to implement real text cleanup.
+      int dMod = int.parse(dexMod.value.trim(), onError: (_) => null);
 
       if (dMod != null) {
         if (dMod <= 5) {
-          _model.init.addMod(_model.gameModel.initiativeTotalMods[1].clone()..value = dMod);
+          _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[1].clone()..value = dMod);
         }
       }
     });
@@ -180,5 +181,15 @@ class PlayerInitiativeView implements View {
 
   void _submitInit(Event event) {
 //    _ccm.sendMessage(charName.value, Message.INIT, _model.init.toMap());
+
+    if (_model.charName.isEmpty) {
+      return;
+    }
+
+    // create character database ID
+    String id = _model.charName.toLowerCase().replaceAll(" ", "");
+
+    // put character data to Firebase
+    new FB.Firebase("$FIREBASE_CHARACTER_PATH/$id").set(_model.toMap());
   }
 }

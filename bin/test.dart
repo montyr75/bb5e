@@ -5,15 +5,15 @@ import 'dart:async';
 PlayerModel model = new PlayerModel();
 
 void main() {
-  model.init.addMod(model.gameModel.initiativeTotalMods[0].clone()..value = 15);
+  model.initiativeTotal.addMod(model.gameModel.initiativeTotalMods[0].clone()..value = 15);
 
-  print(model.init);
+  print(model.initiativeTotal);
 
   model.conditions.incapacitated = true;
 
 //  model.init.removeMod(model.gameModel.initiativeTotalMods[8]);
 
   scheduleMicrotask(() {
-    scheduleMicrotask(() => print(model.init.toMap()));
+    scheduleMicrotask(() => print(model.initiativeTotal.toMap()));
   });
 }

@@ -7,7 +7,7 @@ import 'package:firebase/firebase.dart' as FB;
 
 //ClientConnectionManager ccm = new ClientConnectionManager();
 
-Map initModel;
+Map charModel;
 
 void main() {
 //  ccm.connectToServer(SERVER_IP, SERVER_PORT);
@@ -24,10 +24,13 @@ void main() {
 //    ccm.sendMessage("DM", Message.GET_INIT);
 //  });
 
-  FB.Firebase ref = new FB.Firebase("$FIREBASE_PATH/characterData");
+  FB.Firebase ref = new FB.Firebase(FIREBASE_CHARACTER_PATH);
 
   ref.onValue.listen((FB.Event event) {
-    Map characterData = event.snapshot.val();
-    print(characterData);
+    charModel = event.snapshot.val();
+
+    charModel.keys.forEach((String charID) {
+      HTML.querySelector('#$charID-init').text = charModel[charID]['initiativeTotal']['value'].toString();
+    });
   });
 }
