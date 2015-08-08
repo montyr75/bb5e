@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="packages/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="packages/bootstrap/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="packages/bootstrap/js/bootstrap.js"></script>
@@ -25,34 +26,92 @@
     .num {
       text-align: right;
     }
+
+    .main-container {
+      margin-top: 50px;
+    }
+
+    .list-group-item-text-small {
+      font-size: 0.8em;
+    }
+
+    h3.list-group-item-text {
+      margin-top: 0;
+    }
+
+    a.list-group-item::before {
+      display: none;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Initiative</h1>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <a class="navbar-brand" title="Battle Buddy 5e" href="#">BB5e</a>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">
+              Initiative
+            </a>
+          </li>
+          <!--<li>-->
+            <!--<a href="#">-->
+              <!--Companies-->
+            <!--</a>-->
+          <!--</li>-->
+          <!--<li>-->
+            <!--<a href="#">-->
+              <!--Settings-->
+            <!--</a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+    </div>
+  </div>
 
-  <table style="margin-bottom: 20px; width: auto;" class="table table-bordered">
-    <tr>
-      <td style="width: 100px;">Orsa</td>
-      <td id="orsa-init" class="num"></td>
-    </tr>
-    <tr>
-      <td>Miri</td>
-      <td id="miri-init" class="num"></td>
-    </tr>
-    <tr>
-      <td>Iadekon</td>
-      <td id="iadekon-init" class="num"></td>
-    </tr>
-    <tr>
-      <td>Tain</td>
-      <td id="tain-init" class="num"></td>
-    </tr>
-    <tr>
-      <td>Marcon</td>
-      <td id="marcon-init" class="num"></td>
-    </tr>
-  </table>
+  <div class="container main-container">
+    <div class="row">
+      <div class="col-sm-5 bootcards-list">
+        <div class="bootcards-list">
+          <div class="panel panel-default">
+            <div id="init-list" class="list-group">
+              <!--<a class="list-group-item" href="#">-->
+                <!--<div class="row">-->
+                  <!--<div class="col-sm-4">-->
+                    <!--<h4 class="list-group-item-heading">Orsa</h4>-->
+                    <!--<p class="list-group-item-text"></p>-->
+                  <!--</div>-->
+                  <!--<div class="col-sm-6">-->
+                    <!--<p class="list-group-item-text">Initiative Roll: 14</p>-->
+                    <!--<p class="list-group-item-text list-group-item-text-small">Dexterity Modifier: -1</p>-->
+                  <!--</div>-->
+                  <!--<div class="col-sm-2">-->
+                    <!--<h4 class="list-group-item-heading">13</h4>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-7 bootcards-cards">
+
+        ...your Bootcards Cards go here...
+
+      </div>
+    </div>
+  </div>
 
   <!--<button id="get-btn" class="btn">Get Init</button>-->
 

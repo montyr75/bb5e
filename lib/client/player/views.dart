@@ -144,7 +144,7 @@ class PlayerInitiativeView implements View {
 
     dexMod.onInput.listen((Event event) {
     // TODO: Need to implement real text cleanup.
-      int dMod = int.parse(dexMod.value.trim(), onError: (_) => null);
+      int dMod = int.parse(dexMod.value.trim().replaceAll("+", ""), onError: (_) => null);
 
       if (dMod != null) {
         if (dMod <= 5) {
@@ -187,9 +187,9 @@ class PlayerInitiativeView implements View {
     }
 
     // create character database ID
-    String id = _model.charName.toLowerCase().replaceAll(" ", "");
+    String id = _model.charName.replaceAll(" ", "");
 
     // put character data to Firebase
-    new FB.Firebase("$FIREBASE_CHARACTER_PATH/$id").set(_model.toMap());
+    new FB.Firebase("$FIREBASE_CHARACTER_PATH/$id").set(_model.toCharacterDataMap());
   }
 }

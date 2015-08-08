@@ -47,6 +47,4 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
   }
 
   @override String toString() => "Initiative Total: $value\n  $mods";
-
-  Map toMap() => super.toMap();
 }

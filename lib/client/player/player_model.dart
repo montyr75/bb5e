@@ -15,7 +15,7 @@ class PlayerModel {
     initiativeTotal = new InitiativeTotalEntry<int>(gameModel.initiativeTotalMods);
   }
 
-  Map toMap() {
+  Map toCharacterDataMap() {
     return {
       "charName": charName,
       "initiativeTotal": initiativeTotal.toMap()
