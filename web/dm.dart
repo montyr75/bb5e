@@ -53,7 +53,7 @@ void main() {
                 </div>
                 <div class="col-sm-6">
                   <p class="list-group-item-text">Initiative Roll: ${roll.value}</p>
-                  <p class="list-group-item-text list-group-item-text-small">Dexterity Modifier: ${dexMod.value > 0 ? "+" : ""}${dexMod.value}</p>
+                  <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod.value > 0 ? "+" : ""}${dexMod.value}</p>
                 </div>
                 <div class="col-sm-2">
                   <h4 class="list-group-item-heading">$init</h4>

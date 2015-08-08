@@ -50,7 +50,7 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
   }
 
   CalculatedEntry.fromMap(Map map) : super.fromMap(map), min = map['min'], max = map['max'] {
-    mods = map['mods'].map((Map modMap) => new Mod.fromMap(modMap));
+    mods = map['mods'].map((Map modMap) => new Mod.fromMap(modMap)).toList();
   }
 
   Map toMap() {
