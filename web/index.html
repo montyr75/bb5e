@@ -1,441 +1,375 @@
-<!doctype html>
-<html lang="">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BB5e</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>BB5e (Player Edition)</title>
 
-  <link rel="stylesheet" href="styles/demo.css">
+    <link rel="stylesheet" href="packages/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="packages/bootstrap/css/bootstrap-theme.css">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link id="theme" rel="stylesheet" href="https://cdn.rawgit.com/MikeMitterer/dart-mdl-theme/master/blue_grey-light_green/material.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="packages/bootstrap/js/bootstrap.js"></script>
 
-  <style>
-    /*Accordion CSS stuff*/
-    html{
-      -font-smoothing: antialiased;
-      height: 100%;
-      background: white;
-      background: radial-gradient(circle, #fff 20%, #ccc);
-      background-size: cover;
-    }
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
 
-    h1{
-      font-weight: lighter;
-    }
+    <style>
+      /*Accordion CSS stuff*/
+      .accordion-p, .accordion-table{
+        color: #666;
+        margin-top: 1%;
+      }
 
-    .accordion-p, .accordion-table{
-      color: #666;
-      margin-top: 1%;
-    }
+      #accordion-container{
+        width: 500px;
+        height: auto;
+        margin-top: 3%;
+        border-top: 1px solid #bdbdbd;
+        border-left: 1px solid #bdbdbd;
+        border-right: 1px solid #bdbdbd;
+      }
 
-    #accordion-container{
-      width: 500px;
-      height: auto;
-      margin-top: 3%;
-      border-top: 1px solid #bdbdbd;
-      border-left: 1px solid #bdbdbd;
-      border-right: 1px solid #bdbdbd;
-    }
+      .accordion label{
+        display:block;
+        background-color: #eeeeee;
+        padding-left: 25px;
+        color: #424242;
+        text-shadow: 0 0 2px rgba(255,255,255,0.6);
+        cursor: pointer;
+        border-bottom: 1px solid #bdbdbd;
+        border-top: 1px solid #ffffff;
+      }
 
-    .accordion label{
-      display:block;
-      background-color: #eeeeee;
-      padding-left: 25px;
-      color: #424242;
-      text-shadow: 0 0 2px rgba(255,255,255,0.6);
-      cursor: pointer;
-      border-bottom: 1px solid #bdbdbd;
-      border-top: 1px solid #ffffff;
-    }
+      .accordion .accordion-table, .accordion-p {
+        color: #424242;
+        padding: 10px;
+        line-height: 1.7em;
+        border-bottom: 1px solid #bdbdbd;
+        visibility: hidden;
+        opacity: 0;
+        display: none;
+        text-align: left;
+        background-color: #fff;
+        margin-top: 0;
+      }
 
-    .accordion .accordion-table, .accordion-p {
-      color: #424242;
-      padding: 10px;
-      line-height: 1.7em;
-      border-bottom: 1px solid #bdbdbd;
-      visibility: hidden;
-      opacity: 0;
-      display: none;
-      text-align: left;
-      background-color: #fff;
-      margin-top: 0px;
-    }
+      #tm:checked ~ .hiddentext{
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      }
 
-    #tm:checked ~ .hiddentext{
-      display: block;
-      visibility: visible;
-      opacity: 1;
-    }
+      input#tm{
+        display: none;
+        position: relative;
+      }
 
-    input#tm{
-      display: none;
-      position: relative;
-    }
+      #tn:checked ~ .hiddentext{
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      }
 
-    #tn:checked ~ .hiddentext{
-      display: block;
-      visibility: visible;
-      opacity: 1;
-    }
+      input#tn{
+        display: none;
+        position: relative;
+      }
 
-    input#tn{
-      display: none;
-      position: relative;
-    }
+      #to:checked ~ .hiddentext{
+        display: block;
+        visibility: visible;
+        opacity: 1;
+      }
 
-    #to:checked ~ .hiddentext{
-      display: block;
-      visibility: visible;
-      opacity: 1;
-    }
+      input#to{
+        display: none;
+        position: relative;
+      }
+      .arrow{
+        color: #666666;
+      }
 
-    input#to{
-      display: none;
-      position: relative;
-    }
-    .arrow{
-      color: #666666;
-    }
+      .table-left-row {
+        width: 45px;
+      }
+      /*End of accordion CSS STUFF*/
 
-    .table-left-row {
-      width: 45px;
-    }
-    /*End of accordion CSS STUFF*/
+      body {
+        padding-left: 2%;
+      }
+      
+      .body-container {
+        width: 600px;
+      }
 
+      .display-inline {
+        display: inline-block;
+        width: 49%;
+      }
 
-    div.loading {
-      display: none;
-    }
+      .text-field-container {
+        width: 250px;
+      }
 
-    body.mdl-upgrading > * {
-      display: none;
-    }
+      #total-card {
+        border: 1px solid gainsboro;
+        border-radius: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 3%;
+      }
+      
+      #submit-to-dm {
+        margin-bottom: 10px;
+      }
 
-    body.mdl-upgrading div.loading {
-      display: block;
-    }
+      #card-header {
+        border-bottom: 1px solid gainsboro;
+        padding-bottom: 5px;
+        margin-top: 10px;
+      }
 
-    .char-container {
-      display: block;
-    }
+      .text-align-right {
+        text-align: right;
+        padding-right: 2%;
+        padding-left: 5%;
+      }
 
-    .char-name-input {
-      width: 10em;
-    }
+      .left-column {
+        width: 50%;
+      }
+    </style>
+  </head>
 
-    .s-num-input {
-      margin-right: 2em;
-      width: 4em;
-    }
-
-    .action-comment {
-      width: 50%;
-    }
-    
-    .table-container {
-      display: inline-block;
-      margin-right: 10%;
-    }
-
-    .text-align-right {
-      text-align: right;
-      padding-right: 2%;
-      padding-left: 5%;
-    }
-    
-    .display-inline {
-      display: inline-block;
-    }
-    
-    .initiativeTotalDisplay {
-      padding-left: 3%;
-    }
-  </style>
-
-</head>
-
-<body class="mdl-typography mdl-base mdl-upgrading">
-  <div class="loading">Loading...</div>
-
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <!-- Icon -->
-      <div class="mdl-layout-icon demo-app-icon"></div>
-
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">BB5e</span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="#">Initiative</a>
-          <a class="mdl-navigation__link" href="#">Reference</a>
-          <a class="mdl-navigation__link" href="#">How</a>
-          <a class="mdl-navigation__link" href="#">Are</a>
-          <a class="mdl-navigation__link" href="#">You?</a>
-        </nav>
-      </div>
-    </header>
-
-    <div class="mdl-layout__drawer mdl-color--50">
-      <span class="mdl-layout-title mdl-color--primary mdl-color-text--white">BB5e</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link mdl-color-text--primary" href="#">Initiative</a>
-        <a class="mdl-navigation__link mdl-color-text--primary" href="#">Reference</a>
-        <a class="mdl-navigation__link mdl-color-text--primary" href="#">How</a>
-        <a class="mdl-navigation__link mdl-color-text--primary" href="#">Are</a>
-        <a class="mdl-navigation__link mdl-color-text--primary" href="#">You?</a>
-      </nav>
-    </div>
-
-    <main class="mdl-layout__content">
-      <section>
-        <div class="mdl-panel mdl-panel--shadow">
-          <h3 class="mdl-color-text--primary">Initiative</h3>
-
-          <div>
-            <div class="display-inline">
-            <!-- Character Name Text Input -->
-              <div class="mdl-textfield mdl-js-textfield char-container">
-                <input id="char-name" class="mdl-textfield__input char-name-input" type="text" />
-                <label class="mdl-textfield__label char-name-input" for="char-name">Character Name</label>
-              </div>
-
-              <!-- d20 roll Input -->
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input s-num-input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="d20" />
-                <label class="mdl-textfield__label s-num-input" for="d20">d20</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
-              </div>
-
-              <!-- Dex. modifier Input -->
-              <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input s-num-input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="dex-mod"/>
-                <label class="mdl-textfield__label s-num-input" for="dex-mod">Dex Mod</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
-              </div>
-            </div>
-
-            <div class="display-inline">
-              <div>
-                <div class="mdl-card mdl-shadow--2dp">
-                  <div class="mdl-card__title mdl-card--expand">
-                    <h2 class="mdl-card__title-text">Total</h2>
-                  </div>
-                  <div class="mdl-card__supporting-text">
-
-                    <!-- Initiative total -->
-                    <h1 class="display-inline initiativeTotalDisplay"><span id="init-total"></span></h1>
-                  </div>
-                  <div class="mdl-card__actions mdl-card--border">
-                    <button id="submit-btn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Submit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h4>Speed Factor Initiative Modifiers</h4>
-
-          <!-- Speed Factor Initiative Modifiers table  -->
-          <table id="speed-factor-tbl" class="mdl-shadow--2dp table-container">
-            <thead>
-            <tr>
-              <th class="mdl-data-table__cell--non-numeric">Factor</th>
-              <th>Initiative Modifier</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spell-cb">
-                  <input type="checkbox" id="spell-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Spell</span>
-                </label>
-              </td>
-              <td class="text-align-right">
-                <div>
-                  Subtract the spell's level
-                  <select id="spell-level-sel">
-                    <option value="0">Cantrip</option>
-                    <option value="-1">1st</option>
-                    <option value="-2">2nd</option>
-                    <option value="-3">3rd</option>
-                    <option value="-4">4th</option>
-                    <option value="-5">5th</option>
-                    <option value="-6">6th</option>
-                    <option value="-7">7th</option>
-                    <option value="-8">8th</option>
-                    <option value="-9">9th</option>
-                  </select>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="melee-hw-cb">
-                  <input type="checkbox" id="melee-hw-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Melee, heavy weapon</span>
-                </label>
-              </td>
-              <td class="text-align-right">-2</td>
-            </tr>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="melee-lw-cb">
-                  <input type="checkbox" id="melee-lw-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Melee, light or finesse weapon</span>
-                </label>
-              </td>
-              <td class="text-align-right">+2</td>
-            </tr>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="melee-twohand-cb">
-                  <input type="checkbox" id="melee-twohand-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Melee, two-handed weapon</span>
-                </label>
-              </td>
-              <td class="text-align-right">-2</td>
-            </tr>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="ranged-loading-cb">
-                  <input type="checkbox" id="ranged-loading-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Ranged, loading weapon</span>
-                </label>
-              </td>
-              <td class="text-align-right">-5</td>
-            </tr>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="creature-size-cb">
-                  <input type="checkbox" id="creature-size-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Creature Size</span>
-                </label>
-              </td>
-              <td class="text-align-right">
-                  <div>
-                    If other than Medium, select
-                    <!-- Value for creature-size-sel is the index of the mod-->
-                    <select id="creature-size-sel">
-                      <option value="7">Tiny</option>
-                      <option value="8">Small</option>
-                      <option value="9">Large</option>
-                      <option value="10">Huge</option>
-                      <option value="11">Gargantuan</option>
-                    </select>
-                  </div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="custom-cb">
-                  <input type="checkbox" id="custom-cb" class="mdl-checkbox__input" />
-                  <span class="mdl-checkbox__label">Custom</span>
-                </label>
-              </td>
-              <td class="text-align-right">
-                <div>
-                  DM's discretion
-                  <select id="custom-sel">
-                    <option value="-5">-5</option>
-                    <option value="-2">-2</option>
-                    <option value="2">+2</option>
-                    <option value="5">+5</option>
-                  </select>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-
-          <h4>Description</h4>
-
-          <div class="mdl-textfield mdl-js-textfield action-comment">
-            <textarea id="description-txt" class="mdl-textfield__input" rows= "1"></textarea>
-            <label class="mdl-textfield__label" for="description-txt">A brief description of your declared action...</label>
-          </div>
+  <body>
+  <div class="body-container">
 
 
-        <!--Start of Player References-->
-          <h1>Player References</h1>
-          <!-- Start of the accordion -->
-          <div id="accordion-container">
-            <!-- Item 1 -->
-            <div class="accordion">
-              <label for="tm" class="accordionitem">
-                <h2>System Shock  <span class="arrow">&raquo;</span></h2>
-              </label>
-              <input type="checkbox" id="tm"/>
-              <p class="accordion-p hiddentext">When a creature takes damage from a single source equal to or greater than half its hit point maximum, it must succeed on a DC 15 Constitution saving throw or suffer a random effect determined by a roll on the System Shock Table. For example, a creature that has a hit point maximum of 30 must make that Constitution save if it takes 15 damage or more from a single source.</p>
-              <table class="hiddentext accordion-table">
-                <tr>
-                  <th class="table-left-row">d10</th>
-                  <th>Effect</th>
-                </tr>
-                <tr>
-                  <td class="table-left-row">1</td>
-                  <td>The creature drops to 0 hit points.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">2-3</td>
-                  <td>The creature drops to 0 hit points but is stable.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">4-5</td>
-                  <td> The creature is stunned until the end of its next turn.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">6-7</td>
-                  <td>The creature can't take reactions and has disadvantage on attack rolls and ability checks until the end of its next turn.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">8-10</td>
-                  <td>The creature can't take reactions until the end of its next turn.</td>
-                </tr>
-              </table>
-            </div>
+    <h1>Initiative</h1>
 
-            <!-- Item 2 -->
-            <div class="accordion">
-              <label for="tn" class="accordionitem">
-                <h2>Item 2 <span class="arrow">&raquo;</span></h2>
-              </label>
-              <input type="checkbox" id="tn"/>
-              <p class="accordion-p hiddentext">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="accordion">
-              <label for="to" class="accordionitem">
-                <h2>Item 3 <span class="arrow">&raquo;</span></h2>
-              </label>
-              <input type="checkbox" id="to"/>
-              <p class="accordion-p hiddentext">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>
-            </div>
-          </div>
-          <!-- End of Player References-->
+    <!-- Start char input (name, d20, dex mod) and Initiative Total -->
+    <div>
+      <div class="text-field-container display-inline">
+        <div class="form-group">
+          <label for="char-name" class="input-sm">Character Name</label>
+          <input id="char-name" type="text" class="form-control input-lg" placeholder="Character Name">
         </div>
-      </section>
-    </main>
 
-    <footer class="mdl-sticky-mini-footer mdl-color--primary mdl-color-text--white">
-      <div class="mdl-mini-footer--left-section">
-        <ul class="mdl-mini-footer--link-list">
-          <li><a href="#">Help</a></li>
-          <li><a href="#">Privacy &amp; Terms</a></li>
-        </ul>
+        <!-- Start d20 and dex mod input section -->
+        <div>
+          <div class="form-group display-inline">
+            <label for="d20" class="input-sm">d20</label>
+            <input id="d20" type="text" class="form-control input-lg" placeholder="d20">
+          </div>
+
+          <div class="form-group display-inline">
+            <label for="dex-mod" class="input-sm">Dex Modifier</label>
+            <input id="dex-mod" type="text" class="form-control input-lg" placeholder="Dex Mod">
+          </div>
+        </div>
+        <!-- End d20 and dex mod input section -->
       </div>
-    </footer>
+
+      <!-- Start "card" -->
+      <div id="total-card" class="display-inline">
+        <h2 id="card-header">Total</h2>
+
+        <h1><span id="init-total"></span></h1>
+
+        <button id="submit-to-dm" class="btn btn-primary" type="button">Submit</button>
+
+      </div>
+      <!-- End "card" -->
+    </div>
+    <!-- End char input (name, d20, dex mod) and Initiative Total-->
+
+    <!-- Start Speed Factor Initiative Modifiers -->
+    <h2>Speed Factor Initiative Modifiers</h2>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="left-column">Factor</th>
+          <th class="text-align-right">Modifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label for="spell-cb">
+              <input type="checkbox" id="spell-cb"/>
+              <span>Spell</span>
+            </label>
+          </td>
+          <td class="text-align-right">
+            <div class="dropdown">
+              Spell Level
+              <select id="spell-level-sel" class="btn btn-default dropdown-toggle">
+                  <option value="0">Cantrip</option>
+                  <option value="-1">1st</option>
+                  <option value="-2">2nd</option>
+                  <option value="-3">3rd</option>
+                  <option value="-4">4th</option>
+                  <option value="-5">5th</option>
+                  <option value="-6">6th</option>
+                  <option value="-7">7th</option>
+                  <option value="-8">8th</option>
+                  <option value="-9">9th</option>
+              </select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="melee-hw-cb">
+              <input type="checkbox" id="melee-hw-cb"/>
+              <span>Melee, heavy weapon</span>
+            </label>
+          </td>
+          <td class="text-align-right">-2</td>
+        </tr>
+        <tr>
+          <td>
+            <label for="melee-lw-cb">
+              <input type="checkbox" id="melee-lw-cb"/>
+              <span>Melee, light or finesse weapon</span>
+            </label>
+          </td>
+          <td class="text-align-right">+2</td>
+        </tr>
+        <tr>
+          <td>
+            <label for="melee-twohand-cb">
+              <input type="checkbox" id="melee-twohand-cb" />
+              <span>Melee, two-handed weapon</span>
+            </label>
+          </td>
+          <td class="text-align-right">-2</td>
+        </tr>
+        <tr>
+          <td>
+            <label for="ranged-loading-cb">
+              <input type="checkbox" id="ranged-loading-cb" />
+              <span>Ranged, loading weapon</span>
+            </label>
+          </td>
+          <td class="text-align-right">-5</td>
+        </tr>
+        <tr>
+          <td>
+            <label for="creature-size-cb">
+              <input type="checkbox" id="creature-size-cb" />
+              <span>Creature Size</span>
+            </label>
+          </td>
+          <td class="text-align-right">
+            <div class="dropdown">
+              If other than Medium
+              <!-- Value for creature-size-sel is the index of the mod-->
+              <select id="creature-size-sel" class="btn btn-default dropdown-toggle">
+                <option value="7">Tiny</option>
+                <option value="8">Small</option>
+                <option value="9">Large</option>
+                <option value="10">Huge</option>
+                <option value="11">Gargantuan</option>
+              </select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="custom-cb">
+              <input type="checkbox" id="custom-cb" />
+              <span>Custom</span>
+            </label>
+          </td>
+          <td class="text-align-right input-group container-fluid">
+            <input type="text" class="form-control">
+            <div class="input-group-btn">
+              <select id="custom-sel" class="btn btn-default dropdown-toggle">
+                <option value="-5">-5</option>
+                <option value="-2">-2</option>
+                <option value="2">+2</option>
+                <option value="5">+5</option>
+              </select>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- End Speed Factor Initiative Modifiers -->
+
+    <!-- Start description -->
+    <h2>Description</h2>
+
+    <div class="form-group">
+      <label for="description-txt">What are ya gonna do on your turn?</label>
+      <input type="text" class="form-control" id="description-txt" placeholder="Cast a cantrip? Use your bow? Stab someone with your sword (sexually)?">
+    </div>
+    <!-- End description-->
+
+    <!--Start of Player Reference-->
+    <h2>Player Reference</h2>
+    <!-- Start of the accordion -->
+    <div id="accordion-container">
+      <!-- Item 1 -->
+      <div class="accordion">
+        <label for="tm" class="accordionitem">
+          <h2>System Shock  <span class="arrow">&raquo;</span></h2>
+        </label>
+        <input type="checkbox" id="tm"/>
+        <p class="accordion-p hiddentext">When a creature takes damage from a single source equal to or greater than half its hit point maximum, it must succeed on a DC 15 Constitution saving throw or suffer a random effect determined by a roll on the System Shock Table. For example, a creature that has a hit point maximum of 30 must make that Constitution save if it takes 15 damage or more from a single source.</p>
+        <table class="hiddentext accordion-table">
+          <tr>
+            <th class="table-left-row">d10</th>
+            <th>Effect</th>
+          </tr>
+          <tr>
+            <td class="table-left-row">1</td>
+            <td>The creature drops to 0 hit points.</td>
+          </tr>
+          <tr>
+            <td class="table-left-row">2-3</td>
+            <td>The creature drops to 0 hit points but is stable.</td>
+          </tr>
+          <tr>
+            <td class="table-left-row">4-5</td>
+            <td> The creature is stunned until the end of its next turn.</td>
+          </tr>
+          <tr>
+            <td class="table-left-row">6-7</td>
+            <td>The creature can't take reactions and has disadvantage on attack rolls and ability checks until the end of its next turn.</td>
+          </tr>
+          <tr>
+            <td class="table-left-row">8-10</td>
+            <td>The creature can't take reactions until the end of its next turn.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Item 2 -->
+      <!--<div class="accordion">-->
+        <!--<label for="tn" class="accordionitem">-->
+          <!--<h2>Item 2 <span class="arrow">&raquo;</span></h2>-->
+        <!--</label>-->
+        <!--<input type="checkbox" id="tn"/>-->
+        <!--<p class="accordion-p hiddentext">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>-->
+      <!--</div>-->
+
+      <!-- Item 3 -->
+      <!--<div class="accordion">-->
+        <!--<label for="to" class="accordionitem">-->
+          <!--<h2>Item 3 <span class="arrow">&raquo;</span></h2>-->
+        <!--</label>-->
+        <!--<input type="checkbox" id="to"/>-->
+        <!--<p class="accordion-p hiddentext">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.</p>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!-- End of Player References-->
+
   </div>
 
-  <script type="application/dart" src="main.dart"></script>
-  <script data-pub-inline src="packages/browser/dart.js"></script>
-</body>
+
+    <script type="application/dart" src="main.dart"></script>
+    <script data-pub-inline src="packages/browser/dart.js"></script>
+  </body>
 </html>

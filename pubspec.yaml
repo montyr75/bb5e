@@ -9,11 +9,6 @@ environment:
 
 dependencies:
   browser: any
-  mdl: any
-  logging: any
-  logging_handlers: any
-  console_log_handler: any
-  di: any
   event_bus: any
   intl: any
   redstone: any
@@ -21,6 +16,3 @@ dependencies:
   http: any
   firebase: any
   bootstrap: any
-
-transformers:
-  - di
