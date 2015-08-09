@@ -1,7 +1,7 @@
-import 'dart:html' as HTML;
+import 'dart:html';
 import 'package:bb5e/client/shared.dart';
 import 'package:bb5e/models/mod.dart';
-import 'package:bb5e/client/dm/character_data.dart';
+import 'package:bb5e/client/dm/character.dart';
 import 'package:firebase/firebase.dart' as FB;
 //import 'package:bb5e/client/client_connection_manager.dart';
 //import 'package:bb5e/comms/comms.dart';
@@ -12,7 +12,7 @@ import 'package:firebase/firebase.dart' as FB;
 Map charModel;
 
 // UI refs
-HTML.DivElement initList = HTML.querySelector("#init-list");
+DivElement initList = querySelector("#init-list");
 
 void main() {
 //  ccm.connectToServer(SERVER_IP, SERVER_PORT);
@@ -21,11 +21,11 @@ void main() {
 //    initModel = msg.payload;
 //
 //    initModel.keys.forEach((String charName) {
-//      HTML.querySelector('#${charName.toLowerCase()}-init').text = initModel[charName].toString();
+//      querySelector('#${charName.toLowerCase()}-init').text = initModel[charName].toString();
 //    });
 //  });
 //
-//  HTML.querySelector('#get-btn').onClick.listen((HTML.Event event) {
+//  querySelector('#get-btn').onClick.listen((Event event) {
 //    ccm.sendMessage("DM", Message.GET_INIT);
 //  });
 
@@ -38,17 +38,16 @@ void main() {
       initList.children.clear();
 
       charModel.keys.forEach((String charID) {
-        CharacterData cd = new CharacterData.fromMap(charModel[charID]);
-        Mod roll = cd.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 0, orElse: () => null);
-        Mod dexMod = cd.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 1, orElse: () => null);
-        int init = cd.initiativeTotal.value;
+        Character char = new Character.fromMap(charModel[charID]);
+        Mod roll = char.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 0, orElse: () => null);
+        Mod dexMod = char.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 1, orElse: () => null);
 
         if (roll != null && dexMod != null) {
           initList.appendHtml('''
             <a class="list-group-item" href="#">
               <div class="row">
                 <div class="col-sm-4">
-                  <h4 class="list-group-item-heading">$charID</h4>
+                  <h4 class="list-group-item-heading">${char.charName}</h4>
                   <p class="list-group-item-text"></p>
                 </div>
                 <div class="col-sm-6">
@@ -56,7 +55,7 @@ void main() {
                   <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod.value > 0 ? "+" : ""}${dexMod.value}</p>
                 </div>
                 <div class="col-sm-2">
-                  <h4 class="list-group-item-heading">$init</h4>
+                  <h4 class="list-group-item-heading">${char.initiativeTotal.value}</h4>
                 </div>
               </div>
             </a>'''
@@ -64,5 +63,11 @@ void main() {
         }
       });
     }
+  });
+
+  querySelector("#clear-btn").onClick.listen((_) {
+    ref.remove();
+    charModel = null;
+    initList.children.clear();
   });
 }

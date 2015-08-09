@@ -1,6 +1,7 @@
 library bb5e.client.player.views;
 
 import 'dart:html';
+import 'dart:async';
 import '../../client/shared.dart';
 import '../../client/player/player_model.dart';
 import 'package:firebase/firebase.dart' as FB;
@@ -8,6 +9,9 @@ import 'package:firebase/firebase.dart' as FB;
 //import '../../comms/message.dart';
 
 class PlayerInitiativeView implements View {
+  FB.Firebase _fbRef = new FB.Firebase("$FIREBASE_CHARACTER_PATH");
+  FB.Firebase _charRef;
+
   PlayerModel _model;
 //  ClientConnectionManager _ccm;
 
@@ -143,7 +147,6 @@ class PlayerInitiativeView implements View {
     });
 
     dexMod.onInput.listen((Event event) {
-    // TODO: Need to implement real text cleanup.
       int dMod = int.parse(dexMod.value.trim().replaceAll("+", ""), onError: (_) => null);
 
       if (dMod != null) {
@@ -182,14 +185,34 @@ class PlayerInitiativeView implements View {
   void _submitInit(Event event) {
 //    _ccm.sendMessage(charName.value, Message.INIT, _model.init.toMap());
 
+    void showAlert(String type, String msg) {
+      SpanElement alert = new SpanElement()..classes.addAll(["alert", "alert-$type"])..setAttribute("role", "alert");
+      alert.appendHtml('<span>$msg</span>');
+      DivElement totalCard = querySelector("#total-card")..children.add(alert);
+      new Timer(const Duration(seconds: 2), () => totalCard.children.remove(alert));
+    }
+
+    void showSuccess([_]) {
+      showAlert("success", '<strong>Success!</strong>');
+    }
+
+    void showError([_]) {
+      showAlert("danger", '<strong>Error!</strong>');
+    }
+
     if (_model.charName.isEmpty) {
       return;
     }
 
-    // create character database ID
-    String id = _model.charName.replaceAll(" ", "");
+    Map characterDataMap = _model.toCharacterDataMap();
 
-    // put character data to Firebase
-    new FB.Firebase("$FIREBASE_CHARACTER_PATH/$id").set(_model.toCharacterDataMap());
+    if (_charRef != null) {
+      _charRef.set(characterDataMap).then(showSuccess);
+    }
+    else {
+      _charRef = _fbRef.push()..set(characterDataMap).then(showSuccess);
+      _charRef.onDisconnect.remove();
+    }
+
   }
 }

@@ -1,14 +1,14 @@
-library client.dm.character_data;
+library client.dm.character;
 
 import '../../models/initiative_total_entry.dart';
 
-class CharacterData {
+class Character {
   String charName = "";
   InitiativeTotalEntry<int> initiativeTotal;
 
-  CharacterData();
+  Character();
 
-  CharacterData.fromMap(Map map) {
+  Character.fromMap(Map map) {
     charName = map['charName'];
     initiativeTotal = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
   }

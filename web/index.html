@@ -137,6 +137,11 @@
       .left-column {
         width: 50%;
       }
+
+      .alert {
+        margin: 0 0 0 25px;
+        padding: 7px;
+      }
     </style>
   </head>
 
@@ -146,7 +151,7 @@
 
     <h1>Initiative</h1>
 
-    <!-- Start char input (name, d20, dex mod) and Initiative Total -->
+    <!-- Start char input (name, d20, DEX mod) and Initiative Total -->
     <div>
       <div class="text-field-container display-inline">
         <div class="form-group">
@@ -154,7 +159,7 @@
           <input id="char-name" type="text" class="form-control input-lg" placeholder="Character Name">
         </div>
 
-        <!-- Start d20 and dex mod input section -->
+        <!-- Start d20 and DEX mod input section -->
         <div>
           <div class="form-group display-inline">
             <label for="d20" class="input-sm">d20</label>
@@ -162,11 +167,11 @@
           </div>
 
           <div class="form-group display-inline">
-            <label for="dex-mod" class="input-sm">Dex Modifier</label>
-            <input id="dex-mod" type="text" class="form-control input-lg" placeholder="Dex Mod">
+            <label for="dex-mod" class="input-sm">DEX Modifier</label>
+            <input id="dex-mod" type="text" class="form-control input-lg" placeholder="DEX Mod">
           </div>
         </div>
-        <!-- End d20 and dex mod input section -->
+        <!-- End d20 and DEX mod input section -->
       </div>
 
       <!-- Start "card" -->
@@ -180,7 +185,7 @@
       </div>
       <!-- End "card" -->
     </div>
-    <!-- End char input (name, d20, dex mod) and Initiative Total-->
+    <!-- End char input (name, d20, DEX mod) and Initiative Total-->
 
     <!-- Start Speed Factor Initiative Modifiers -->
     <h2>Speed Factor Initiative Modifiers</h2>
@@ -266,11 +271,11 @@
               If other than Medium
               <!-- Value for creature-size-sel is the index of the mod-->
               <select id="creature-size-sel" class="btn btn-default dropdown-toggle">
-                <option value="7">Tiny</option>
-                <option value="8">Small</option>
-                <option value="9">Large</option>
-                <option value="10">Huge</option>
-                <option value="11">Gargantuan</option>
+                <option value="7">Tiny (+5)</option>
+                <option value="8">Small (+2)</option>
+                <option value="9">Large (-2)</option>
+                <option value="10">Huge (-5)</option>
+                <option value="11">Gargantuan (-8)</option>
               </select>
             </div>
           </td>
