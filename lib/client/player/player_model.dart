@@ -1,24 +1,28 @@
 library bb5e.client.player.model;
 
+import 'dart:async';
 import 'package:bb5e/models/game_model.dart';
-import '../../models/initiative_total_entry.dart';
 import '../../models/conditions_model.dart';
+import '../../models/character.dart';
 
 class PlayerModel {
-  GameModel gameModel = new GameModel();
+  GameModel gameModel;
+  Character character;
 
-  String charName = "";
-  InitiativeTotalEntry<int> initiativeTotal;
   ConditionsModel conditions = new ConditionsModel();
 
+  // event controllers
+  StreamController _onLoaded = new StreamController();
+
   PlayerModel() {
-    initiativeTotal = new InitiativeTotalEntry<int>(gameModel.initiativeTotalMods);
+    gameModel = new GameModel()..onLoaded.first.then((bool loaded) {
+      character = new Character(gameModel);
+
+      // fire Loaded event
+      _onLoaded.add(loaded);
+    });
   }
 
-  Map toCharacterDataMap() {
-    return {
-      "charName": charName,
-      "initiativeTotal": initiativeTotal.toMap()
-    };
-  }
+  // events
+  Stream<bool> get onLoaded => _onLoaded.stream;
 }

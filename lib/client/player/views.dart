@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:async';
 import '../../client/shared.dart';
 import '../../client/player/player_model.dart';
+import '../../models/initiative_total_entry.dart';
 import 'package:firebase/firebase.dart' as FB;
 //import '../client_connection_manager.dart';
 //import '../../comms/message.dart';
@@ -17,7 +18,7 @@ class PlayerInitiativeView implements View {
 
   // UI refs (global)
   InputElement charName;
-  TextAreaElement actionDescription;
+  InputElement actionDescription;
 
   // UI refs (initiative)
   InputElement d20;
@@ -64,76 +65,78 @@ class PlayerInitiativeView implements View {
   }
 
   void _setupListeners() {
+    InitiativeTotalEntry<int> initTotalEntry = _model.character.initiativeTotal;
+    
     void _setSpellMod(Event event) {
       if (spell.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[2].clone()..value = int.parse(spellLevel.value));
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[2].clone()..value = int.parse(spellLevel.value));
       }
       else {
-        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[2]);
+        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[2]);
       }
     }
 
     //Worst function ever.
     void _setCreatureSizeMod(Event event) {
       if (creatureSize.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[int.parse(creatureSizeSel.value)].clone());
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[int.parse(creatureSizeSel.value)].clone());
       }
       else {
-        _model.initiativeTotal.removeSizeMods();
+        initTotalEntry.removeSizeMods();
       }
     }
 
     void _setCustomMod(Event event) {
       if (custom.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[13].clone()..value = int.parse(customSel.value));
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[13].clone()..value = int.parse(customSel.value));
       }
       else {
-        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[13]);
+        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[13]);
       }
     }
 
     void _setMeleeHWMod(Event event) {
       if (meleeHW.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[3].clone());
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[3].clone());
       }
       else {
-        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[3]);
+        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[3]);
       }
     }
 
     void _setMeleeLWMod(Event event) {
       if (meleeLW.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[4].clone());
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[4].clone());
       }
       else {
-        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[4]);
+        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[4]);
       }
     }
 
     void _setMeleeTwoHandMod(Event event) {
       if (meleeTwoHand.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[5].clone());
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[5].clone());
       }
       else {
-        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[5]);
+        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[5]);
       }
     }
 
     void _setRangedLoadingMod(Event event) {
       if (rangedLoading.checked) {
-        _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[6].clone());
+        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[6].clone());
       }
       else {
-        _model.initiativeTotal.removeMod(_model.gameModel.initiativeTotalMods[6]);
+        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[6]);
       }
     }
 
     charName.onInput.listen((Event event) {
-      _model.charName = (event.target as InputElement).value.trim();
+      _model.character.charName = (event.target as InputElement).value.trim();
     });
 
     actionDescription.onInput.listen((Event event) {
-      _model.initiativeTotal.notes = (event.target as TextAreaElement).value.trim();
+      initTotalEntry.notes = (event.target as TextAreaElement).value.trim();
     });
 
     d20.onInput.listen((Event event) {
@@ -141,7 +144,7 @@ class PlayerInitiativeView implements View {
 
       if (roll != null) {
         if (roll >= 1 && roll <= 20) {
-          _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[0].clone()..value = roll);
+          initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[0].clone()..value = roll);
         }
       }
     });
@@ -151,7 +154,7 @@ class PlayerInitiativeView implements View {
 
       if (dMod != null) {
         if (dMod <= 5) {
-          _model.initiativeTotal.addMod(_model.gameModel.initiativeTotalMods[1].clone()..value = dMod);
+          initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[1].clone()..value = dMod);
         }
       }
     });
@@ -200,11 +203,11 @@ class PlayerInitiativeView implements View {
       showAlert("danger", '<strong>Error!</strong>');
     }
 
-    if (_model.charName.isEmpty) {
+    if (_model.character.charName.isEmpty) {
       return;
     }
 
-    Map characterDataMap = _model.toCharacterDataMap();
+    Map characterDataMap = _model.character.toMap();
 
     if (_charRef != null) {
       _charRef.set(characterDataMap).then(showSuccess);
