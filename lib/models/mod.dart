@@ -13,7 +13,6 @@ class Mod {
   String subtype;           // more specific type of mod (examples: Speed.GROUND, Proficiencies.SKILL)
   String source;            // source of mod (examples: Mod.CUSTOM [user-provided], Race:Elf, Class:Fighter, etc.)
   String description;       // full description of mod (if any)
-  String ref;               // reference for mod in game books (examples: PHB 101, DMG 55)
 
   List<AffectedStat> affectedStats = <AffectedStat>[];
 
@@ -27,7 +26,6 @@ class Mod {
     subtype = map["subtype"];
     source = map["source"];
     description = map["description"];
-    ref = map["ref"];
 
     map['affectedStats'].forEach((String key, Map map) => affectedStats.add(new AffectedStat.fromMap(map)));
   }
@@ -42,7 +40,6 @@ class Mod {
     if (subtype != null) map['subtype'] = subtype;
     if (source != null) map['source'] = source;
     if (description != null) map['description'] = description;
-    if (ref != null) map['ref'] = ref;
 
     if (affectedStats.isNotEmpty) {
       map['affectedStats'] = affectedStats.map((AffectedStat af) => af.toMap());
@@ -73,17 +70,41 @@ abstract class Modifiable {
 class AffectedStat {
   String name;
   var value;
+  HashMap<String, bool> tags;
+  String ref;         // reference for mod in game books (examples: PHB 101, DMG 55)
 
   AffectedStat();
 
-  AffectedStat.fromMap(Map map) : name = map['name'], value = map['value'];
+  AffectedStat.fromMap(Map map) : name = map['name'], value = map['value'], tags = map['tags'], ref = map['ref'];
 
   Map toMap() {
     return {
       "name": name,
-      "value": value
+      "value": value,
+      "tags": tags,
+      "ref": ref
     };
   }
 
   @override String toString() => "$name: $value";
+}
+
+// entries only need this, instead of the full Mod
+class ModRef {
+  String id;          // the ID of the source Mod
+  AffectedStat stat;    // the value for just one affected stat
+
+  ModRef(this.id, this.stat);
+
+  ModRef.fromMap(Map map) {
+    id = map['id'];
+    stat = new AffectedStat.fromMap(map);
+  }
+
+  Map toMap() {
+    return {
+      "id": id,
+      "stat": stat.toMap()
+    };
+  }
 }
