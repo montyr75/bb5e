@@ -37,7 +37,7 @@ void main() {
     if (charModel != null) {
       initList.children.clear();
 
-      charModel.keys.forEach((String charID) {
+      /*charModel.keys.forEach((String charID) {
         Character char = new Character.fromMap(charModel[charID]);
         Mod roll = char.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 0, orElse: () => null);
         Mod dexMod = char.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 1, orElse: () => null);
@@ -61,7 +61,7 @@ void main() {
             </a>'''
           );
         }
-      });
+      });*/
     }
   });
 

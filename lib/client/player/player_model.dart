@@ -16,7 +16,7 @@ class PlayerModel {
 
   PlayerModel() {
     gameModel = new GameModel()..onLoaded.first.then((bool loaded) {
-      character = new Character(gameModel);
+      character = new Character();
 
       // fire Loaded event
       _onLoaded.add(loaded);

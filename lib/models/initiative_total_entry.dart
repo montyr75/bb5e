@@ -5,11 +5,11 @@ import 'entry.dart';
 import '../client/shared.dart';
 
 class InitiativeTotalEntry<T> extends CalculatedEntry {
-  InitiativeTotalEntry(List<Mod<int>> initiativeTotalMods) {
+  InitiativeTotalEntry(/*, List<Mod<int>> initiativeTotalMods*/) : super("initiativeTotal") {
     // listen for incapacitated events
-    eventBus.on(IncapacitatedEvent).listen((_) {
-      addMod(initiativeTotalMods[12].clone());
-    });
+//    eventBus.on(IncapacitatedEvent).listen((_) {
+//      addMod(initiativeTotalMods[12].clone());
+//    });
   }
 
   // an entry created this way will not respond to IncapacitatedEvent

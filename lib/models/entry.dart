@@ -4,15 +4,17 @@ import "mod.dart";
 
 // any entry that can be arbitrarily set by a user
 class Entry<T> {
+  String name;
   T value;
   String notes;
 
-  Entry();
+  Entry(String this.name);
 
-  Entry.fromMap(Map map) : value = map['value'], notes = map['notes'];
+  Entry.fromMap(Map map) : name = map['name'], value = map['value'], notes = map['notes'];
 
   Map toMap() {
     return {
+      "name": name,
       "value": value,
       "notes": notes
     };
@@ -23,7 +25,7 @@ class Entry<T> {
 class ModifiableEntry<T> extends Entry implements Modifiable {
   Mod mod;
 
-  ModifiableEntry();
+  ModifiableEntry(String name) : super(name);
 
   void addMod(Mod newMod) {
     mod = mod;
@@ -41,7 +43,7 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
   num min;
   num max;
 
-  CalculatedEntry({this.min: null, this.max: null}) {
+  CalculatedEntry(String name, {num this.min: null, num this.max: null}) : super(name) {
     value = null;
 
     if (mods == null) {
@@ -81,7 +83,7 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
     }
 
     // calculate value as sum of Mod values
-    List<num> values = mods.map((Mod mod) => mod.value).toList();
+    List<num> values = mods.map((Mod mod) => mod.affectedStats.firstWhere((AffectedStat af) => af.name == name).value).toList();
     value = values.reduce((num totalValue, num currentValue) => totalValue + currentValue);
 
     // enforce min/max

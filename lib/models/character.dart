@@ -1,29 +1,38 @@
 library client.dm.character;
 
+import 'dart:collection';
 import 'package:bb5e/models/game_model.dart';
+import 'mod.dart';
+import 'entry.dart';
 import 'initiative_total_entry.dart';
 
 class Character {
-  GameModel _gameModel;     // reference to game rules and mods
+//  GameModel _gameModel;     // reference to game rules and mods
 
-  String charName = "";
-  InitiativeTotalEntry<int> initiativeTotal;    // initiative total during combat
+  HashMap<String, Entry> _entries = <String, Entry>{
+    "name": new Entry<String>("name"),
+    "initiativeTotal": new InitiativeTotalEntry<int>()
+  };
 
-  Character(this._gameModel) {
-    initiativeTotal = new InitiativeTotalEntry<int>(_gameModel.initiativeTotalMods);
-  }
+  Character(/*this._gameModel*/);
 
   Character.fromMap(Map map) {
-    charName = map['charName'];
-    initiativeTotal = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
+    _entries['name'] = new Entry<String>.fromMap(map['name']);
+    _entries['initiativeTotal'] = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
+  }
+
+  void addMod(Mod mod) {
+    // loop through all affectedStats and send a copy of the mod to each of those entries
   }
 
   Map toMap() {
-    return {
-      "charName": charName,
-      "initiativeTotal": initiativeTotal.toMap()
-    };
+    Map map = {};
+    _entries.forEach((String stat, Entry entry) => map[stat] = entry.toMap());
+    return map;
   }
 
-  @override String toString() => "$charName-> ${initiativeTotal}";
+  // for access to entries
+  Entry operator [](String stat) => _entries[stat];
+
+  @override String toString() => "${this['name']}-> ${this['initiativeTotal']}";
 }

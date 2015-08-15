@@ -65,7 +65,7 @@ class PlayerInitiativeView implements View {
   }
 
   void _setupListeners() {
-    InitiativeTotalEntry<int> initTotalEntry = _model.character.initiativeTotal;
+    InitiativeTotalEntry<int> initTotalEntry = _model.character['initiativeTotal'];
     
     void _setSpellMod(Event event) {
       if (spell.checked) {
@@ -132,7 +132,7 @@ class PlayerInitiativeView implements View {
     }
 
     charName.onInput.listen((Event event) {
-      _model.character.charName = (event.target as InputElement).value.trim();
+      _model.character['name'].value = (event.target as InputElement).value.trim();
     });
 
     actionDescription.onInput.listen((Event event) {
@@ -203,7 +203,7 @@ class PlayerInitiativeView implements View {
       showAlert("danger", '<strong>Error!</strong>');
     }
 
-    if (_model.character.charName.isEmpty) {
+    if (charName.value.trim().isEmpty) {
       return;
     }
 

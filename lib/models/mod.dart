@@ -1,19 +1,21 @@
 library dd5.base.mod;
 
-class Mod<T> {
+import 'dart:collection';
+
+class Mod {
   // sources
   static const String CUSTOM = "CUSTOM";
 
   int id;                   // unique ID of mod (typically db-defined)
-  int level;                // 1-20 or null = "all"
+  int level;                // 1-20 or -1 = "all"
   String name;              // official name of the mod (if any)
   String type;              // type of mod (examples: ModType.BASE, ModType.BONUS, ModType.PENALTY)
   String subtype;           // more specific type of mod (examples: Speed.GROUND, Proficiencies.SKILL)
   String source;            // source of mod (examples: Mod.CUSTOM [user-provided], Race:Elf, Class:Fighter, etc.)
-  String affectedStat;      // stat affected by this mod (examples: size, speed, traits)
-  T value;                  // value of mod for calculation purposes (if any)
   String description;       // full description of mod (if any)
   String ref;               // reference for mod in game books (examples: PHB 101, DMG 55)
+
+  List<AffectedStat> affectedStats = <AffectedStat>[];
 
   Mod();
 
@@ -24,10 +26,10 @@ class Mod<T> {
     type = map["type"];
     subtype = map["subtype"];
     source = map["source"];
-    affectedStat = map["affectedStat"];
-    value = map["value"];
     description = map["description"];
     ref = map["ref"];
+
+    map['affectedStats'].forEach((String key, Map map) => affectedStats.add(new AffectedStat.fromMap(map)));
   }
 
   Map toMap() {
@@ -39,32 +41,21 @@ class Mod<T> {
     if (type != null) map['type'] = type;
     if (subtype != null) map['subtype'] = subtype;
     if (source != null) map['source'] = source;
-    if (affectedStat != null) map['affectedStat'] = affectedStat;
-    if (value != null) map['value'] = value;
     if (description != null) map['description'] = description;
     if (ref != null) map['ref'] = ref;
 
-    return map;
+    if (affectedStats.isNotEmpty) {
+      map['affectedStats'] = affectedStats.map((AffectedStat af) => af.toMap());
+    }
 
-//    return {
-//      "id": id,
-//      "level": level,
-//      "name": name,
-//      "type": type,
-//      "subtype": subtype,
-//      "source": source,
-//      "affectedStat": affectedStat,
-//      "value": value,
-//      "description": description,
-//      "ref": ref
-//    };
+    return map;
   }
 
   Mod clone() => new Mod.fromMap(toMap());
 
-  @override bool operator ==(Mod other) => id == other.id;
+  @override bool operator ==(Mod other) => name == other.name;
 
-  @override String toString() => "$name: $value";
+  @override String toString() => "$name: $affectedStats";
 }
 
 class ModType {
@@ -77,4 +68,22 @@ class ModType {
 abstract class Modifiable {
   void addMod(Mod mod);
   void removeMod(Mod mod);
+}
+
+class AffectedStat {
+  String name;
+  var value;
+
+  AffectedStat();
+
+  AffectedStat.fromMap(Map map) : name = map['name'], value = map['value'];
+
+  Map toMap() {
+    return {
+      "name": name,
+      "value": value
+    };
+  }
+
+  @override String toString() => "$name: $value";
 }

@@ -1,44 +1,10 @@
 [
   {
-    "level": null,
-    "name": "Initiative Roll",
-    "type": "BASE",
-    "subtype": null,
-    "source": "CUSTOM",
-    "affectedStat": "initiativeTotal",
-    "value": null,
-    "description": "Base initiative roll (DEX check).",
-    "ref": "PHB 189"
-  },
-  {
-    "level": null,
-    "name": "Dexterity Modifier",
-    "type": "MODIFIER",
-    "subtype": null,
-    "source": "CUSTOM",
-    "affectedStat": "initiativeTotal",
-    "value": null,
-    "description": "Modifier based on Dexterity score.",
-    "ref": null
-  },
-  {
-    "level": null,
-    "name": "Spellcasting",
-    "type": "PENALTY",
-    "subtype": null,
-    "source": "CUSTOM",
-    "affectedStat": "initiativeTotal",
-    "value": null,
-    "description": "Speed factor initiative modifier based on spell level.",
-    "ref": "DMG 270"
-  },
-  {
-    "level": null,
     "name": "Melee, heavy weapon",
-    "type": "PENALTY",
-    "subtype": null,
-    "source": "null",
-    "affectedStat": "initiativeTotal",
+    "affectedStats": {
+      "name": "initiativeTotal",
+      "value": -2
+    },
     "value": -2,
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "ref": "DMG 270"

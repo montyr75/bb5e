@@ -6,7 +6,7 @@ import 'mod.dart';
 import '../client/shared.dart';
 
 class GameModel {
-  List<Mod<int>> initiativeTotalMods;
+  List<Mod> initiativeTotalMods;
 
   // event controllers
   StreamController _onLoaded = new StreamController();
@@ -21,7 +21,7 @@ class GameModel {
     FB.Firebase initiativeTotalModsRef = new FB.Firebase("$FIREBASE_PATH/gameData/initiativeTotalMods");
     FB.DataSnapshot snapshot = await initiativeTotalModsRef.once("value");
     List<Map> initiativeTotalModsMaps = snapshot.val();
-    initiativeTotalMods = initiativeTotalModsMaps.map((Map map) => new Mod<int>.fromMap(map)..id = i++).toList();
+    initiativeTotalMods = initiativeTotalModsMaps.map((Map map) => new Mod.fromMap(map)..id = i++).toList();
 
     // fire Loaded event
     _onLoaded.add(true);
