@@ -2,9 +2,7 @@
   {
     "level": -1,
     "name": "Initiative Roll",
-    "type": "BASE",
-    "subtype": null,
-    "source": "CUSTOM",
+    "source": "User",
     "description": "Base initiative roll (DEX check).",
     "affectedStats": [
       {
@@ -18,9 +16,7 @@
   {
     "level": -1,
     "name": "Dexterity Modifier",
-    "type": "MODIFIER",
-    "subtype": null,
-    "source": "CUSTOM",
+    "source": "User",
     "description": "Modifier based on Dexterity score.",
     "affectedStats": [
       {
@@ -34,9 +30,7 @@
   {
     "level": -1,
     "name": "Spellcasting",
-    "type": "PENALTY",
-    "subtype": null,
-    "source": "CUSTOM",
+    "source": "User",
     "description": "Speed factor initiative modifier based on spell level.",
     "affectedStats": [
       {
@@ -50,9 +44,7 @@
   {
     "level": -1,
     "name": "Melee, heavy weapon",
-    "type": "PENALTY",
-    "subtype": null,
-    "source": "null",
+    "source": "User",
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "affectedStats": [
       {
@@ -66,9 +58,7 @@
   {
     "level": -1,
     "name": "Melee, light or finesse weapon",
-    "type": "BONUS",
-    "subtype": null,
-    "source": "null",
+    "source": "User",
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "affectedStats": [
       {
@@ -82,9 +72,7 @@
   {
     "level": -1,
     "name": "Melee, two-handed weapon",
-    "type": "PENALTY",
-    "subtype": null,
-    "source": "null",
+    "source": "User",
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "affectedStats": [
       {
@@ -98,9 +86,7 @@
   {
     "level": -1,
     "name": "Ranged, loading weapon",
-    "type": "PENALTY",
-    "subtype": null,
-    "source": "null",
+    "source": "User",
     "description": "Speed factor initiative modifier for using a ranged weapon requiring effort to reload.",
     "affectedStats": [
       {
@@ -114,9 +100,7 @@
   {
     "level": -1,
     "name": "Custom Speed Factor Modifier",
-    "type": "MODIFIER",
-    "subtype": null,
-    "source": "CUSTOM",
+    "source": "User",
     "description": "(string)",
     "affectedStats": [
       {
