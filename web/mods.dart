@@ -1,7 +1,5 @@
 import 'dart:html';
 import 'dart:convert';
-import 'package:bb5e/models/mod.dart';
-import 'package:bb5e/models/character.dart';
 import 'package:firebase/firebase.dart' as FB;
 
 FB.Firebase ref = new FB.Firebase("https://incandescent-heat-2470.firebaseio.com/gameData/mods");

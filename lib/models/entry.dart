@@ -46,26 +46,22 @@ class ModifiableEntry<T> extends Entry implements Modifiable {
 
 // takes any number of mods and uses them to calculate the value (simple math)
 class CalculatedEntry<T> extends Entry implements Modifiable {
-  List<ModRef> mods;
+  List<ModRef> mods = [];
   num min;
   num max;
 
   CalculatedEntry(String name, {num this.min: null, num this.max: null}) : super(name) {
     value = null;
-
-    if (mods == null) {
-      mods = [];
-    }
   }
 
   CalculatedEntry.fromMap(Map map) : super.fromMap(map), min = map['min'], max = map['max'] {
-    mods = map['mods'].map((Map modMap) => new ModRef.fromMap(modMap)).toList();
+//    mods = map['mods'].map((Map modMap) => new ModRef.fromMap(modMap)).toList();
   }
 
   Map toMap() {
     Map map = super.toMap();
     map.addAll({
-      "mods": mods.map((ModRef mod) => mod.toMap()).toList(),
+//      "mods": mods.map((ModRef mod) => mod.toMap()).toList(),
       "min": min,
       "max": max
     });

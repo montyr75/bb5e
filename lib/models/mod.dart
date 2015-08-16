@@ -1,7 +1,5 @@
 library dd5.base.mod;
 
-import 'dart:collection';
-
 class Mod {
   // sources
   static const String CUSTOM = "CUSTOM";
@@ -60,7 +58,7 @@ class Mod {
 class AffectedStat {
   String name;
   var value;
-  HashMap<String, bool> tags;
+  Map<String, bool> tags;
   String ref;         // reference for mod in game books (examples: PHB 101, DMG 55)
 
   AffectedStat();
@@ -79,31 +77,46 @@ class AffectedStat {
   @override String toString() => "$name: $value";
 }
 
-// entries only need this, instead of the full Mod
+// entries only need this, instead of the full Mod (ModRefs should not persist to the db)
 class ModRef {
-  String id;            // the ID of the source Mod
-  String name;          // the name of the source Mod
-  AffectedStat stat;    // just one affected stat
+  Mod mod;              // reference to the source Mod
+  AffectedStat stat;    // reference to the pertinent affected stat data
 
-  ModRef(this.id, this.name, this.stat);
+  ModRef(Mod this.mod, AffectedStat this.stat);
 
-  ModRef.fromMap(Map map) {
-    id = map['id'];
-    name = map['name'];
-    stat = new AffectedStat.fromMap(map);
-  }
-
-  Map toMap() {
-    return {
-      "id": id,
-      "name": name,
-      "stat": stat.toMap()
-    };
-  }
-
+  String get id => mod.id;
+  String get name => mod.name;
   get value => stat.value;
-  get tags => stat.tags;
-  get ref => stat.ref;
+  Map<String, bool> get tags => stat.tags;
+  String get ref => stat.ref;
 
   @override String toString() => "$name (${stat.name}): $value";
 }
+
+//class ModRef {
+//  String id;            // the ID of the source Mod
+//  String name;          // the name of the source Mod
+//  AffectedStat stat;    // just one affected stat
+//
+//  ModRef(this.id, this.name, this.stat);
+//
+//  ModRef.fromMap(Map map) {
+//    id = map['id'];
+//    name = map['name'];
+//    stat = new AffectedStat.fromMap(map);
+//  }
+//
+//  Map toMap() {
+//    return {
+//      "id": id,
+//      "name": name,
+//      "stat": stat.toMap()
+//    };
+//  }
+//
+//  get value => stat.value;
+//  get tags => stat.tags;
+//  get ref => stat.ref;
+//
+//  @override String toString() => "$name (${stat.name}): $value";
+//}
