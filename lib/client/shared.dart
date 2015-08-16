@@ -15,8 +15,6 @@ abstract class View {
 
 EventBus eventBus = new EventBus();
 
-class IncapacitatedEvent {}
-
 class InitiativeTotalCalculatedEvent {
   final int value;
   InitiativeTotalCalculatedEvent(this.value);

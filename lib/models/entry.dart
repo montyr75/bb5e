@@ -2,10 +2,15 @@ library dd5.base.entry;
 
 import "mod.dart";
 
+abstract class Modifiable {
+  void addMod(ModRef mod);
+  void removeMod(String modID);
+}
+
 // any entry that can be arbitrarily set by a user
 class Entry<T> {
-  String name;
-  T value;
+  String name;        // the name of the entry (often a stat name)
+  T value;            // the value of the entry
   String notes;
 
   Entry(String this.name);
@@ -19,27 +24,29 @@ class Entry<T> {
       "notes": notes
     };
   }
+
+  @override String toString() => "$name: $value";
 }
 
 // takes only a single Mod and uses that as the Entry's value
 class ModifiableEntry<T> extends Entry implements Modifiable {
-  Mod mod;
+  ModRef mod;
 
   ModifiableEntry(String name) : super(name);
 
-  void addMod(Mod newMod) {
-    mod = mod;
-    value = value;
+  void addMod(ModRef newMod) {
+    mod = newMod;
+    value = newMod.value;
   }
 
-  void removeMod(Mod oldMod) {
+  void removeMod(String oldModID) {
     mod = value = null;
   }
 }
 
 // takes any number of mods and uses them to calculate the value (simple math)
 class CalculatedEntry<T> extends Entry implements Modifiable {
-  List<Mod> mods;
+  List<ModRef> mods;
   num min;
   num max;
 
@@ -52,13 +59,13 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
   }
 
   CalculatedEntry.fromMap(Map map) : super.fromMap(map), min = map['min'], max = map['max'] {
-    mods = map['mods'].map((Map modMap) => new Mod.fromMap(modMap)).toList();
+    mods = map['mods'].map((Map modMap) => new ModRef.fromMap(modMap)).toList();
   }
 
   Map toMap() {
     Map map = super.toMap();
     map.addAll({
-      "mods": mods.map((Mod mod) => mod.toMap()).toList(),
+      "mods": mods.map((ModRef mod) => mod.toMap()).toList(),
       "min": min,
       "max": max
     });
@@ -66,13 +73,13 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
     return map;
   }
 
-  void addMod(Mod mod) {
+  void addMod(ModRef mod) {
     mods.add(mod);
     calculate();
   }
 
-  void removeMod(Mod mod) {
-    mods.remove(mod);
+  void removeMod(String modID) {
+    mods.removeWhere((ModRef mod) => mod.id == modID);
     calculate();
   }
 
@@ -83,7 +90,7 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
     }
 
     // calculate value as sum of Mod values
-    List<num> values = mods.map((Mod mod) => mod.affectedStats.firstWhere((AffectedStat af) => af.name == name).value).toList();
+    List<num> values = mods.map((ModRef mod) => mod.value).toList();
     value = values.reduce((num totalValue, num currentValue) => totalValue + currentValue);
 
     // enforce min/max

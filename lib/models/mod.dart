@@ -6,12 +6,10 @@ class Mod {
   // sources
   static const String CUSTOM = "CUSTOM";
 
-  int id;                   // unique ID of mod (typically db-defined)
+  String id;                // Firebase ID
   int level;                // 1-20 or -1 = "all"
   String name;              // official name of the mod (if any)
-  String type;              // type of mod (examples: ModType.BASE, ModType.BONUS, ModType.PENALTY)
-  String subtype;           // more specific type of mod (examples: Speed.GROUND, Proficiencies.SKILL)
-  String source;            // source of mod (examples: Mod.CUSTOM [user-provided], Race:Elf, Class:Fighter, etc.)
+  String source;            // source of mod (examples: User, Race:Elf, Class:Fighter, etc.)
   String description;       // full description of mod (if any)
 
   List<AffectedStat> affectedStats = <AffectedStat>[];
@@ -22,49 +20,41 @@ class Mod {
     id = map["id"];
     level = map["level"];
     name = map["name"];
-    type = map["type"];
-    subtype = map["subtype"];
     source = map["source"];
     description = map["description"];
 
-    map['affectedStats'].forEach((String key, Map map) => affectedStats.add(new AffectedStat.fromMap(map)));
+    affectedStats = map['affectedStats'].map((Map asMap) => new AffectedStat.fromMap(asMap)).toList();
   }
 
   Map toMap() {
-    // in JS, null values in here end up as undefined and cause Firebase.set to fail
-    Map map = {};
-    if (id != null) map['id'] = id;
-    if (level != null) map['level'] = level;
-    if (name != null) map['name'] = name;
-    if (type != null) map['type'] = type;
-    if (subtype != null) map['subtype'] = subtype;
-    if (source != null) map['source'] = source;
-    if (description != null) map['description'] = description;
+    return {
+      "id": id,
+      "level": level,
+      "name": name,
+      "source": source,
+      "description": description,
+      "affectedStats": affectedStats.map((AffectedStat stat) => stat.toMap()).toList()
+    };
+  }
 
-    if (affectedStats.isNotEmpty) {
-      map['affectedStats'] = affectedStats.map((AffectedStat af) => af.toMap());
+  void setValue(value, {String statName}) {
+    if (statName == null) {
+      affectedStats[0].value = value;
     }
-
-    return map;
+    else {
+      // find all stats with the given name and update their values
+      affectedStats.where((AffectedStat stat) => stat.name == statName).forEach((AffectedStat stat) => stat.value = value);
+    }
   }
 
   Mod clone() => new Mod.fromMap(toMap());
 
-  @override bool operator ==(Mod other) => name == other.name;
+  // this sets the value on just the first affectedStat (good for when there's only one)
+  void set value(val) => setValue(val);
+
+  @override bool operator ==(Mod other) => id == other.id;
 
   @override String toString() => "$name: $affectedStats";
-}
-
-class ModType {
-  static const String BASE = "BASE";
-  static const String BONUS = "BONUS";
-  static const String PENALTY = "PENALTY";
-  static const String MODIFIER = "MODIFIER";
-}
-
-abstract class Modifiable {
-  void addMod(Mod mod);
-  void removeMod(Mod mod);
 }
 
 class AffectedStat {
@@ -91,20 +81,29 @@ class AffectedStat {
 
 // entries only need this, instead of the full Mod
 class ModRef {
-  String id;          // the ID of the source Mod
-  AffectedStat stat;    // the value for just one affected stat
+  String id;            // the ID of the source Mod
+  String name;          // the name of the source Mod
+  AffectedStat stat;    // just one affected stat
 
-  ModRef(this.id, this.stat);
+  ModRef(this.id, this.name, this.stat);
 
   ModRef.fromMap(Map map) {
     id = map['id'];
+    name = map['name'];
     stat = new AffectedStat.fromMap(map);
   }
 
   Map toMap() {
     return {
       "id": id,
+      "name": name,
       "stat": stat.toMap()
     };
   }
+
+  get value => stat.value;
+  get tags => stat.tags;
+  get ref => stat.ref;
+
+  @override String toString() => "$name (${stat.name}): $value";
 }

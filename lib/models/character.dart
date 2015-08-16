@@ -1,20 +1,19 @@
 library client.dm.character;
 
-import 'dart:collection';
-import 'package:bb5e/models/game_model.dart';
 import 'mod.dart';
 import 'entry.dart';
 import 'initiative_total_entry.dart';
 
 class Character {
-//  GameModel _gameModel;     // reference to game rules and mods
 
-  HashMap<String, Entry> _entries = <String, Entry>{
+  Map<String, Mod> mods = {};     // master mod list (using a Map, no mod can be applied more than once -- correct behavior?)
+
+  Map<String, Entry> _entries = <String, Entry>{
     "name": new Entry<String>("name"),
     "initiativeTotal": new InitiativeTotalEntry<int>()
   };
 
-  Character(/*this._gameModel*/);
+  Character();
 
   Character.fromMap(Map map) {
     _entries['name'] = new Entry<String>.fromMap(map['name']);
@@ -22,7 +21,26 @@ class Character {
   }
 
   void addMod(Mod mod) {
-    // loop through all affectedStats and send a copy of the mod to each of those entries
+    // only apply the same mod once -- correct behavior?
+    if (!mods.containsKey(mod.id)) {
+      // save mod to master list
+      mods[mod.id] = mod;
+
+      mod.affectedStats.forEach((AffectedStat stat) {
+        // add a ModRef to each affected stat
+        if (_entries.containsKey(stat.name)) {
+          (_entries[stat.name] as Modifiable).addMod(new ModRef(mod.id, mod.name, stat));
+        }
+      });
+    }
+  }
+
+  void removeMod(String modID) {
+    if (mods.containsKey(modID)) {
+      mods[modID].affectedStats.forEach((AffectedStat stat) {
+        (_entries[stat.name] as Modifiable).removeMod(modID);
+      });
+    }
   }
 
   Map toMap() {

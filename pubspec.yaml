@@ -15,6 +15,7 @@ dependencies:
   redstone_web_socket: any
   http: any
   firebase: any
+  firebase_rest: any
   bootstrap: any
   dart_to_js_script_rewriter: '^0.1.0'
 

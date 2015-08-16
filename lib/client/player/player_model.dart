@@ -1,6 +1,5 @@
 library bb5e.client.player.model;
 
-import 'dart:async';
 import 'package:bb5e/models/game_model.dart';
 import '../../models/conditions_model.dart';
 import '../../models/character.dart';
@@ -11,18 +10,8 @@ class PlayerModel {
 
   ConditionsModel conditions = new ConditionsModel();
 
-  // event controllers
-  StreamController _onLoaded = new StreamController();
-
-  PlayerModel() {
-    gameModel = new GameModel()..onLoaded.first.then((bool loaded) {
-      character = new Character();
-
-      // fire Loaded event
-      _onLoaded.add(loaded);
-    });
+  PlayerModel(Map modMaps) {
+    gameModel = new GameModel(modMaps);
+    character = new Character();
   }
-
-  // events
-  Stream<bool> get onLoaded => _onLoaded.stream;
 }
