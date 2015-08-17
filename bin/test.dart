@@ -1,19 +1,18 @@
-import 'package:firebase_rest/firebase_rest.dart';
+import 'dart:async';
 import 'package:bb5e/client/player/player_model.dart';
 import 'package:bb5e/models/global.dart';
+import 'package:bb5e/server/database.dart';
 
-PlayerModel model;    // NOTE: This will not work without an alternate way for GameModel to get its data from Firebase (server-side style)
+PlayerModel model;
 
 void main() {
   initLog();
-
-  getGameData();
+  getGameData().then((_) => test());
 }
 
-getGameData() async {
-  DataSnapshot snapshot = await new Firebase(Uri.parse("$FIREBASE_PATH/gameData/mods")).get();
-  model = new PlayerModel(snapshot.val);
-  test();
+Future getGameData() async {
+  Database db = new Database();
+  model = new PlayerModel(await db.getGameData());
 }
 
 void test() {

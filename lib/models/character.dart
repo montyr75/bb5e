@@ -16,8 +16,10 @@ class Character {
   Character();
 
   Character.fromMap(Map map) {
+    // restore master mod list
     map['mods'].forEach((Map modMap) => _mods[modMap['id']] = new Mod.fromMap(modMap));
 
+    // restore entries
     _entries['name'] = new Entry<String>.fromMap(map['name']);
     _entries['initiativeTotal'] = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
 

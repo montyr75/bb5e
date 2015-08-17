@@ -1,5 +1,6 @@
 library model.global;
 
+import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:event_bus/event_bus.dart';
@@ -21,6 +22,10 @@ bool initLog() {
   });
 
   return true;
+}
+
+abstract class DatabaseInterface {
+  Future<Map> getGameData();
 }
 
 abstract class View {
