@@ -1,5 +1,5 @@
 import 'dart:html';
-import 'package:bb5e/client/shared.dart';
+import 'package:bb5e/models/global.dart';
 import 'package:bb5e/models/mod.dart';
 import 'package:bb5e/models/character.dart';
 import 'package:firebase/firebase.dart' as FB;

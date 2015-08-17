@@ -1,10 +1,12 @@
 import 'package:firebase_rest/firebase_rest.dart';
 import 'package:bb5e/client/player/player_model.dart';
-import 'package:bb5e/client/shared.dart';
+import 'package:bb5e/models/global.dart';
 
 PlayerModel model;    // NOTE: This will not work without an alternate way for GameModel to get its data from Firebase (server-side style)
 
 void main() {
+  initLog();
+
   getGameData();
 }
 

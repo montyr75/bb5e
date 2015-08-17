@@ -2,7 +2,7 @@ library bb5e.client.player.views;
 
 import 'dart:html';
 import 'dart:async';
-import '../../client/shared.dart';
+import '../../models/global.dart';
 import '../../client/player/player_model.dart';
 import '../../models/initiative_total_entry.dart';
 import 'package:firebase/firebase.dart' as FB;

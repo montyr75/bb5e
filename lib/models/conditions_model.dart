@@ -1,6 +1,6 @@
 library bb5e.models.conditions_model;
 
-import '../client/shared.dart';
+import 'global.dart';
 
 class ConditionsModel {
   bool blinded = false;
@@ -21,10 +21,6 @@ class ConditionsModel {
 
   bool get incapacitated => _incapacitated;
   void set incapacitated(bool newVal) {
-    if (!_incapacitated && newVal) {
-      eventBus.fire(new IncapacitatedEvent());
-    }
-
     _incapacitated = newVal;
 
     if (_incapacitated) {

@@ -21,14 +21,12 @@ class Character {
     _entries['name'] = new Entry<String>.fromMap(map['name']);
     _entries['initiativeTotal'] = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
 
-    // TODO: Test this! Also, this code is redundant and possibly computationally wasteful.
-    // TODO: CalculatedEntry might need something like restoreMod that doesn't recalclate.
-    // when loading a saved character, reapply all ModRefs
+    // TODO: Test this!
+    // when loading a saved character, restore stat ModRef lists (which do not persist)
     _mods.forEach((String id, Mod mod) {
       mod.affectedStats.forEach((AffectedStat stat) {
-        // add a ModRef to each affected stat
         if (_entries.containsKey(stat.name)) {
-          (_entries[stat.name] as Modifiable).addMod(new ModRef(mod, stat));
+          (_entries[stat.name] as Modifiable).restoreMod(new ModRef(mod, stat));
         }
       });
     });
@@ -54,6 +52,9 @@ class Character {
       _mods[modID].affectedStats.forEach((AffectedStat stat) {
         (_entries[stat.name] as Modifiable).removeMod(modID);
       });
+
+      // remove mod from master list
+      _mods.remove(modID);
     }
   }
 

@@ -3,8 +3,9 @@ library dd5.base.entry;
 import "mod.dart";
 
 abstract class Modifiable {
-  void addMod(ModRef mod);
-  void removeMod(String modID);
+  void addMod(ModRef mod);          // add mod to entry and recalculate value (if necessary)
+  void removeMod(String modID);     // remove mod from entry and recalculate value (if necessary)
+  void restoreMod(ModRef mod);      // restore mod to entry after a reload, which should typically not trigger recalculation
 }
 
 // any entry that can be arbitrarily set by a user
@@ -42,6 +43,10 @@ class ModifiableEntry<T> extends Entry implements Modifiable {
   void removeMod(String oldModID) {
     mod = value = null;
   }
+
+  void restoreMod(ModRef oldMod) {
+    mod = oldMod;
+  }
 }
 
 // takes any number of mods and uses them to calculate the value (simple math)
@@ -77,6 +82,10 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
   void removeMod(String modID) {
     mods.removeWhere((ModRef mod) => mod.id == modID);
     calculate();
+  }
+
+  void restoreMod(ModRef mod) {
+    mods.add(mod);
   }
 
   void calculate() {

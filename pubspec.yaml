@@ -17,6 +17,7 @@ dependencies:
   firebase: any
   firebase_rest: any
   bootstrap: any
+  logging: any
   dart_to_js_script_rewriter: '^0.1.0'
 
 transformers:

@@ -2,27 +2,21 @@ library bb5e.models.inititative_total_entry;
 
 import 'mod.dart';
 import 'entry.dart';
-import '../client/shared.dart';
+import 'global.dart';
 
 class InitiativeTotalEntry<T> extends CalculatedEntry {
   InitiativeTotalEntry() : super("initiativeTotal");
 
   InitiativeTotalEntry.fromMap(Map map) : super.fromMap(map);
 
-  @override void addMod(ModRef mod) {
-    // TODO: restore size checks using tags
+  @override void addMod(ModRef newMod) {
     // there can be only one Size mod
-//    else if (mod.subtype == "Size") {
-//      removeSizeMods();
-//    }
+    if (newMod.tags.containsKey("creature size")) {
+      mods.removeWhere((ModRef mod) => mod.tags.containsKey("creature size"));
+    }
 
-    super.addMod(mod);
+    super.addMod(newMod);
   }
-
-//  void removeSizeMods() {
-//    mods.removeWhere((ModRef mod) => mod.subtype == "Size");
-//    calculate();
-//  }
 
   @override void calculate() {
     if (mods.any((ModRef mod) => mod.name == "Incapacitated")) {
@@ -34,7 +28,7 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
 
     eventBus.fire(new InitiativeTotalCalculatedEvent(value));
 
-    print(this);
+    log.info("$runtimeType::attached() -- $this");
   }
 
   @override String toString() => "Initiative Total: $value\n  $mods";

@@ -2,7 +2,7 @@
 //import 'package:bb5e/comms/comms.dart';
 import 'package:bb5e/client/player/player_model.dart';
 import 'package:bb5e/client/player/views.dart';
-import 'package:bb5e/client/shared.dart';
+import 'package:bb5e/models/global.dart';
 
 PlayerModel model;
 View currentView;
