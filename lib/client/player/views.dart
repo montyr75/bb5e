@@ -65,9 +65,13 @@ class PlayerInitiativeView implements View {
   }
 
   void _setupListeners() {
+    Character char = _model.character;
+    Map gm = _model.gameModel;
     InitiativeTotalEntry<int> initTotalEntry = _model.character['initiativeTotal'];
     
     void _setSpellMod(Event event) {
+      Mod mod gm['crazyID'];
+
       if (spell.checked) {
         initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[2].clone()..value = int.parse(spellLevel.value));
       }
