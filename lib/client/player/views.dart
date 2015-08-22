@@ -48,22 +48,27 @@ class InitiativeView extends View {
     Character char = _model.character;
     Map<String, Mod> mods = _model.gameModel.mods;
 
-    initRoll.onInput.listen((Event event) {
-      int roll = int.parse(initRoll.value.trim(), onError: (_) => null);
+    void _setMod(String modID, {value}) {
+      Mod mod = mods[modID];
 
-      if (roll != null) {
-        if (roll >= 1 && roll <= 20) {
-          char.addMod(mods[INIT_ROLL]..value = roll);
-        }
+      if (value != null) {
+        char.addMod(mod..setValue(value, statName: 'initiativeTotal'));
       }
+      else {
+        char.removeMod(mod.id);
+      }
+    }
+
+    initRoll.onInput.listen((_) {
+      int value = int.parse(initRoll.value.trim(), onError: (_) => null);
+      value = value != null && value >= 1 && value <= 20 ? value : null;
+      _setMod(INIT_ROLL, value: value);
     });
 
-    dexMod.onInput.listen((Event event) {
-      int dMod = int.parse(dexMod.value.trim().replaceAll("+", ""), onError: (_) => 0);
-
-      if (dMod <= 5) {
-        char.addMod(mods[DEX_MOD]..value = dMod);
-      }
+    dexMod.onInput.listen((_) {
+      int value = int.parse(dexMod.value.trim().replaceAll("+", ""), onError: (_) => null);
+      value = value != null && value <= 5 ? value : null;
+      _setMod(DEX_MOD, value: value);
     });
 
     actionDescription.onInput.listen((Event event) {
@@ -81,125 +86,69 @@ class InitiativeView extends View {
   }
 }
 
-//class SpeedFactorView extends View {
-//  CheckboxInputElement spell;
-//  SelectElement spellLevel;
-//  CheckboxInputElement meleeHW;
-//  CheckboxInputElement meleeLW;
-//  CheckboxInputElement meleeTwoHand;
-//  CheckboxInputElement rangedLoading;
-//  CheckboxInputElement creatureSize;
-//  SelectElement creatureSizeSel;
-//  CheckboxInputElement custom;
-//  SelectElement customSel;
-//
-//  SpeedFactorView(PlayerModel model) : super(model);
-//
-//  @override void setupListeners() {
-//    charName.onInput.listen((Event event) {
-//      _model.character['name'].value =
-//          (event.target as InputElement).value.trim();
-//    });
-//  }
-//
-//  void _getUIReferences() {
-//    spell = querySelector("#spell-cb");
-//    spellLevel = querySelector("#spell-level-sel");
-//    creatureSize = querySelector("#creature-size-cb");
-//    creatureSizeSel = querySelector("#creature-size-sel");
-//    custom = querySelector("#custom-cb");
-//    customSel = querySelector("#custom-sel");
-//    meleeHW = querySelector("#melee-hw-cb");
-//    meleeLW = querySelector("#melee-lw-cb");
-//    meleeTwoHand = querySelector("#melee-twohand-cb");
-//    rangedLoading = querySelector("#ranged-loading-cb");
-//  }
-//
-//  @override void setupListeners() {
-//    Character char = _model.character;
-//    Map<String, Mod> mods = _model.gameModel.mods;
-//
-//    void _setSpellMod(Event event) {
-//      Mod mod = mods['crazyID'];
-//
-//      if (spell.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[2].clone()
-//          ..value = int.parse(spellLevel.value));
-//      }
-//      else {
-//        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[2]);
-//      }
-//    }
-//
-//    //Worst function ever.
-//    void _setCreatureSizeMod(Event event) {
+class SpeedFactorView extends View {
+  static const String SPELLCASTING = "-JwnoPlGm5tYgTJyp8pY";
+  static const String MELEE_HW = "-JwnoPlHFgrIsZXmMYKE";
+  static const String MELEE_LW = "-JwnoPlIvT4px-phgWlD";
+  static const String MELEE_TWO_HAND = "-JwnoPlLXsiqHFXaNcm6";
+  static const String RANGED_LOADING = "-JwnoPlMNtQEir2cFkUD";
+  static const String CUSTOM_SPEED_FACTOR = "-JwnoPlNGljXXDbGim8_";
+
+  CheckboxInputElement spell = querySelector("#spell-cb");
+  SelectElement spellLevel = querySelector("#spell-level-sel");
+  CheckboxInputElement meleeHW = querySelector("#melee-hw-cb");
+  CheckboxInputElement meleeLW = querySelector("#melee-lw-cb");
+  CheckboxInputElement meleeTwoHand = querySelector("#melee-twohand-cb");
+  CheckboxInputElement rangedLoading = querySelector("#ranged-loading-cb");
+  CheckboxInputElement creatureSize = querySelector("#creature-size-cb");
+  SelectElement creatureSizeSel = querySelector("#creature-size-sel");
+  CheckboxInputElement custom = querySelector("#custom-cb");
+  SelectElement customSel = querySelector("#custom-sel");
+
+  SpeedFactorView(PlayerModel model) : super(model);
+
+  @override void setupListeners() {
+    Character char = _model.character;
+    Map<String, Mod> mods = _model.gameModel.mods;
+
+    void _setMod(bool checked, String modID, {value}) {
+      Mod mod = mods[modID];
+
+      if (checked) {
+        if (value != null) {
+          mod.setValue(value, statName: 'initiativeTotal');
+        }
+
+        char.addMod(mod);
+      }
+      else {
+        char.removeMod(mod.id);
+      }
+    }
+
+    // TODO: Add creature size mods to database
+//    void _setCreatureSizeMod(_) {
 //      if (creatureSize.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[int.parse(
+//        char.addMod(_model.gameModel.initiativeTotalMods[int.parse(
 //            creatureSizeSel.value)].clone());
 //      }
 //      else {
-//        initTotalEntry.removeSizeMods();
+//        char.removeSizeMods();
 //      }
 //    }
-//
-//    void _setCustomMod(Event event) {
-//      if (custom.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[13].clone()
-//          ..value = int.parse(customSel.value));
-//      }
-//      else {
-//        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[13]);
-//      }
-//    }
-//
-//    void _setMeleeHWMod(Event event) {
-//      if (meleeHW.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[3].clone());
-//      }
-//      else {
-//        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[3]);
-//      }
-//    }
-//
-//    void _setMeleeLWMod(Event event) {
-//      if (meleeLW.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[4].clone());
-//      }
-//      else {
-//        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[4]);
-//      }
-//    }
-//
-//    void _setMeleeTwoHandMod(Event event) {
-//      if (meleeTwoHand.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[5].clone());
-//      }
-//      else {
-//        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[5]);
-//      }
-//    }
-//
-//    void _setRangedLoadingMod(Event event) {
-//      if (rangedLoading.checked) {
-//        initTotalEntry.addMod(_model.gameModel.initiativeTotalMods[6].clone());
-//      }
-//      else {
-//        initTotalEntry.removeMod(_model.gameModel.initiativeTotalMods[6]);
-//      }
-//    }
-//
-//    spell.onChange.listen(_setSpellMod);
-//    spellLevel.onChange.listen(_setSpellMod);
-//
+
+    spell.onChange.listen((_) => _setMod(spell.checked, SPELLCASTING, value: int.parse(spellLevel.value)));
+    spellLevel.onChange.listen((_) => _setMod(spell.checked, SPELLCASTING, value: int.parse(spellLevel.value)));
+
+    meleeHW.onChange.listen((_) => _setMod(meleeHW.checked, MELEE_HW));
+    meleeLW.onChange.listen((_) => _setMod(meleeLW.checked, MELEE_LW));
+    meleeTwoHand.onChange.listen((_) => _setMod(meleeTwoHand.checked, MELEE_TWO_HAND));
+    rangedLoading.onChange.listen((_) => _setMod(rangedLoading.checked, RANGED_LOADING));
+
+    custom.onChange.listen((_) => _setMod(custom.checked, CUSTOM_SPEED_FACTOR, value: int.parse(customSel.value)));
+    customSel.onChange.listen((_) => _setMod(custom.checked, CUSTOM_SPEED_FACTOR, value: int.parse(customSel.value)));
+
 //    creatureSize.onChange.listen(_setCreatureSizeMod);
 //    creatureSizeSel.onChange.listen(_setCreatureSizeMod);
-//
-//    custom.onChange.listen(_setCustomMod);
-//    customSel.onChange.listen(_setCustomMod);
-//
-//    meleeHW.onChange.listen(_setMeleeHWMod);
-//    meleeLW.onChange.listen(_setMeleeLWMod);
-//    meleeTwoHand.onChange.listen(_setMeleeTwoHandMod);
-//    rangedLoading.onChange.listen(_setRangedLoadingMod);
-//  }
-//}
+  }
+}

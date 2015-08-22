@@ -19,6 +19,7 @@ void main() {
   getGameData().then((_) {
     currentViews.add(new CharacterBasicsView(model));
     currentViews.add(new InitiativeView(model));
+    currentViews.add(new SpeedFactorView(model));
 
     // character SAVE button
     querySelector("#save-btn").onClick.listen((_) => db.saveCharacterData(model.character.toMap()));
