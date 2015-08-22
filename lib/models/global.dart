@@ -28,14 +28,6 @@ abstract class DatabaseInterface {
   Future<Map> getGameData();
 }
 
-abstract class View {
-  // save references to all pertinent UI elements
-  void _getUIReferences();
-
-  // set up event listeners for UI elements
-  void _setupListeners();
-}
-
 EventBus eventBus = new EventBus();
 
 class InitiativeTotalCalculatedEvent {

@@ -35,18 +35,19 @@ class Character {
   }
 
   void addMod(Mod mod) {
-    // only apply the same mod once -- correct behavior?
-    if (!_mods.containsKey(mod.id)) {
-      // save mod to master list
-      _mods[mod.id] = mod;
+    // TODO: This might not be the most efficient way to update an existing mod
+    // make sure the new mod isn't already here, and remove it if it is
+    removeMod(mod.id);
 
-      mod.affectedStats.forEach((AffectedStat stat) {
-        // add a ModRef to each affected stat
-        if (_entries.containsKey(stat.name)) {
-          (_entries[stat.name] as Modifiable).addMod(new ModRef(mod, stat));
-        }
-      });
-    }
+    // save mod to master list (overwrites if already present)
+    _mods[mod.id] = mod;
+
+    mod.affectedStats.forEach((AffectedStat stat) {
+      // add a ModRef to each affected stat
+      if (_entries.containsKey(stat.name)) {
+        (_entries[stat.name] as Modifiable).addMod(new ModRef(mod, stat));
+      }
+    });
   }
 
   void removeMod(String modID) {

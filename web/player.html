@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>BB5E Player Edition</title>
+    <title>BB5e (Player Edition)</title>
 
     <!-- Bootcards CSS for desktop: -->
     <link rel="stylesheet" href="assets/css/bootcards-desktop.min.css">
@@ -62,27 +62,27 @@
               <i class="fa fa-lg fa-chevron-left"></i>
               <span>Back</span>
             </button>
-            <a class="navbar-brand" title="Customers v{{getAppVersion}}" href="/">Customers</a>
+            <a class="navbar-brand" title="Customers v{{getAppVersion}}" href="/">BB5e</a>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="active">
                   <a href="#">
                     <i class="fa fa-users"></i>
-                    Contacts
+                    Character
                   </a>
                 </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-building-o"></i>
-                    Companies
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-gears"></i>
-                    Settings
-                  </a>
-                </li>
+                <!--<li>-->
+                  <!--<a href="#">-->
+                    <!--<i class="fa fa-building-o"></i>-->
+                    <!--Companies-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a href="#">-->
+                    <!--<i class="fa fa-gears"></i>-->
+                    <!--Settings-->
+                  <!--</a>-->
+                <!--</li>-->
               </ul>
             </div>
           </div>
@@ -115,9 +115,9 @@
           <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
-                <label for="d20" class="col-xs-3 control-label input-sm">d20</label>
+                <label for="init-roll" class="col-xs-3 control-label input-sm">d20</label>
                 <div class="col-xs-9">
-                  <input id="d20" type="text" class="form-control" placeholder="d20">
+                  <input id="init-roll" type="text" class="form-control" placeholder="d20">
                 </div>
               </div>
 
@@ -131,7 +131,7 @@
               <div class="form-group">
                 <label class="col-xs-3 control-label input-sm">Description</label>
                 <div class="col-xs-9">
-                  <textarea class="form-control" rows="6" placeholder="Cast a cantrip? Use your bow? Stab someone with your sword (sexually)?"></textarea>
+                  <textarea id="action-description" class="form-control" rows="6" placeholder="Cast a cantrip? Use your bow? Stab someone with your sword (sexually)?"></textarea>
                 </div>
               </div>
             </form>
@@ -264,57 +264,60 @@
         </div>
         <!-- End Speed Factor Modifiers -->
 
-      <!-- Start of Player Reference -->
-      <!-- Start Bootstrap collapse (accordion) -->
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-primary">
-          <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                System Shock
-              </a>
-            </h4>
-          </div>
-          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-              <p class="accordion-p hiddentext">When a creature takes damage from a single source equal to or greater than half its hit point maximum, it must succeed on a DC 15 Constitution saving throw or suffer a random effect determined by a roll on the System Shock Table. For example, a creature that has a hit point maximum of 30 must make that Constitution save if it takes 15 damage or more from a single source.</p>
-              <table class="hiddentext accordion-table">
-                <tr>
-                  <th class="table-left-row">d10</th>
-                  <th>Effect</th>
-                </tr>
-                <tr>
-                  <td class="table-left-row">1</td>
-                  <td>The creature drops to 0 hit points.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">2-3</td>
-                  <td>The creature drops to 0 hit points but is stable.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">4-5</td>
-                  <td> The creature is stunned until the end of its next turn.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">6-7</td>
-                  <td>The creature can't take reactions and has disadvantage on attack rolls and ability checks until the end of its next turn.</td>
-                </tr>
-                <tr>
-                  <td class="table-left-row">8-10</td>
-                  <td>The creature can't take reactions until the end of its next turn.</td>
-                </tr>
-              </table>
+        <!-- Start of Player Reference -->
+        <!-- Start Bootstrap collapse (accordion) -->
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-primary">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  System Shock
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <p class="accordion-p hiddentext">When a creature takes damage from a single source equal to or greater than half its hit point maximum, it must succeed on a DC 15 Constitution saving throw or suffer a random effect determined by a roll on the System Shock Table. For example, a creature that has a hit point maximum of 30 must make that Constitution save if it takes 15 damage or more from a single source.</p>
+                <table class="hiddentext accordion-table">
+                  <tr>
+                    <th class="table-left-row">d10</th>
+                    <th>Effect</th>
+                  </tr>
+                  <tr>
+                    <td class="table-left-row">1</td>
+                    <td>The creature drops to 0 hit points.</td>
+                  </tr>
+                  <tr>
+                    <td class="table-left-row">2-3</td>
+                    <td>The creature drops to 0 hit points but is stable.</td>
+                  </tr>
+                  <tr>
+                    <td class="table-left-row">4-5</td>
+                    <td> The creature is stunned until the end of its next turn.</td>
+                  </tr>
+                  <tr>
+                    <td class="table-left-row">6-7</td>
+                    <td>The creature can't take reactions and has disadvantage on attack rolls and ability checks until the end of its next turn.</td>
+                  </tr>
+                  <tr>
+                    <td class="table-left-row">8-10</td>
+                    <td>The creature can't take reactions until the end of its next turn.</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>
+        <!-- End Bootstrap collapse (accordion) -->
+        <!-- End of Player Reference -->
+
       </div>
-      <!-- End Bootstrap collapse (accordion) -->
-      <!-- End of Player Reference -->
+
+      <div class="col-md-4 bootcards-cards">
+        <button id="save-btn" class="btn btn-primary" type="button">Save</button>
+      </div>
 
     </div>
-      <div class="col-md-4 bootcards-cards">
-        <button id="submit-to-dm" class="btn btn-primary" type="button">Submit</button>
-      </div>
   </div>
 
   <script async type="application/dart" src="main.dart"></script>
