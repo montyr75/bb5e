@@ -37,31 +37,32 @@ void main() {
     if (charModel != null) {
       initList.children.clear();
 
-      /*charModel.keys.forEach((String charID) {
-        Character char = new Character.fromMap(charModel[charID]);
-        Mod roll = char.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 0, orElse: () => null);
-        Mod dexMod = char.initiativeTotal.mods.firstWhere((Mod mod) => mod.id == 1, orElse: () => null);
+      charModel.forEach((String charID, Map char) {
+        String name = char['entries']['name']['value'];
+        var roll = char['mods']['-JwnoPlDzNETWJ3aXle9']['affectedStats'][0]['value'];
+        var dexMod = char['mods']['-JwnoPlFx3hz9pwAAYHn']['affectedStats'][0]['value'];
+        var initTotal = char['entries']['initiativeTotal']['value'];
 
         if (roll != null && dexMod != null) {
           initList.appendHtml('''
             <a class="list-group-item" href="#">
               <div class="row">
                 <div class="col-sm-4">
-                  <h4 class="list-group-item-heading">${char.charName}</h4>
+                  <h4 class="list-group-item-heading">$name</h4>
                   <p class="list-group-item-text"></p>
                 </div>
                 <div class="col-sm-6">
-                  <p class="list-group-item-text">Initiative Roll: ${roll.value}</p>
-                  <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod.value > 0 ? "+" : ""}${dexMod.value}</p>
+                  <p class="list-group-item-text">Initiative Roll: $roll</p>
+                  <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod > 0 ? "+" : ""}${dexMod}</p>
                 </div>
                 <div class="col-sm-2">
-                  <h4 class="list-group-item-heading">${char.initiativeTotal.value}</h4>
+                  <h4 class="list-group-item-heading">$initTotal</h4>
                 </div>
               </div>
             </a>'''
           );
         }
-      });*/
+      });
     }
   });
 
