@@ -122,3 +122,7 @@ body {
 #cond-exhausted {
   background-image: url("../../images/conditions/exhausted.png");
 }
+
+button, .btn {
+  cursor: default !important;
+}
