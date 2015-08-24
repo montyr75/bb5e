@@ -69,7 +69,7 @@ void renderCharacters() {
       var initTotal = char['entries']['initiativeTotal']['value'];
 
       initList.appendHtml('''
-        <div class="row">
+        <div class="row list-group-item">
           <div class="col-sm-4">
             <h4 class="list-group-item-heading">$name</h4>
             <p class="list-group-item-text"></p>
