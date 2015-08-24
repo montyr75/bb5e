@@ -9,7 +9,7 @@ import 'package:firebase/firebase.dart' as FB;
 
 //ClientConnectionManager ccm = new ClientConnectionManager();
 
-Map charModel;
+Map charModel = {};
 
 // UI refs
 DivElement initList = querySelector("#init-list");
@@ -31,44 +31,60 @@ void main() {
 
   FB.Firebase ref = new FB.Firebase(FIREBASE_CHARACTER_PATH);
 
-  ref.onValue.listen((FB.Event event) {
-    charModel = event.snapshot.val();
+  ref.onChildAdded.listen((FB.Event event) {
+    Map char = event.snapshot.val();
+    charModel[getCharID(char)] = char;
+    renderCharacters();
+  });
 
-    if (charModel != null) {
-      initList.children.clear();
+  ref.onChildChanged.listen((FB.Event event) {
+    Map char = event.snapshot.val();
+    charModel[getCharID(char)] = char;
+    renderCharacters();
+  });
 
-      charModel.forEach((String charID, Map char) {
-        String name = char['entries']['name']['value'];
-        var roll = char['mods']['-JwnoPlDzNETWJ3aXle9']['affectedStats'][0]['value'];
-        var dexMod = char['mods']['-JwnoPlFx3hz9pwAAYHn']['affectedStats'][0]['value'];
-        var initTotal = char['entries']['initiativeTotal']['value'];
-
-        if (roll != null && dexMod != null) {
-          initList.appendHtml('''
-            <a class="list-group-item" href="#">
-              <div class="row">
-                <div class="col-sm-4">
-                  <h4 class="list-group-item-heading">$name</h4>
-                  <p class="list-group-item-text"></p>
-                </div>
-                <div class="col-sm-6">
-                  <p class="list-group-item-text">Initiative Roll: $roll</p>
-                  <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod > 0 ? "+" : ""}${dexMod}</p>
-                </div>
-                <div class="col-sm-2">
-                  <h4 class="list-group-item-heading">$initTotal</h4>
-                </div>
-              </div>
-            </a>'''
-          );
-        }
-      });
-    }
+  ref.onChildRemoved.listen((FB.Event event) {
+    Map char = event.snapshot.val();
+    charModel.remove(getCharID(char));
+    renderCharacters();
   });
 
   querySelector("#clear-btn").onClick.listen((_) {
     ref.remove();
-    charModel = null;
+    charModel = {};
     initList.children.clear();
   });
+}
+
+String getCharID(Map char) => (char['entries']['name']['value'] as String).toLowerCase().trim();
+
+void renderCharacters() {
+  if (charModel != null) {
+    initList.children.clear();
+
+    charModel.forEach((String charID, Map char) {
+      String name = char['entries']['name']['value'];
+      var roll = char['mods']['-JwnoPlDzNETWJ3aXle9']['affectedStats'][0]['value'];
+      var dexMod = char['mods']['-JwnoPlFx3hz9pwAAYHn']['affectedStats'][0]['value'];
+      var initTotal = char['entries']['initiativeTotal']['value'];
+
+      initList.appendHtml('''
+          <a class="list-group-item" href="#">
+            <div class="row">
+              <div class="col-sm-4">
+                <h4 class="list-group-item-heading">$name</h4>
+                <p class="list-group-item-text"></p>
+              </div>
+              <div class="col-sm-6">
+                <p class="list-group-item-text">Initiative Roll: $roll</p>
+                <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod > 0 ? "+" : ""}${dexMod}</p>
+              </div>
+              <div class="col-sm-2">
+                <h4 class="list-group-item-heading">$initTotal</h4>
+              </div>
+            </div>
+          </a>'''
+      );
+    });
+  }
 }

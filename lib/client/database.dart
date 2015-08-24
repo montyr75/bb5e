@@ -21,14 +21,13 @@ class Database implements DatabaseInterface {
   void saveCharacterData(Map characterMap) {
     log.info("$runtimeType::saveCharacterData() -- $characterMap");
 
-    // if character exists, just update it
+    // if character exists in FB, remove it (necessary to make FB send events correctly)
     if (_charRef != null) {
-      _charRef.set(characterMap)/*.then(showSuccess)*/;
+      _charRef.remove();
     }
-    // otherwise, create the character in the database
-    else {
-      _charRef = _fbRef.push()..set(characterMap)/*.then(showSuccess)*/;
-      _charRef.onDisconnect.remove();
-    }
+
+    // push the character data to FB
+    _charRef = _fbRef.push()..set(characterMap)/*.then(showSuccess)*/;
+    _charRef.onDisconnect.remove();
   }
 }
