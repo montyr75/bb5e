@@ -3,3 +3,118 @@ input[type=checkbox], input[type=radio] {
   position: relative;
   bottom: 3px;
 }
+
+.table-left-row {
+  width: 100px;
+}
+
+body {
+  padding-left: 2%;
+}
+
+#submit-to-dm {
+  margin-bottom: 10px;
+}
+
+.text-align-right th + th, .text-align-right td + td {
+  text-align: right;
+  padding-right: 2%;
+}
+
+.left-column {
+  width: 40%;
+}
+
+.alert {
+  margin: 0 0 0 25px;
+  padding: 7px;
+}
+
+#save-btn {
+  margin-top: 95px;
+  margin-bottom: 20px;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.main-container {
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+#cond-container label{
+  height: 5rem;
+  width: 5rem;
+  background-size: 4rem;
+  background-position: .45rem .45rem;
+}
+
+#cond-blinded {
+  background-image: url("../../images/conditions/blinded.png");
+}
+
+#cond-charmed {
+  background-image: url("../../images/conditions/charmed.png");
+}
+
+#cond-deafened {
+  background-image: url("../../images/conditions/deafened.png");
+}
+
+#cond-frightened {
+  background-image: url("../../images/conditions/frightened.png");
+}
+
+#cond-grappled {
+  background-image: url("../../images/conditions/grappled.png");
+}
+
+#cond-incapacitated {
+  background-image: url("../../images/conditions/incapacitated.png");
+}
+
+#cond-invisible {
+  background-image: url("../../images/conditions/invisible.png");
+}
+
+#cond-paralyzed {
+  background-image: url("../../images/conditions/paralyzed.png");
+}
+
+#cond-petrified {
+  background-image: url("../../images/conditions/petrified.png");
+}
+
+#cond-poisoned {
+  background-image: url("../../images/conditions/poisoned.png");
+}
+
+#cond-prone {
+  background-image: url("../../images/conditions/prone.png");
+}
+
+#cond-restrained {
+  background-image: url("../../images/conditions/restrained.png");
+}
+
+#cond-stunned {
+  background-image: url("../../images/conditions/stunned.png");
+}
+
+#cond-unconscious {
+  background-image: url("../../images/conditions/unconscious.png");
+}
+
+#cond-surprised {
+  background-image: url("../../images/conditions/surprised.png");
+}
+
+#cond-bloodied {
+  background-image: url("../../images/conditions/bloodied.png");
+}
+
+#cond-exhausted {
+  background-image: url("../../images/conditions/exhausted.png");
+}
