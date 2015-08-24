@@ -69,21 +69,19 @@ void renderCharacters() {
       var initTotal = char['entries']['initiativeTotal']['value'];
 
       initList.appendHtml('''
-          <a class="list-group-item" href="#">
-            <div class="row">
-              <div class="col-sm-4">
-                <h4 class="list-group-item-heading">$name</h4>
-                <p class="list-group-item-text"></p>
-              </div>
-              <div class="col-sm-6">
-                <p class="list-group-item-text">Initiative Roll: $roll</p>
-                <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod > 0 ? "+" : ""}${dexMod}</p>
-              </div>
-              <div class="col-sm-2">
-                <h4 class="list-group-item-heading">$initTotal</h4>
-              </div>
-            </div>
-          </a>'''
+        <div class="row">
+          <div class="col-sm-4">
+            <h4 class="list-group-item-heading">$name</h4>
+            <p class="list-group-item-text"></p>
+          </div>
+          <div class="col-sm-6">
+            <p class="list-group-item-text">Initiative Roll: $roll</p>
+            <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod > 0 ? "+" : ""}${dexMod}</p>
+          </div>
+          <div class="col-sm-2">
+            <h4 class="list-group-item-heading">$initTotal</h4>
+          </div>
+        </div>'''
       );
     });
   }

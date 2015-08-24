@@ -4,6 +4,10 @@ input[type=checkbox], input[type=radio] {
   bottom: 3px;
 }
 
+button {
+  cursor: default !important;
+}
+
 .table-left-row {
   width: 100px;
 }
