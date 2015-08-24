@@ -2,6 +2,7 @@
 //import 'package:bb5e/comms/comms.dart';
 import 'dart:async';
 import 'dart:html';
+import 'dart:js';
 import 'package:bb5e/client/player/player_model.dart';
 import 'package:bb5e/client/player/views.dart';
 import 'package:bb5e/models/global.dart';
@@ -17,6 +18,12 @@ void main() {
   initLog();
 
   getGameData().then((_) {
+    db.onSave.listen((bool saved) {
+      JsObject jQuery = context['jQuery'];
+      JsObject config = new JsObject.jsify({'width': 'auto'});
+      jQuery.callMethod('bootstrapGrowl', ['Character Saved', config]);
+    });
+
     currentViews.add(new CharacterBasicsView(model));
     currentViews.add(new InitiativeView(model));
     currentViews.add(new SpeedFactorView(model));

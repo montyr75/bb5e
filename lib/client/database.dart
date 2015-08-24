@@ -9,6 +9,9 @@ class Database implements DatabaseInterface {
   Firebase _fbRef = new Firebase("$FIREBASE_CHARACTER_PATH");
   Firebase _charRef;
 
+  // events
+  StreamController _onSave = new StreamController.broadcast();
+
   Database();
 
   Future<Map> getGameData() async {
@@ -27,7 +30,9 @@ class Database implements DatabaseInterface {
     }
 
     // push the character data to FB
-    _charRef = _fbRef.push()..set(characterMap)/*.then(showSuccess)*/;
+    _charRef = _fbRef.push()..set(characterMap).then((_) => _onSave.add(true));
     _charRef.onDisconnect.remove();
   }
+
+  Stream<bool> get onSave => _onSave.stream;
 }
