@@ -41,6 +41,96 @@
         margin: 0 0 0 25px;
         padding: 7px;
       }
+
+      #save-btn {
+        margin-top: 95px;
+        margin-bottom: 20px;
+      }
+      
+      .flex-container {
+        display: flex;
+      }
+
+      .main-container {
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+
+      #cond-container label{
+        height: 5rem;
+        width: 5rem;
+        background-size: 4rem;
+        background-position: .45rem .45rem;
+      }
+
+      #cond-blinded {
+        background-image: url("images/conditions/blinded.png");
+      }
+
+      #cond-charmed {
+        background-image: url("images/conditions/charmed.png");
+      }
+
+      #cond-deafened {
+        background-image: url("images/conditions/deafened.png");
+      }
+
+      #cond-frightened {
+        background-image: url("images/conditions/frightened.png");
+      }
+
+      #cond-grappled {
+        background-image: url("images/conditions/grappled.png");
+      }
+
+      #cond-incapacitated {
+        background-image: url("images/conditions/incapacitated.png");
+      }
+
+      #cond-invisible {
+        background-image: url("images/conditions/invisible.png");
+      }
+
+      #cond-paralyzed {
+        background-image: url("images/conditions/paralyzed.png");
+      }
+
+      #cond-petrified {
+        background-image: url("images/conditions/petrified.png");
+      }
+
+      #cond-poisoned {
+        background-image: url("images/conditions/poisoned.png");
+      }
+
+      #cond-prone {
+        background-image: url("images/conditions/prone.png");
+      }
+
+      #cond-restrained {
+        background-image: url("images/conditions/restrained.png");
+      }
+
+      #cond-stunned {
+        background-image: url("images/conditions/stunned.png");
+      }
+
+      #cond-unconscious {
+        background-image: url("images/conditions/unconscious.png");
+      }
+
+      #cond-surprised {
+        background-image: url("images/conditions/surprised.png");
+      }
+
+      #cond-bloodied {
+        background-image: url("images/conditions/bloodied.png");
+      }
+
+      #cond-exhausted {
+        background-image: url("images/conditions/exhausted.png");
+      }
+
     </style>
   </head>
 
@@ -316,6 +406,33 @@
 
       <div class="col-md-4 bootcards-cards">
         <button id="save-btn" class="btn btn-primary" type="button">Save</button>
+
+        <!-- Start Conditions -->
+        <div id="cond-container" class="flex-container panel panel-primary main-container">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left">Conditions</h3>
+          </div>
+          <div class="modal-body" data-toggle="buttons">
+            <label id="cond-blinded" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Blinded"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-charmed" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Charmed"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-deafened" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Deafened"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-frightened" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Frightened"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-grappled" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Grappled"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-incapacitated" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Incapacitated"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-invisible" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Invisible"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-paralyzed" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Paralyzed"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-petrified" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Petrified"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-poisoned" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Poisoned"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-prone" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Prone"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-restrained" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Restrained"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-stunned" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Stunned"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-unconscious" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Unconscious"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-surprised" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Surprised"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-bloodied" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Bloodied"><input type="checkbox" autocomplete="off"></label>
+            <label id="cond-exhausted" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Exhausted"><input type="checkbox" autocomplete="off"></label>
+          </div>
+        </div>
+        <!-- End Conditions-->
       </div>
 
     </div>
