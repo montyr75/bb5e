@@ -31,5 +31,5 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
     log.info("$runtimeType::attached() -- $this");
   }
 
-  @override String toString() => "Initiative Total: $value\n  $mods";
+  @override String toString() => "${super.toString()}\n  $mods";
 }

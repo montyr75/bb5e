@@ -2,6 +2,8 @@
   {
     "level": -1,
     "name": "Initiative Roll",
+    "type": "Initiative Roll",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Base initiative roll (DEX check).",
     "affectedStats": [
@@ -16,6 +18,8 @@
   {
     "level": -1,
     "name": "Dexterity Modifier",
+    "type": "Dexterity Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Modifier based on Dexterity score.",
     "affectedStats": [
@@ -30,6 +34,8 @@
   {
     "level": -1,
     "name": "Spellcasting",
+    "type": "Speed Factor Initiative Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Speed factor initiative modifier based on spell level.",
     "affectedStats": [
@@ -44,6 +50,8 @@
   {
     "level": -1,
     "name": "Melee, heavy weapon",
+    "type": "Speed Factor Initiative Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "affectedStats": [
@@ -58,6 +66,8 @@
   {
     "level": -1,
     "name": "Melee, light or finesse weapon",
+    "type": "Speed Factor Initiative Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "affectedStats": [
@@ -72,6 +82,8 @@
   {
     "level": -1,
     "name": "Melee, two-handed weapon",
+    "type": "Speed Factor Initiative Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Speed factor initiative modifier based on size/weight of weapon.",
     "affectedStats": [
@@ -86,6 +98,8 @@
   {
     "level": -1,
     "name": "Ranged, loading weapon",
+    "type": "Speed Factor Initiative Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "Speed factor initiative modifier for using a ranged weapon requiring effort to reload.",
     "affectedStats": [
@@ -100,6 +114,8 @@
   {
     "level": -1,
     "name": "Custom Speed Factor Modifier",
+    "type": "Speed Factor Initiative Modifier",
+    "exclusiveByType": false,
     "source": "User",
     "description": "(string)",
     "affectedStats": [

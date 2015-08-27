@@ -35,6 +35,8 @@ class ModifiableEntry<T> extends Entry implements Modifiable {
 
   ModifiableEntry(String name) : super(name);
 
+  ModifiableEntry.fromMap(Map map) : super.fromMap(map);
+
   void addMod(ModRef newMod) {
     mod = newMod;
     value = newMod.value;

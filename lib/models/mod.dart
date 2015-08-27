@@ -4,9 +4,11 @@ class Mod {
   // sources
   static const String CUSTOM = "CUSTOM";
 
-  String id;                // Firebase ID
+  String id;                // Database ID -- only one mod with this ID can be present on a character
   int level;                // 1-20 or -1 = "all"
   String name;              // official name of the mod (if any)
+  String type;              // type of mod (examples: Creature Size, etc.)
+  bool exclusiveByType;     // if true, only one mod of this type should be present on a character
   String source;            // source of mod (examples: User, Race:Elf, Class:Fighter, etc.)
   String description;       // full description of mod (if any)
 
@@ -18,6 +20,8 @@ class Mod {
     id = map["id"];
     level = map["level"];
     name = map["name"];
+    type = map["type"];
+    exclusiveByType = map["exclusiveByType"];
     source = map["source"];
     description = map["description"];
 
@@ -29,6 +33,8 @@ class Mod {
       "id": id,
       "level": level,
       "name": name,
+      "type": type,
+      "exclusiveByType": exclusiveByType,
       "source": source,
       "description": description,
       "affectedStats": affectedStats.map((AffectedStat stat) => stat.toMap()).toList()

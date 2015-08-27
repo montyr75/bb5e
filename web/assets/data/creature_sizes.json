@@ -1,0 +1,134 @@
+[
+  {
+    "level": -1,
+    "name": "Creature Size: Tiny",
+    "type": "Creature Size",
+    "exclusiveByType": true,
+    "source": "Race",
+    "description": "Creature size.",
+    "affectedStats": [
+      {
+        "name": "size",
+        "value": "Tiny",
+        "tags": {"size": true, "creatures size": true},
+        "ref": "PHB"
+      },
+      {
+        "name": "initiativeTotal",
+        "value": 5,
+        "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
+        "ref": "DMG 270"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Creature Size: Small",
+    "type": "Creature Size",
+    "exclusiveByType": true,
+    "source": "Race",
+    "description": "Creature size.",
+    "affectedStats": [
+      {
+        "name": "size",
+        "value": "Small",
+        "tags": {"size": true, "creatures size": true},
+        "ref": "PHB"
+      },
+      {
+        "name": "initiativeTotal",
+        "value": 2,
+        "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
+        "ref": "DMG 270"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Creature Size: Medium",
+    "type": "Creature Size",
+    "exclusiveByType": true,
+    "source": "Race",
+    "description": "Creature size.",
+    "affectedStats": [
+      {
+        "name": "size",
+        "value": "Medium",
+        "tags": {"size": true, "creatures size": true},
+        "ref": "PHB"
+      },
+      {
+        "name": "initiativeTotal",
+        "value": 0,
+        "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
+        "ref": "DMG 270"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Creature Size: Large",
+    "type": "Creature Size",
+    "exclusiveByType": true,
+    "source": "Race",
+    "description": "Creature size.",
+    "affectedStats": [
+      {
+        "name": "size",
+        "value": "Large",
+        "tags": {"size": true, "creatures size": true},
+        "ref": "PHB"
+      },
+      {
+        "name": "initiativeTotal",
+        "value": -2,
+        "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
+        "ref": "DMG 270"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Creature Size: Huge",
+    "type": "Creature Size",
+    "exclusiveByType": true,
+    "source": "Race",
+    "description": "Creature size.",
+    "affectedStats": [
+      {
+        "name": "size",
+        "value": "Huge",
+        "tags": {"size": true, "creatures size": true},
+        "ref": "PHB"
+      },
+      {
+        "name": "initiativeTotal",
+        "value": -5,
+        "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
+        "ref": "DMG 270"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Creature Size: Gargantuan",
+    "type": "Creature Size",
+    "exclusiveByType": true,
+    "source": "Race",
+    "description": "Creature size.",
+    "affectedStats": [
+      {
+        "name": "size",
+        "value": "Gargantuan",
+        "tags": {"size": true, "creatures size": true},
+        "ref": "PHB"
+      },
+      {
+        "name": "initiativeTotal",
+        "value": -8,
+        "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
+        "ref": "DMG 270"
+      }
+    ]
+  }
+]

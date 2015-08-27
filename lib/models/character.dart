@@ -10,6 +10,7 @@ class Character {
 
   Map<String, Entry> _entries = <String, Entry>{
     "name": new Entry<String>("name"),
+    "size": new ModifiableEntry<String>("size"),
     "initiativeTotal": new InitiativeTotalEntry<int>()
   };
 
@@ -34,18 +35,24 @@ class Character {
     });
   }
 
-  void addMod(Mod mod) {
+  void addMod(Mod modToAdd) {
     // TODO: This might not be the most efficient way to update an existing mod
     // make sure the new mod isn't already here, and remove it if it is
-    removeMod(mod.id);
+    removeMod(modToAdd.id);
 
-    // save mod to master list (overwrites if already present)
-    _mods[mod.id] = mod;
+    // if new mod should be exclusive by type, remove all existing mods of that type
+    if (modToAdd.exclusiveByType) {
+      List<Mod> foundMods = _mods.values.where((Mod mod) => mod.type == modToAdd.type).toList();
+      foundMods.forEach((Mod mod) => removeMod(mod.id));
+    }
 
-    mod.affectedStats.forEach((AffectedStat stat) {
-      // add a ModRef to each affected stat
+    // save mod to master list
+    _mods[modToAdd.id] = modToAdd;
+
+    // add a ModRef to each affected stat
+    modToAdd.affectedStats.forEach((AffectedStat stat) {
       if (_entries.containsKey(stat.name)) {
-        (_entries[stat.name] as Modifiable).addMod(new ModRef(mod, stat));
+        (_entries[stat.name] as Modifiable).addMod(new ModRef(modToAdd, stat));
       }
     });
   }
@@ -76,5 +83,5 @@ class Character {
   // for access to entries
   Entry operator [](String stat) => _entries[stat];
 
-  @override String toString() => "${this['name']}-> ${this['initiativeTotal']}";
+  @override String toString() => "${this['name']}-> ${_entries}";
 }

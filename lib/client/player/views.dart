@@ -32,8 +32,8 @@ class CharacterBasicsView extends View {
 }
 
 class InitiativeView extends View {
-  static const String INIT_ROLL = "-JwnoPlDzNETWJ3aXle9";
-  static const String DEX_MOD = "-JwnoPlFx3hz9pwAAYHn";
+  static const String INIT_ROLL = "-JxlER7yTbE8jkNR0G8U";
+  static const String DEX_MOD = "-JxlER83xf5vPpIlq5hd";
 
   InputElement initRoll = querySelector("#init-roll");
   InputElement dexMod = querySelector("#dex-mod");
@@ -87,12 +87,12 @@ class InitiativeView extends View {
 }
 
 class SpeedFactorView extends View {
-  static const String SPELLCASTING = "-JwnoPlGm5tYgTJyp8pY";
-  static const String MELEE_HW = "-JwnoPlHFgrIsZXmMYKE";
-  static const String MELEE_LW = "-JwnoPlIvT4px-phgWlD";
-  static const String MELEE_TWO_HAND = "-JwnoPlLXsiqHFXaNcm6";
-  static const String RANGED_LOADING = "-JwnoPlMNtQEir2cFkUD";
-  static const String CUSTOM_SPEED_FACTOR = "-JwnoPlNGljXXDbGim8_";
+  static const String SPELLCASTING = "-JxlER85H3cOG0wIh5iX";
+  static const String MELEE_HW = "-JxlER86mVUEsDVSbSnn";
+  static const String MELEE_LW = "-JxlER88XgSMKri4Zv73";
+  static const String MELEE_TWO_HAND = "-JxlER8AEzrLT8VlFOBD";
+  static const String RANGED_LOADING = "-JxlER8B3Reg8DBFxh3G";
+  static const String CUSTOM_SPEED_FACTOR = "-JxlER8C0m219GZyx0YL";
 
   CheckboxInputElement spell = querySelector("#spell-cb");
   SelectElement spellLevel = querySelector("#spell-level-sel");
