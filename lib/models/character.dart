@@ -22,6 +22,7 @@ class Character {
 
     // restore entries
     _entries['name'] = new Entry<String>.fromMap(map['name']);
+    _entries['size'] = new ModifiableEntry<String>.fromMap(map['size']);
     _entries['initiativeTotal'] = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
 
     // TODO: Test this!
@@ -80,7 +81,7 @@ class Character {
     return map;
   }
 
-  // for access to entries
+  // for access to individual entries
   Entry operator [](String stat) => _entries[stat];
 
   @override String toString() => "${this['name']}-> ${_entries}";

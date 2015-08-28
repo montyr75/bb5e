@@ -43,7 +43,6 @@
               <ul class="nav navbar-nav">
                 <li class="active">
                   <a href="#">
-                    <i class="fa fa-users"></i>
                     Character
                   </a>
                 </li>
@@ -71,14 +70,27 @@
             <h3 class="panel-title pull-left">Character Basics</h3>
           </div>
           <div class="modal-body">
-            <form class="form-horizontal">
+            <div class="form-horizontal">
               <div class="form-group">
                 <label class="col-xs-3 control-label input-sm">Character Name</label>
                 <div class="col-xs-9">
                   <input id="char-name" type="text" class="form-control" placeholder="Character Name">
                 </div>
               </div>
-            </form>
+              <div class="form-group">
+                <label class="col-xs-3 control-label input-sm">Size</label>
+                <div class="col-xs-9">
+                  <select id="creature-size-sel" class="btn btn-default dropdown-toggle">
+                    <option value="0">Tiny</option>
+                    <option value="1">Small</option>
+                    <option value="2" selected>Medium</option>
+                    <option value="3">Large</option>
+                    <option value="4">Huge</option>
+                    <option value="5">Gargantuan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- End Character Basics-->
@@ -194,27 +206,27 @@
                 </td>
                 <td>-5</td>
               </tr>
-              <tr>
-                <td>
-                  <label for="creature-size-cb">
-                    <input type="checkbox" id="creature-size-cb" />
-                    <span>Creature Size</span>
-                  </label>
-                </td>
-                <td>
-                  <div class="dropdown">
-                    If other than Medium
-                    <!-- Value for creature-size-sel is the index of the mod-->
-                    <select id="creature-size-sel" class="btn btn-default dropdown-toggle">
-                      <option value="7">Tiny (+5)</option>
-                      <option value="8">Small (+2)</option>
-                      <option value="9">Large (-2)</option>
-                      <option value="10">Huge (-5)</option>
-                      <option value="11">Gargantuan (-8)</option>
-                    </select>
-                  </div>
-                </td>
-              </tr>
+              <!--<tr>-->
+                <!--<td>-->
+                  <!--<label for="creature-size-cb">-->
+                    <!--<input type="checkbox" id="creature-size-cb" />-->
+                    <!--<span>Creature Size</span>-->
+                  <!--</label>-->
+                <!--</td>-->
+                <!--<td>-->
+                  <!--<div class="dropdown">-->
+                    <!--If other than Medium-->
+                    <!--&lt;!&ndash; Value for creature-size-sel is the index of the mod&ndash;&gt;-->
+                    <!--<select id="creature-size-sel" class="btn btn-default dropdown-toggle">-->
+                      <!--<option value="7">Tiny (+5)</option>-->
+                      <!--<option value="8">Small (+2)</option>-->
+                      <!--<option value="9">Large (-2)</option>-->
+                      <!--<option value="10">Huge (-5)</option>-->
+                      <!--<option value="11">Gargantuan (-8)</option>-->
+                    <!--</select>-->
+                  <!--</div>-->
+                <!--</td>-->
+              <!--</tr>-->
               <tr>
                 <td>
                   <label for="custom-cb">

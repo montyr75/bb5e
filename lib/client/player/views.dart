@@ -20,7 +20,17 @@ abstract class View {
 }
 
 class CharacterBasicsView extends View {
+  static const List<String> sizeMods = const <String>[
+    "-JxlET8tgFA5bewaPihl",
+    "-JxlET8wBBbwQL-ez2sT",
+    "-JxlET8yXcgHAJMu9pm4",
+    "-JxlET9-2lIpta7qHQbE",
+    "-JxlET91Grqmn1qIBMdQ",
+    "-JxlET92Ey_0WFpjqm24"
+  ];
+
   InputElement charName = querySelector("#char-name");
+  SelectElement creatureSizeSel = querySelector("#creature-size-sel");
 
   CharacterBasicsView(PlayerModel model) : super(model);
 
@@ -28,6 +38,8 @@ class CharacterBasicsView extends View {
     charName.onInput.listen((Event event) {
       _model.character['name'].value = (event.target as InputElement).value.trim();
     });
+
+    creatureSizeSel.onChange.listen((_) => _model.character.addMod(_model.gameModel.mods[sizeMods[int.parse(creatureSizeSel.value)]]));
   }
 }
 
@@ -100,8 +112,6 @@ class SpeedFactorView extends View {
   CheckboxInputElement meleeLW = querySelector("#melee-lw-cb");
   CheckboxInputElement meleeTwoHand = querySelector("#melee-twohand-cb");
   CheckboxInputElement rangedLoading = querySelector("#ranged-loading-cb");
-  CheckboxInputElement creatureSize = querySelector("#creature-size-cb");
-  SelectElement creatureSizeSel = querySelector("#creature-size-sel");
   CheckboxInputElement custom = querySelector("#custom-cb");
   SelectElement customSel = querySelector("#custom-sel");
 
@@ -126,17 +136,6 @@ class SpeedFactorView extends View {
       }
     }
 
-    // TODO: Add creature size mods to database
-//    void _setCreatureSizeMod(_) {
-//      if (creatureSize.checked) {
-//        char.addMod(_model.gameModel.initiativeTotalMods[int.parse(
-//            creatureSizeSel.value)].clone());
-//      }
-//      else {
-//        char.removeSizeMods();
-//      }
-//    }
-
     spell.onChange.listen((_) => _setMod(spell.checked, SPELLCASTING, value: int.parse(spellLevel.value)));
     spellLevel.onChange.listen((_) => _setMod(spell.checked, SPELLCASTING, value: int.parse(spellLevel.value)));
 
@@ -147,8 +146,5 @@ class SpeedFactorView extends View {
 
     custom.onChange.listen((_) => _setMod(custom.checked, CUSTOM_SPEED_FACTOR, value: int.parse(customSel.value)));
     customSel.onChange.listen((_) => _setMod(custom.checked, CUSTOM_SPEED_FACTOR, value: int.parse(customSel.value)));
-
-//    creatureSize.onChange.listen(_setCreatureSizeMod);
-//    creatureSizeSel.onChange.listen(_setCreatureSizeMod);
   }
 }
