@@ -8,8 +8,8 @@ button {
   cursor: default !important;
 }
 
-.table-left-row {
-  width: 100px;
+.table-left-row td:first-child {
+  width: 10em;
 }
 
 body {
@@ -23,6 +23,11 @@ body {
 .text-align-right th + th, .text-align-right td + td {
   text-align: right;
   padding-right: 2%;
+}
+
+.table-description {
+  padding-left: 1em;
+  padding-top: 1em;
 }
 
 .left-column {

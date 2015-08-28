@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ability Checks</title>
+
+    <!-- Bootcards CSS for desktop: -->
+    <link rel="stylesheet" href="assets/css/bootcards-desktop.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-slate.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="packages/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/js/jquery.bootstrap-growl.min.js"></script>
+
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+  </head>
+
+  <body>
+  <div class="flex-container container">
+    <div class="row col-md-8">
+      <!-- Start Skills Table -->
+      <div class="panel-group" id="skills-accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-primary">
+          <div class="panel-heading" role="tab" id="skills-header">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#skills-collapse-one" aria-expanded="true" aria-controls="skills-collapse-one">
+                Skills
+              </a>
+            </h4>
+          </div>
+          <div id="skills-collapse-one" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="skillsHeader">
+            <div class="panel-body">
+              <table class="table-left-row hiddentext accordion-table">
+                <tr>
+                  <th>Ability Score</th>
+                  <th>Associated Skills</th>
+                </tr>
+                <tr>
+                  <td>Strength</td>
+                  <td>Athletics</td>
+                </tr>
+                <tr>
+                  <td>Dexterity</td>
+                  <td>Acrobatics, Sleight of Hand, Stealth</td>
+                </tr>
+                <tr>
+                  <td>Constitution</td>
+                  <td>N/A (See Constitution table)</td>
+                </tr>
+                <tr>
+                  <td>Intelligence</td>
+                  <td>Arcana, History, Investigation, Nature, Religion</td>
+                </tr>
+                <tr>
+                  <td>Wisdom</td>
+                  <td>Animal Handling, Insight, Medicine, Perception, Survival</td>
+                </tr>
+                <tr>
+                  <td>Charisma</td>
+                  <td>Deception, Intimidation, Performance, Persuasion</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Skills Table -->
+
+      <!-- Start Typical Difficulty Classes Table -->
+      <div class="panel-group" id="dc-table-accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-primary">
+          <div class="panel-heading" role="tab" id="dc-table-header">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#dc-table-collapse" aria-expanded="true" aria-controls="dc-table-header">
+                Typical Difficulty Classes
+              </a>
+            </h4>
+          </div>
+          <div id="dc-table-collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="dc-table-header">
+            <div class="panel-body">
+              <table class="hiddentext accordion-table table-left-row">
+                <tr>
+                  <th>Task Difficulty</th>
+                  <th>DC</th>
+                </tr>
+                <tr>
+                  <td>Trivial</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>Easy</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>Moderate</td>
+                  <td>15</td>
+                </tr>
+                <tr>
+                  <td>Hard</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>Very Hard</td>
+                  <td>25</td>
+                </tr>
+                <tr>
+                  <td>Nearly Impossible</td>
+                  <td>30</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Typical Difficulty Classes Table -->
+
+      <!-- Start Strength Table -->
+      <div class="panel-group" id="strength-table-accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-primary">
+          <div class="panel-heading" role="tab" id="strength-table-header">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#strength-table-collapse" aria-expanded="true" aria-controls="strength-table-collapse">
+                Typical Difficulty Classes
+              </a>
+            </h4>
+          </div>
+          <p class="table-description">Strength measures bodily power and athletic training.</p>
+          <div id="strength-table-collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="strength-table-header">
+            <div class="panel-body">
+              <!-- Start Athletics Table-->
+              <table class="hiddentext accordion-table table-left-row">
+                <h3>Athletics</h3>
+                <tr>
+                  <td>Automatic</td>
+                  <td>
+                    <p>&bull; Climb a wall with plenty of handholds or a secure, knotted rope or rope ladder</p>
+                    <p>&bull; Swim in relatively calm water</p>
+                    <p>&bull; Jump a number of feet horizontally equal to half of your Strength score, or your full Strength score with a 10 foot running start</p>
+                    <p>&bull; Leap into the air a number of feet equal to half of (3 + your Strength modifier), or the full amount with a 10 foot running start.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Easy</td>
+                  <td>
+                    <p>&bull; Climb a wall lacking an adequate amount of handholds, tread water in rough conditions, jump a few feet farther than you normally could</p>
+                    <p>&bull; During a long jump, clear an obstacle such as a low-lying hedge or wall of height &le; a fourth of the jump's distance</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Moderate</td>
+                  <td>
+                    <p>Climb a rope dangling from a portursion or overhang (i.e. lacking a vertical surcave to brace against), swim in rough water or against a mild current</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Hard</td>
+                  <td>
+                    <p>Climb a wall with very few handholds, catch yourself on a rope or other handhold in the middle or at the end of your jump, swim in violent water or against a strong current</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Very Hard</td>
+                  <td>
+                    <p>Climb a slippery or sheer wall with little or no handholds, climb vertically along an overhang with adequate handholds, swim in stormy waters</p>
+                  </td>
+                </tr>
+              </table>
+              <!-- End Athletics Table-->
+
+              <!-- Start Feats of Strength Table-->
+              <table class="hiddentext accordion-table table-left-row">
+                <h3>Feats of Strength - Other</h3>
+                <tr>
+                  <td>Easy</td>
+                  <td>Force open a stuc or broken door, break free from weak bindings, pull a stuck or wedged object loose</td>
+                </tr>
+                <tr>
+                  <td>Moderate</td>
+                  <td>Break through a wooden door reinforced with iron, hang on to a wagon while being dragged behind it</td>
+                </tr>
+                <tr>
+                  <td>Hard</td>
+                  <td>Break through a heavy locked or barred door, topple a stone statue</td>
+                </tr>
+                <tr>
+                  <td>Very Hard</td>
+                  <td>Break through a heavy, reinforced door such as a prison or armory door, hold a door shut against a room filling with water</td>
+                </tr>
+              </table>
+              <!-- End Feats of Strength Table-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Strength Table -->
+
+
+      </div>
+    </div>
+  </body>
+</html>
