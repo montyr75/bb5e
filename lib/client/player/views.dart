@@ -21,12 +21,12 @@ abstract class View {
 
 class CharacterBasicsView extends View {
   static const List<String> sizeMods = const <String>[
-    "-JxlET8tgFA5bewaPihl",
-    "-JxlET8wBBbwQL-ez2sT",
-    "-JxlET8yXcgHAJMu9pm4",
-    "-JxlET9-2lIpta7qHQbE",
-    "-JxlET91Grqmn1qIBMdQ",
-    "-JxlET92Ey_0WFpjqm24"
+    "-JxlET8tgFA5bewaPihl",   // Tiny
+    "-JxlET8wBBbwQL-ez2sT",   // Small
+    "-JxlET8yXcgHAJMu9pm4",   // Medium
+    "-JxlET9-2lIpta7qHQbE",   // Large
+    "-JxlET91Grqmn1qIBMdQ",   // Huge
+    "-JxlET92Ey_0WFpjqm24"    // Gargantuan
   ];
 
   InputElement charName = querySelector("#char-name");
