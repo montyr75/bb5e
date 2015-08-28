@@ -64,17 +64,19 @@ class Mod {
 class AffectedStat {
   String name;
   var value;
+  bool exclusive = false;       // an exclusive effect overshadows all other effects on a stat (example: Incapacitated on InitiativeTotalEntry)
   Map<String, bool> tags;
   String ref;         // reference for mod in game books (examples: PHB 101, DMG 55)
 
   AffectedStat();
 
-  AffectedStat.fromMap(Map map) : name = map['name'], value = map['value'], tags = map['tags'], ref = map['ref'];
+  AffectedStat.fromMap(Map map) : name = map['name'], value = map['value'], exclusive = map['exclusive'], tags = map['tags'], ref = map['ref'];
 
   Map toMap() {
     return {
       "name": name,
       "value": value,
+      "exclusive": exclusive,
       "tags": tags,
       "ref": ref
     };

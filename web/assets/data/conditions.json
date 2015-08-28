@@ -1,13 +1,335 @@
 [
   {
-    "level": null,
+    "level": -1,
     "name": "Incapacitated",
-    "type": "PENALTY",
-    "subtype": "Condition",
-    "source": "null",
-    "affectedStat": "initiativeTotal",
-    "value": 0,
-    "description": "An incapacitated creature can't take actions or reactions, and it has an initiative total of 0.",
-    "ref": "PHB 291"
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>An incapacitated creature can't take actions or reactions.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Incapacitated",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      },
+      {
+        "name": "initiativeTotal",
+        "exclusive": true,
+        "value": "(null)",
+        "tags": {"initiative": true, "condition": true},
+        "ref": "PHB 290"
+      }
+    ],
+    "removeMods": [
+      "Grappled"
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Blinded",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A blinded creature can't see and automatically fails any ability check that requires sight.</li><li>Attack rolls against the creature have advantage, and the creature's attack rolls have disadvantage.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Blinded",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Charmed",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A charmed creature can't attack the charmer or target the charmer with harmful abilities or magical effects.</li><li>The charmer has advantage on any ability check to interact socially with the creature.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Charmed",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Deafened",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A deafened creature can't hear and automatically fails any ability check that requires hearing.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Deafened",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Frightened",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A frightened creature has disadvantage on ability checks and attack rolls while the source of its fear is within line of sight.</li><li>The creature can’t willingly move closer to the source of its fear.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Frightened",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Grappled",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A grappled creature's speed becomes 0, and it can't benefit from any bonus to its speed.</li><li>The condition ends if the grappler is incapacitated.</li><li>The condition also ends if an effect removes the grappled creature from the reach of the grappler or grappling effect, such as when a creature is hurled away by the <em>thunderwave</em> spell.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Grappled",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      },
+      {
+        "name": "speed",
+        "value": 0,
+        "exclusive": true,
+        "tags": {"condition": true},
+        "ref": "PHB 290"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Invisible",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>An invisible creature is impossible to see without the aid of magic or a special sense. For the purpose of hiding, the creature is heavily obscured. The creature’s location can be detected by any noise it makes or any tracks it leaves.</li><li>Attack rolls against the creature have disadvantage, and the creature’s attack rolls have advantage.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Invisible",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Paralyzed",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A paralyzed creature is incapacitated and can't move or speak.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>Attack rolls against the creature have advantage.</li><li>Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Paralyzed",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ],
+    "addMods": [
+      "Incapacitated"
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Petrified",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.</li><li>The creature is incapacitated, can't move or speak, and is unaware of its surroundings.</li><li>Attack rolls against the creature have advantage.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>The creature has resistance to all damage.</li><li>The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Petrified",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ],
+    "addMods": [
+      "Incapacitated"
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Poisoned",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A poisoned creature has disadvantage on attack rolls and ability checks.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Poisoned",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Prone",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A prone creature's only movement option is to crawl, unless it stands up and thereby ends the condition.</li><li>The creature has disadvantage on attack rolls.</li><li>An attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the attack roll has disadvantage.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Prone",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Restrained",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A restrained creature's speed becomes 0, and it can't benefit from any bonus to its speed.</li><li>Attack rolls against the creature have advantage, and the creature’s attack rolls have disadvantage.</li><li>The creature has disadvantage on Dexterity saving throws.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Restrained",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      },
+      {
+        "name": "speed",
+        "value": 0,
+        "exclusive": true,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Stunned",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A stunned creature is incapacitated, can't move, and can speak only falteringly.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>Attack rolls against the creature have advantage.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Stunned",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      }
+    ],
+    "addMods": [
+      "Incapacitated"
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Unconscious",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>An unconscious creature is incapacitated, can't move or speak, and is unaware of its surroundings.</li><li>The creature drops whatever it's holding and falls prone.</li><li>The creature automatically fails Strength and Dexterity saving throws.</li><li>Attack rolls against the creature have advantage.</li><li></li><li>Any attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Unconscious",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      },
+      {
+        "name": "speed",
+        "value": 0,
+        "exclusive": true,
+        "tags": {"condition": true},
+        "ref": "PHB 292"
+      }
+    ],
+    "addMods": [
+      "Incapacitated",
+      "Prone"
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Surprised",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A surprised creature cannot move or take an action on its first turn of the combat.</li><li>The creature cannot take a reaction until after its first turn ends.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Surprised",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 189"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Bloodied",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A bloodied creature (one with half or fewer of its maximum hit points remaining) has disadvantage on ability checks.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Bloodied",
+        "exclusive": false,
+        "tags": {"condition": true, "variant": true, "bloodied": true},
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Dead",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>A dead creature is dead and can do nothing.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Dead",
+        "exclusive": true,
+        "tags": {"condition": true},
+        "ref": ""
+      }
+    ]
   }
 ]

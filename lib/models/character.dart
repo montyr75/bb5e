@@ -9,9 +9,9 @@ class Character {
   Map<String, Mod> _mods = {};     // master mod list (using a Map, no mod can be applied more than once -- correct behavior?)
 
   Map<String, Entry> _entries = <String, Entry>{
-    "name": new Entry<String>("name"),
-    "size": new ModifiableEntry<String>("size"),
-    "initiativeTotal": new InitiativeTotalEntry<int>()
+    "name": new Entry("name"),
+    "size": new ModifiableEntry("size"),
+    "initiativeTotal": new InitiativeTotalEntry()
   };
 
   Character();
@@ -21,9 +21,9 @@ class Character {
     map['mods'].forEach((Map modMap) => _mods[modMap['id']] = new Mod.fromMap(modMap));
 
     // restore entries
-    _entries['name'] = new Entry<String>.fromMap(map['name']);
-    _entries['size'] = new ModifiableEntry<String>.fromMap(map['size']);
-    _entries['initiativeTotal'] = new InitiativeTotalEntry<int>.fromMap(map['initiativeTotal']);
+    _entries['name'] = new Entry.fromMap(map['name']);
+    _entries['size'] = new ModifiableEntry.fromMap(map['size']);
+    _entries['initiativeTotal'] = new InitiativeTotalEntry.fromMap(map['initiativeTotal']);
 
     // TODO: Test this!
     // when loading a saved character, restore stat ModRef lists (which do not persist)

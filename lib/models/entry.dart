@@ -9,9 +9,9 @@ abstract class Modifiable {
 }
 
 // any entry that can be arbitrarily set by a user
-class Entry<T> {
+class Entry {
   String name;        // the name of the entry (often a stat name)
-  T value;            // the value of the entry
+  var value;            // the value of the entry
   String notes;
 
   Entry(String this.name);
@@ -30,7 +30,7 @@ class Entry<T> {
 }
 
 // takes only a single Mod and uses that as the Entry's value
-class ModifiableEntry<T> extends Entry implements Modifiable {
+class ModifiableEntry extends Entry implements Modifiable {
   ModRef mod;
 
   ModifiableEntry(String name) : super(name);
@@ -52,7 +52,7 @@ class ModifiableEntry<T> extends Entry implements Modifiable {
 }
 
 // takes any number of mods and uses them to calculate the value (simple math)
-class CalculatedEntry<T> extends Entry implements Modifiable {
+class CalculatedEntry extends Entry implements Modifiable {
   List<ModRef> mods = [];
   num min;
   num max;
@@ -95,6 +95,10 @@ class CalculatedEntry<T> extends Entry implements Modifiable {
       value = null;
       return;
     }
+
+    // TODO: check for an exclusive mod and use its value as final
+
+    // TODO: check for nullifiers and multipliers
 
     // calculate value as sum of Mod values
     List<num> values = mods.map((ModRef mod) => mod.value).toList();
