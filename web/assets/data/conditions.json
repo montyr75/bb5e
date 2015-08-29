@@ -321,7 +321,7 @@
     "type": "Condition",
     "exclusiveByType": false,
     "source": "User",
-    "description": "<ul><li>A dead creature is dead and can do nothing.</li></ul>",
+    "description": "<ul><li>A dead creature is deceased and can do nothing.</li></ul>",
     "affectedStats": [
       {
         "name": "conditions",
@@ -330,6 +330,132 @@
         "tags": {"condition": true},
         "ref": ""
       }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Exhaustion: Level 1",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>Disadvantage on ability checks.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Exhaustion: Level 1",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Exhaustion: Level 2",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>Speed halved.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Exhaustion: Level 2",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      },
+      {
+        "name": "speed",
+        "value": "/2",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Exhaustion: Level 3",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>Disadvantage on attack rolls and saving throws.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Exhaustion: Level 3",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Exhaustion: Level 4",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>Hit point maximum halved.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Exhaustion: Level 4",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      },
+      {
+        "name": "hitPointsMax",
+        "value": "/2",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Exhaustion: Level 5",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>Speed reduced to 0.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Exhaustion: Level 5",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      },
+      {
+        "name": "speed",
+        "value": 0,
+        "exclusive": true,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ]
+  },
+  {
+    "level": -1,
+    "name": "Exhaustion: Level 6",
+    "type": "Condition",
+    "exclusiveByType": false,
+    "source": "User",
+    "description": "<ul><li>Death.</li></ul>",
+    "affectedStats": [
+      {
+        "name": "conditions",
+        "value": "Exhaustion: Level 6",
+        "exclusive": false,
+        "tags": {"condition": true},
+        "ref": "PHB 291"
+      }
+    ],
+    "addMods": [
+      "Dead"
     ]
   }
 ]

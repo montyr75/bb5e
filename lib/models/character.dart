@@ -56,6 +56,8 @@ class Character {
         (_entries[stat.name] as Modifiable).addMod(new ModRef(modToAdd, stat));
       }
     });
+
+    // TODO: add/remove additional mods based on modToAdd's "addMods"/"removeMods" lists
   }
 
   void removeMod(String modID) {

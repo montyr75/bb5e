@@ -11,7 +11,7 @@ abstract class Modifiable {
 
 // any entry that can be arbitrarily set by a user
 class Entry {
-  String name;        // the name of the entry (often a stat name)
+  String name;          // the name of the entry (often a stat name)
   var value;            // the value of the entry
   String notes;
 
