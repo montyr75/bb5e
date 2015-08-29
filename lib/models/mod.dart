@@ -95,6 +95,7 @@ class ModRef {
   String get id => mod.id;
   String get name => mod.name;
   get value => stat.value;
+  bool get exclusive => stat.exclusive;
   Map<String, bool> get tags => stat.tags;
   String get ref => stat.ref;
 

@@ -91,25 +91,33 @@ class CalculatedEntry extends Entry implements Modifiable {
   }
 
   void calculate() {
+    // if there are no mods, value is null
     if (mods == null || mods.isEmpty) {
       value = null;
       return;
     }
 
-    // TODO: check for an exclusive mod and use its value as final
+    // check for any exclusive mods, which would dictate the final value
+    ModRef exclusiveMod = mods.firstWhere((ModRef mod) => mod.exclusive, orElse: () => null);
 
-    // TODO: check for nullifiers and multipliers
+    // calculate final value
+    if (exclusiveMod == null) {
+      // TODO: check for nullifiers and multipliers
 
-    // calculate value as sum of Mod values
-    List<num> values = mods.map((ModRef mod) => mod.value).toList();
-    value = values.reduce((num totalValue, num currentValue) => totalValue + currentValue);
+      // calculate value as sum of Mod values
+      List<num> values = mods.map((ModRef mod) => mod.value).toList();
+      value = values.reduce((num totalValue, num currentValue) => totalValue + currentValue);
 
-    // enforce min/max
-    if (min != null) {
-      value = value < min ? min : value;
+      // enforce min/max
+      if (min != null) {
+        value = value < min ? min : value;
+      }
+      if (max != null) {
+        value = value > max ? max : value;
+      }
     }
-    if (max != null) {
-      value = value > max ? max : value;
+    else {
+      value = exclusiveMod.value;
     }
   }
 }
