@@ -8,6 +8,8 @@ import 'package:event_bus/event_bus.dart';
 const String FIREBASE_PATH = "https://incandescent-heat-2470.firebaseio.com";
 const String FIREBASE_CHARACTER_PATH = "$FIREBASE_PATH/characterData";
 
+const String NULL = "(null)";     // for storing null in Firebase
+
 // define logger
 final Logger log = new Logger("bb5e");
 

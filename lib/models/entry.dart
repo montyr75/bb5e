@@ -1,6 +1,7 @@
 library dd5.base.entry;
 
 import "mod.dart";
+import "global.dart";
 
 abstract class Modifiable {
   void addMod(ModRef mod);          // add mod to entry and recalculate value (if necessary)
@@ -91,6 +92,9 @@ class CalculatedEntry extends Entry implements Modifiable {
   }
 
   void calculate() {
+    // NOTE: supports only one exclusive mod (the first found)
+    // NOTE: supports only one multiplier (the last found)
+
     // if there are no mods, value is null
     if (mods == null || mods.isEmpty) {
       value = null;
@@ -100,13 +104,34 @@ class CalculatedEntry extends Entry implements Modifiable {
     // check for any exclusive mods, which would dictate the final value
     ModRef exclusiveMod = mods.firstWhere((ModRef mod) => mod.exclusive, orElse: () => null);
 
-    // calculate final value
+    // if there are no exclusive mods, calculate final value normally
     if (exclusiveMod == null) {
-      // TODO: check for nullifiers and multipliers
+      String multiplier;
+
+      // construct list of mod values, saving out any multipliers
+      List<num> values = mods.map((ModRef mod) {
+        if (mod.value is num) {
+          return mod.value;
+        }
+        else if (mod.value is String) {
+          multiplier = mod.value;
+        }
+
+        return 0;
+      }).toList();
 
       // calculate value as sum of Mod values
-      List<num> values = mods.map((ModRef mod) => mod.value).toList();
       value = values.reduce((num totalValue, num currentValue) => totalValue + currentValue);
+
+      // apply any multipliers
+      if (multiplier != null) {
+        num operand = num.parse(multiplier.substring(1));
+
+        switch (multiplier[0]) {
+          case "*": value *= operand; break;
+          case "/": value /= operand; break;
+        }
+      }
 
       // enforce min/max
       if (min != null) {
@@ -117,7 +142,7 @@ class CalculatedEntry extends Entry implements Modifiable {
       }
     }
     else {
-      value = exclusiveMod.value;
+      value = exclusiveMod.value == NULL ? null : exclusiveMod.value;
     }
   }
 }
