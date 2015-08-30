@@ -12,7 +12,9 @@ class Mod {
   String source;            // source of mod (examples: User, Race:Elf, Class:Fighter, etc.)
   String description;       // full description of mod (if any)
 
-  List<AffectedStat> affectedStats = <AffectedStat>[];
+  List<AffectedStat> affectedStats;   // list of effects on character entries (must be List because it's possible to affect the same stat more than once)
+  Map addMods;      // map of Mod IDs that should be added when this one is added, along with an optional list of maps of affected stats and associated values (example: [{"name": "size", "value": "Tiny"}])
+  List<String> removeMods;            // list of Mod IDs that should be removed when this one is added
 
   Mod();
 
@@ -25,11 +27,15 @@ class Mod {
     source = map["source"];
     description = map["description"];
 
-    affectedStats = map['affectedStats'].map((Map asMap) => new AffectedStat.fromMap(asMap)).toList();
+    affectedStats = (map['affectedStats'] as List).map((Map asMap) => new AffectedStat.fromMap(asMap)).toList();
+
+    // these are often not present in the database (null)
+    addMods = map['addMods'];
+    removeMods = map['removeMods'];
   }
 
   Map toMap() {
-    return {
+    Map map = {
       "id": id,
       "level": level,
       "name": name,
@@ -39,6 +45,16 @@ class Mod {
       "description": description,
       "affectedStats": affectedStats.map((AffectedStat stat) => stat.toMap()).toList()
     };
+
+    // don't include these in the database if they're not used
+    if (addMods != null) {
+      map['addMods'] = addMods;
+    }
+    if (removeMods != null) {
+      map['removeMods'] = removeMods;
+    }
+
+    return map;
   }
 
   void setValue(value, {String statName}) {
@@ -62,11 +78,11 @@ class Mod {
 }
 
 class AffectedStat {
-  String name;
-  var value;
-  bool exclusive = false;       // an exclusive effect overshadows all other effects on a stat (example: Incapacitated on InitiativeTotalEntry)
+  String name;                // name of affected stat
+  var value;                  // value to apply to affected stat (special values include: "(null)", "(int)", etc.)
+  bool exclusive = false;     // an exclusive effect overshadows all other effects on a stat (example: Incapacitated on InitiativeTotalEntry)
   Map<String, bool> tags;
-  String ref;         // reference for mod in game books (examples: PHB 101, DMG 55)
+  String ref;                 // reference for mod in game books (examples: PHB 101, DMG 55)
 
   AffectedStat();
 
@@ -101,31 +117,3 @@ class ModRef {
 
   @override String toString() => "$name (${stat.name}): $value";
 }
-
-//class ModRef {
-//  String id;            // the ID of the source Mod
-//  String name;          // the name of the source Mod
-//  AffectedStat stat;    // just one affected stat
-//
-//  ModRef(this.id, this.name, this.stat);
-//
-//  ModRef.fromMap(Map map) {
-//    id = map['id'];
-//    name = map['name'];
-//    stat = new AffectedStat.fromMap(map);
-//  }
-//
-//  Map toMap() {
-//    return {
-//      "id": id,
-//      "name": name,
-//      "stat": stat.toMap()
-//    };
-//  }
-//
-//  get value => stat.value;
-//  get tags => stat.tags;
-//  get ref => stat.ref;
-//
-//  @override String toString() => "$name (${stat.name}): $value";
-//}

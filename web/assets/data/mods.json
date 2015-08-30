@@ -10,6 +10,7 @@
       {
         "name": "initiativeTotal",
         "value": "(int)",
+        "exclusive": false,
         "tags": {"initiative": true},
         "ref": "PHB 189"
       }
@@ -26,6 +27,7 @@
       {
         "name": "initiativeTotal",
         "value": "(int)",
+        "exclusive": false,
         "tags": {"initiative": true},
         "ref": "PHB"
       }
@@ -42,6 +44,7 @@
       {
         "name": "initiativeTotal",
         "value": "(int)",
+        "exclusive": false,
         "tags": {"initiative": true, "speed factor": true, "variant": true},
         "ref": "DMG 270"
       }
@@ -58,6 +61,7 @@
       {
         "name": "initiativeTotal",
         "value": -2,
+        "exclusive": false,
         "tags": {"initiative": true, "speed factor": true, "variant": true},
         "ref": "DMG 270"
       }
@@ -74,6 +78,7 @@
       {
         "name": "initiativeTotal",
         "value": 2,
+        "exclusive": false,
         "tags": {"initiative": true, "speed factor": true, "variant": true},
         "ref": "DMG 270"
       }
@@ -90,6 +95,7 @@
       {
         "name": "initiativeTotal",
         "value": -2,
+        "exclusive": false,
         "tags": {"initiative": true, "speed factor": true, "variant": true},
         "ref": "DMG 270"
       }
@@ -106,6 +112,7 @@
       {
         "name": "initiativeTotal",
         "value": -5,
+        "exclusive": false,
         "tags": {"initiative": true, "speed factor": true, "variant": true},
         "ref": "DMG 270"
       }
@@ -122,6 +129,7 @@
       {
         "name": "initiativeTotal",
         "value": "(int)",
+        "exclusive": false,
         "tags": {"initiative": true, "speed factor": true, "variant": true},
         "ref": "DMG 270"
       }

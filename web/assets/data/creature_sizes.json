@@ -10,12 +10,14 @@
       {
         "name": "size",
         "value": "Tiny",
+        "exclusive": false,
         "tags": {"size": true, "creatures size": true},
         "ref": "PHB"
       },
       {
         "name": "initiativeTotal",
         "value": 5,
+        "exclusive": false,
         "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
         "ref": "DMG 270"
       }
@@ -32,12 +34,14 @@
       {
         "name": "size",
         "value": "Small",
+        "exclusive": false,
         "tags": {"size": true, "creatures size": true},
         "ref": "PHB"
       },
       {
         "name": "initiativeTotal",
         "value": 2,
+        "exclusive": false,
         "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
         "ref": "DMG 270"
       }
@@ -54,12 +58,14 @@
       {
         "name": "size",
         "value": "Medium",
+        "exclusive": false,
         "tags": {"size": true, "creatures size": true},
         "ref": "PHB"
       },
       {
         "name": "initiativeTotal",
         "value": 0,
+        "exclusive": false,
         "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
         "ref": "DMG 270"
       }
@@ -76,12 +82,14 @@
       {
         "name": "size",
         "value": "Large",
+        "exclusive": false,
         "tags": {"size": true, "creatures size": true},
         "ref": "PHB"
       },
       {
         "name": "initiativeTotal",
         "value": -2,
+        "exclusive": false,
         "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
         "ref": "DMG 270"
       }
@@ -98,12 +106,14 @@
       {
         "name": "size",
         "value": "Huge",
+        "exclusive": false,
         "tags": {"size": true, "creatures size": true},
         "ref": "PHB"
       },
       {
         "name": "initiativeTotal",
         "value": -5,
+        "exclusive": false,
         "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
         "ref": "DMG 270"
       }
@@ -120,12 +130,14 @@
       {
         "name": "size",
         "value": "Gargantuan",
+        "exclusive": false,
         "tags": {"size": true, "creatures size": true},
         "ref": "PHB"
       },
       {
         "name": "initiativeTotal",
         "value": -8,
+        "exclusive": false,
         "tags": {"initiative": true, "size": true, "creatures size": true, "variant": true, "speed factor": true},
         "ref": "DMG 270"
       }

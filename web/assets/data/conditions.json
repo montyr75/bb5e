@@ -151,9 +151,9 @@
         "ref": "PHB 291"
       }
     ],
-    "addMods": [
-      "Incapacitated"
-    ]
+    "addMods": {
+      "Incapacitated": "(null)"
+    }
   },
   {
     "level": -1,
@@ -171,9 +171,9 @@
         "ref": "PHB 291"
       }
     ],
-    "addMods": [
-      "Incapacitated"
-    ]
+    "addMods": {
+      "Incapacitated": "(null)"
+    }
   },
   {
     "level": -1,
@@ -249,9 +249,9 @@
         "ref": "PHB 292"
       }
     ],
-    "addMods": [
-      "Incapacitated"
-    ]
+    "addMods": {
+      "Incapacitated": "(null)"
+    }
   },
   {
     "level": -1,
@@ -276,10 +276,10 @@
         "ref": "PHB 292"
       }
     ],
-    "addMods": [
-      "Incapacitated",
-      "Prone"
-    ]
+    "addMods": {
+      "Incapacitated": "(null)",
+      "Prone": "(null)"
+    }
   },
   {
     "level": -1,
@@ -454,8 +454,8 @@
         "ref": "PHB 291"
       }
     ],
-    "addMods": [
-      "Dead"
-    ]
+    "addMods": {
+      "Dead": "(null)"
+    }
   }
 ]

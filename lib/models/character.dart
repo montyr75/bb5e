@@ -1,10 +1,12 @@
 library client.dm.character;
 
+import 'game_model.dart';
 import 'mod.dart';
 import 'entry.dart';
 import 'initiative_total_entry.dart';
 
 class Character {
+  GameModel _gameModel;
 
   Map<String, Mod> _mods = {};     // master mod list (using a Map, no mod can be applied more than once -- correct behavior?)
 
@@ -14,9 +16,9 @@ class Character {
     "initiativeTotal": new InitiativeTotalEntry()
   };
 
-  Character();
+  Character(GameModel this._gameModel);
 
-  Character.fromMap(Map map) {
+  Character.fromMap(GameModel this._gameModel, Map map) {
     // restore master mod list
     map['mods'].forEach((Map modMap) => _mods[modMap['id']] = new Mod.fromMap(modMap));
 
@@ -57,10 +59,18 @@ class Character {
       }
     });
 
-    // TODO: add/remove additional mods based on modToAdd's "addMods"/"removeMods" lists
+    // TODO: add additional mods based on modToAdd's "addMods" map
+    // add any mods that need to accompany modToAdd
+    // if the value is NULL, no affectedStat values need to be set before applying the mod
+    //   otherwise, the value will be a List of Maps, each of which will have an "affectedStat" and a "value"
+//    modToAdd.addMods?.forEach((String modID, value) {});
+
+    // remove any mods that need to leave as modToAdd is added
+    modToAdd.removeMods?.forEach((String modID) => removeMod(modID));
   }
 
   void removeMod(String modID) {
+    // remove ModRefs from affected stats
     if (_mods.containsKey(modID)) {
       _mods[modID].affectedStats.forEach((AffectedStat stat) {
         (_entries[stat.name] as Modifiable).removeMod(modID);

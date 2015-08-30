@@ -12,6 +12,6 @@ class PlayerModel {
 
   PlayerModel(Map modMaps) {
     gameModel = new GameModel(modMaps);
-    character = new Character();
+    character = new Character(gameModel);
   }
 }
