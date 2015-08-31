@@ -44,12 +44,12 @@ class CharacterBasicsView extends View {
   }
 }
 
-class ConditionsView extends View {
+/*class ConditionsView extends View {
 
   // TODO: Figure out the UI for Condition: Exhausted and Condition: Dead
 
   // UI refs (input)
-  Map<CheckboxInputElement, String> ui = {
+  Map<LabelElement, String> ui = {
     querySelector("#cond-blinded"): "-Jy19_zArP0fdYJOQ1mZ",
     querySelector("#cond-charmed"): "-Jy19_zCnQwNiHWXp1vv",
     querySelector("#cond-deafened"): "-Jy19_zDg1LHglwsx2v6",
@@ -86,8 +86,8 @@ class ConditionsView extends View {
     }
 
     // create listeners
-    ui.keys.forEach((CheckboxInputElement cb) {
-      log.info("${cb.id} listening...");
+    ui.keys.forEach((LabelElement cb) {
+      log.info("${cb.id} listening..."); cb.on
       cb.onChange.listen((Event event) {
         log.info("${event.target.id} changed");
         _setMod((event.target as CheckboxInputElement).checked, ui[event.target]);
@@ -96,7 +96,7 @@ class ConditionsView extends View {
 
     // listen for model changes and update UI to match
     eventBus.on(ConditionsChangedEvent).listen((ConditionsChangedEvent event) {
-      ui.keys.forEach((CheckboxInputElement cb) {
+      ui.keys.forEach((LabelElement cb) {
         String condition = cb.id.substring(5);
         condition = "${condition[0].toUpperCase()}${condition.substring(1)}";
 
@@ -106,7 +106,7 @@ class ConditionsView extends View {
       });
     });
   }
-}
+}*/
 
 class InitiativeView extends View {
   static const String INIT_ROLL = "-JxlER7yTbE8jkNR0G8U";
