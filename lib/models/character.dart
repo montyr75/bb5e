@@ -11,13 +11,16 @@ class Character {
 
   Map<String, Mod> _mods = {};     // master mod list (using a Map, no mod can be applied more than once -- correct behavior?)
 
-  Map<String, Entry> _entries = <String, Entry>{
-    "name": new Entry("name"),
-    "size": new ModifiableEntry("size"),
-    "initiativeTotal": new InitiativeTotalEntry()
-  };
+  Map<String, Entry> _entries;
 
-  Character(GameModel this._gameModel);
+  Character(GameModel this._gameModel) {
+    _entries = <String, Entry>{
+      "name": new Entry("name"),
+      "size": new ModifiableEntry("size"),
+      "conditions": new ListEntry("conditions"),
+      "initiativeTotal": new InitiativeTotalEntry()
+    };
+  }
 
   Character.fromMap(GameModel this._gameModel, Map map) {
     // restore master mod list

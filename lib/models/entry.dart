@@ -27,7 +27,9 @@ class Entry {
     };
   }
 
-  @override String toString() => "$name: $value";
+  @override String toString() => "$value";
+
+  String toStringWithName() => "$name: $value";
 }
 
 // takes only a single Mod and uses that as the Entry's value
@@ -58,18 +60,13 @@ class CalculatedEntry extends Entry implements Modifiable {
   num min;
   num max;
 
-  CalculatedEntry(String name, {num this.min: null, num this.max: null}) : super(name) {
-    value = null;
-  }
+  CalculatedEntry(String name, {num this.min: null, num this.max: null}) : super(name);
 
-  CalculatedEntry.fromMap(Map map) : super.fromMap(map), min = map['min'], max = map['max'] {
-//    mods = map['mods'].map((Map modMap) => new ModRef.fromMap(modMap)).toList();
-  }
+  CalculatedEntry.fromMap(Map map) : super.fromMap(map), min = map['min'], max = map['max'];
 
-  Map toMap() {
+  @override Map toMap() {
     Map map = super.toMap();
     map.addAll({
-//      "mods": mods.map((ModRef mod) => mod.toMap()).toList(),
       "min": min,
       "max": max
     });
@@ -92,7 +89,7 @@ class CalculatedEntry extends Entry implements Modifiable {
   }
 
   void calculate() {
-    // NOTE: supports only one exclusive mod (the first found)
+    // NOTE: supports only one exclusive effect (the first found)
     // NOTE: supports only one multiplier (the last found)
 
     // if there are no mods, value is null
@@ -134,15 +131,55 @@ class CalculatedEntry extends Entry implements Modifiable {
       }
 
       // enforce min/max
-      if (min != null) {
+      if (min != null && value != null) {
         value = value < min ? min : value;
       }
-      if (max != null) {
+      if (max != null && value != null) {
         value = value > max ? max : value;
       }
     }
     else {
       value = exclusiveMod.value == NULL ? null : exclusiveMod.value;
     }
+  }
+}
+
+// takes any number of mods and uses them to construct a list of string values
+class ListEntry extends Entry implements Modifiable {
+  List<ModRef> mods = [];
+
+  ListEntry(String name) : super(name) {
+    value = <String, bool>{};
+  }
+
+  ListEntry.fromMap(Map map) : super.fromMap(map);
+
+  void addMod(ModRef mod) {
+    mods.add(mod);
+    value[mod.value] = true;
+  }
+
+  void removeMod(String modID) {
+    ModRef mod = mods.firstWhere((ModRef mod) => mod.id == modID, orElse: () => null);
+
+    if (mod != null) {
+      mods.remove(mod);
+      value.remove(mod.value);
+    }
+  }
+
+  void restoreMod(ModRef mod) {
+    mods.add(mod);
+  }
+
+  @override Map toMap() {
+    Map map = super.toMap();
+    map['value'] = value;
+    return map;
+  }
+
+  @override toString() {
+    List<String> items = value.keys.toList()..sort();
+    return items.toString().replaceAll(new RegExp(r"[\[\]]"), "");
   }
 }
