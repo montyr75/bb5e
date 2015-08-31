@@ -19,15 +19,15 @@ Future getGameData() async {
 void test() {
   Character c = model.character;
   c['name'].value = "Bob";
-//  c.addMod(model.gameModel['-JwnoPlDzNETWJ3aXle9']..value = 15);    // init roll
-//  c.addMod(model.gameModel['-JwnoPlFx3hz9pwAAYHn']..value = 2);     // DEX mod
-//  c.addMod(model.gameModel['-JwnoPlIvT4px-phgWlD']);                // melee, finesse
-//  c.addMod(model.gameModel['-JwnoPlNGljXXDbGim8_']..setValue(-5, statName: "initiativeTotal"));   // custom
-
-//  c.removeMod('-JwnoPlIvT4px-phgWlD');             // melee, finesse
+  c.addMod(model.gameModel['-JxlER7yTbE8jkNR0G8U']..value = 15);    // init roll
+  c.addMod(model.gameModel['-JxlER83xf5vPpIlq5hd']..value = 2);     // DEX mod
 
   c.addMod(model.gameModel['-JxlET8yXcgHAJMu9pm4']);          // Creature Size: Medium
-  c.addMod(model.gameModel['-JxlET8tgFA5bewaPihl']);          // Creature Size: Medium
 
-  print(c);
+  c.addMod(model.gameModel['-Jy19_z40xsHO5J9N5Zb']);          // Condition: Incapacitated
+  c.removeMod('-Jy19_z40xsHO5J9N5Zb');          // Condition: Incapacitated
+
+  c.addMod(model.gameModel['-Jy19_zRaKPxh2tHiu_P']);          // Condition: Stunned (automatically adds Incapacitated)
+
+  print("\n$c");
 }

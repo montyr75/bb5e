@@ -3,6 +3,7 @@ library client.dm.character;
 import 'game_model.dart';
 import 'mod.dart';
 import 'entry.dart';
+import 'global.dart';
 import 'initiative_total_entry.dart';
 
 class Character {
@@ -59,21 +60,28 @@ class Character {
       }
     });
 
-    // TODO: add additional mods based on modToAdd's "addMods" map
-    // add any mods that need to accompany modToAdd
-    // if the value is NULL, no affectedStat values need to be set before applying the mod
-    //   otherwise, the value will be a List of Maps, each of which will have an "affectedStat" and a "value"
-//    modToAdd.addMods?.forEach((String modID, value) {});
-
     // remove any mods that need to leave as modToAdd is added
     modToAdd.removeMods?.forEach((String modID) => removeMod(modID));
+
+    // add any mods that need to accompany modToAdd
+    // if the value is NULL, no affectedStat values need to be set before applying the mod
+    //   otherwise, the value will be a List of Maps, each of which will be a mini AffectedStat (see Mod for example)
+    modToAdd.addMods?.forEach((String modID, value) {
+      Mod mod = _gameModel[modID];
+
+      if (value != NULL) {
+        (value as List).forEach((Map as) => mod.setValue(as['value'], statName: as['name']));
+      }
+
+      addMod(mod);
+    });
   }
 
   void removeMod(String modID) {
     // remove ModRefs from affected stats
     if (_mods.containsKey(modID)) {
       _mods[modID].affectedStats.forEach((AffectedStat stat) {
-        (_entries[stat.name] as Modifiable).removeMod(modID);
+        (_entries[stat.name] as Modifiable)?.removeMod(modID);
       });
 
       // remove mod from master list
