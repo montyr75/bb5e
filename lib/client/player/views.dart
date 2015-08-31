@@ -94,7 +94,7 @@ class ConditionsView extends View {
       });
     });
 
-    querySelector("#test-cb").onClick.listen((Event event) {
+    querySelector("#test-cb").onChange.listen((Event event) {
       log.info("${event.target.id} changed");
     });
 
