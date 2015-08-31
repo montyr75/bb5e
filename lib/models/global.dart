@@ -36,3 +36,8 @@ class InitiativeTotalCalculatedEvent {
   final int value;
   InitiativeTotalCalculatedEvent(this.value);
 }
+
+class ConditionsChangedEvent {
+  final Map<String, bool> value;
+  ConditionsChangedEvent(this.value);
+}

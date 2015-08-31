@@ -4,7 +4,7 @@ import 'game_model.dart';
 import 'mod.dart';
 import 'entry.dart';
 import 'global.dart';
-import 'initiative_total_entry.dart';
+import 'dd5e_entries.dart';
 
 class Character {
   GameModel _gameModel;
@@ -17,7 +17,7 @@ class Character {
     _entries = <String, Entry>{
       "name": new Entry("name"),
       "size": new ModifiableEntry("size"),
-      "conditions": new ListEntry("conditions"),
+      "conditions": new ConditionsEntry(),
       "initiativeTotal": new InitiativeTotalEntry()
     };
   }
