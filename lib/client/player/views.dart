@@ -94,10 +94,6 @@ class ConditionsView extends View {
       });
     });
 
-    querySelector("#test-cb").onChange.listen((Event event) {
-      log.info("${event.target.id} changed");
-    });
-
     // listen for model changes and update UI to match
     eventBus.on(ConditionsChangedEvent).listen((ConditionsChangedEvent event) {
       ui.keys.forEach((CheckboxInputElement cb) {
