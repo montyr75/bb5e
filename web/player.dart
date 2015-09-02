@@ -14,26 +14,25 @@ PlayerModel model;
 List<View> currentViews = [];
 //ClientConnectionManager ccm = new ClientConnectionManager();
 
-void main() {
+Future main() async {
   initLog();
 
-  getGameData().then((_) {
-    db.onSave.listen((bool saved) {
-      JsObject jQuery = context['jQuery'];
-      JsObject config = new JsObject.jsify({'width': 'auto'});
-      jQuery.callMethod('bootstrapGrowl', ['Character Saved', config]);
-    });
-
-    currentViews.add(new CharacterBasicsView(model));
-//    currentViews.add(new ConditionsView(model));
-    currentViews.add(new InitiativeView(model));
-    currentViews.add(new SpeedFactorView(model));
-
-    // character SAVE button
-    querySelector("#save-btn").onClick.listen((_) => db.saveCharacterData(model.character.toMap()));
-  });
-}
-
-Future getGameData() async {
+  // load game data asynchronously
   model = new PlayerModel(await db.getGameData());
+
+  // show growl on successful character save
+  db.onSave.listen((bool saved) {
+    JsObject jQuery = context['jQuery'];
+    JsObject config = new JsObject.jsify({'width': 'auto'});
+    jQuery.callMethod('bootstrapGrowl', ['Character Saved', config]);
+  });
+
+  // initialize views
+  currentViews.add(new CharacterBasicsView(model));
+//  currentViews.add(new ConditionsView(model));
+  currentViews.add(new InitiativeView(model));
+  currentViews.add(new SpeedFactorView(model));
+
+  // character SAVE button
+  querySelector("#save-btn").onClick.listen((_) => db.saveCharacterData(model.character.toMap()));
 }
