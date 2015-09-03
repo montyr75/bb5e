@@ -44,7 +44,7 @@ class CharacterBasicsView extends View {
   }
 }
 
-/*class ConditionsView extends View {
+class ConditionsView extends View {
 
   // TODO: Figure out the UI for Condition: Exhausted and Condition: Dead
 
@@ -65,7 +65,8 @@ class CharacterBasicsView extends View {
     querySelector("#cond-stunned"): "-Jy19_zRaKPxh2tHiu_P",
     querySelector("#cond-unconscious"): "-Jy19_zSKh-yOG69Ao6v",
     querySelector("#cond-surprised"): "-Jy19_zVohhAnh4_Dw81",
-    querySelector("#cond-bloodied"): "-Jy19_zYI7IoQenWICjK"
+    querySelector("#cond-bloodied"): "-Jy19_zYI7IoQenWICjK",
+    querySelector("#cond-dead"): "-Jy19_zZ70nSaU1ORiYL"
   };
 
   ConditionsView(PlayerModel model) : super(model);
@@ -87,26 +88,28 @@ class CharacterBasicsView extends View {
 
     // create listeners
     ui.keys.forEach((LabelElement cb) {
-      log.info("${cb.id} listening..."); cb.on
-      cb.onChange.listen((Event event) {
-        log.info("${event.target.id} changed");
-        _setMod((event.target as CheckboxInputElement).checked, ui[event.target]);
+      log.info("${cb.id} listening...");
+      cb.onClick.listen((MouseEvent event) {
+        LabelElement btn = event.target;
+        log.info("${btn.id} clicked");
+        // TODO: This might need to be delayed to be accurate.
+        _setMod(btn.classes.contains("active"), ui[event.target]);
       });
     });
 
     // listen for model changes and update UI to match
     eventBus.on(ConditionsChangedEvent).listen((ConditionsChangedEvent event) {
-      ui.keys.forEach((LabelElement cb) {
-        String condition = cb.id.substring(5);
-        condition = "${condition[0].toUpperCase()}${condition.substring(1)}";
-
-        if (event.value[condition] != null) {
-          cb.checked = true;
-        }
-      });
+//      ui.keys.forEach((LabelElement cb) {
+//        String condition = cb.id.substring(5);
+//        condition = "${condition[0].toUpperCase()}${condition.substring(1)}";
+//
+//        if (event.value[condition] != null) {
+//          cb.checked = true;
+//        }
+//      });
     });
   }
-}*/
+}
 
 class InitiativeView extends View {
   static const String INIT_ROLL = "-JxlER7yTbE8jkNR0G8U";
