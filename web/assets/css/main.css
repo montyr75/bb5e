@@ -132,6 +132,10 @@ body {
   background-image: url("../../images/conditions/dead.png");
 }
 
+#cond-dead2 {
+  background-image: url("../../images/conditions/dead2.png");
+}
+
 button, .btn {
   cursor: default !important;
 }
