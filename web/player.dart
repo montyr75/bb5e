@@ -29,7 +29,7 @@ Future main() async {
 
   // initialize views
   currentViews.add(new CharacterBasicsView(model));
-//  currentViews.add(new ConditionsView(model));
+  currentViews.add(new ConditionsView(model));
   currentViews.add(new InitiativeView(model));
   currentViews.add(new SpeedFactorView(model));
 

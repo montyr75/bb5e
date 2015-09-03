@@ -1,6 +1,7 @@
 library bb5e.client.player.views;
 
 import 'dart:html';
+import 'dart:async';
 import '../../client/player/player_model.dart';
 import '../../models/global.dart';
 import '../../models/character.dart';
@@ -78,6 +79,7 @@ class ConditionsView extends View {
     Map<String, Mod> mods = _model.gameModel.mods;
 
     void _setMod(bool checked, String modID) {
+      log.info("$checked");
       if (checked) {
         char.addMod(mods[modID]);
       }
@@ -88,25 +90,25 @@ class ConditionsView extends View {
 
     // create listeners
     ui.keys.forEach((LabelElement cb) {
-      log.info("${cb.id} listening...");
       cb.onClick.listen((MouseEvent event) {
         LabelElement btn = event.target;
         log.info("${btn.id} clicked");
-        // TODO: This might need to be delayed to be accurate.
-        _setMod(btn.classes.contains("active"), ui[event.target]);
+        Timer.run(() {
+          _setMod(btn.classes.contains("active"), ui[event.target]);
+        });
       });
     });
 
     // listen for model changes and update UI to match
     eventBus.on(ConditionsChangedEvent).listen((ConditionsChangedEvent event) {
-//      ui.keys.forEach((LabelElement cb) {
-//        String condition = cb.id.substring(5);
-//        condition = "${condition[0].toUpperCase()}${condition.substring(1)}";
-//
-//        if (event.value[condition] != null) {
-//          cb.checked = true;
-//        }
-//      });
+      ui.keys.forEach((LabelElement btn) {
+        String condition = btn.id.substring(5);
+        condition = "${condition[0].toUpperCase()}${condition.substring(1)}";
+
+        if (event.value[condition] != null) {
+          btn.classes.add("active");
+        }
+      });
     });
   }
 }
