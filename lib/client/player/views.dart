@@ -108,6 +108,9 @@ class ConditionsView extends View {
         if (event.value[condition] != null) {
           btn.classes.add("active");
         }
+        else {
+          btn.classes.remove("active");
+        }
       });
     });
   }

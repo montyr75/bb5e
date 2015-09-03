@@ -326,7 +326,7 @@
       {
         "name": "conditions",
         "value": "Dead",
-        "exclusive": true,
+        "exclusive": false,
         "tags": {"condition": true},
         "ref": ""
       }
