@@ -128,11 +128,11 @@ body {
   background-image: url("../../images/conditions/exhausted.png");
 }
 
-#cond-dead {
-  background-image: url("../../images/conditions/dead.png");
-}
+/*#cond-dead {*/
+  /*background-image: url("../../images/conditions/dead.png");*/
+/*}*/
 
-#cond-dead2 {
+#cond-dead {
   background-image: url("../../images/conditions/dead2.png");
 }
 

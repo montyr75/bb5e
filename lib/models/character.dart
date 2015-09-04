@@ -26,7 +26,7 @@ class Character {
     log.info(map);
 
     // restore master mod list
-    map['mods'].forEach((String modID, Map modMap) => _mods[modID] = new Mod.fromMap(modMap));
+    map['mods']?.forEach((String modID, Map modMap) => _mods[modID] = new Mod.fromMap(modMap));
 
     // restore entries
     _entries = {};
