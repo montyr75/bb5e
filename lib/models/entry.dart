@@ -88,6 +88,10 @@ class CalculatedEntry extends Entry implements Modifiable {
     mods.add(mod);
   }
 
+  bool containsModByName(String modName) {
+    return mods.firstWhere((ModRef mod) => mod.name == modName, orElse: () => null) != null ? true : false;
+  }
+
   void calculate() {
     // NOTE: supports only one exclusive effect (the first found)
     // NOTE: supports only one multiplier (the last found)

@@ -57,6 +57,17 @@ class Mod {
     return map;
   }
 
+  dynamic getValue({String statName}) {
+    if (statName == null) {
+      return affectedStats[0].value;
+    }
+    else {
+      // find first stat with the given name and return its value
+      AffectedStat stat = affectedStats.firstWhere((AffectedStat stat) => stat.name == statName, orElse: () => null);
+      return stat?.value;
+    }
+  }
+
   void setValue(value, {String statName}) {
     if (statName == null) {
       affectedStats[0].value = value;
@@ -68,6 +79,9 @@ class Mod {
   }
 
   Mod clone() => new Mod.fromMap(toMap());
+
+  // this sets the value on just the first affectedStat (good for when there's only one)
+  dynamic get value => getValue();
 
   // this sets the value on just the first affectedStat (good for when there's only one)
   void set value(val) => setValue(val);

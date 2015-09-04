@@ -33,13 +33,15 @@ void main() {
 
   ref.onChildAdded.listen((FB.Event event) {
     Map char = event.snapshot.val();
-    charModel[getCharID(char)] = char;
+//    charModel[getCharID(char)] = char;
+    charModel[getCharID(char)] = new Character.fromMap(null, char);
     renderCharacters();
   });
 
   ref.onChildChanged.listen((FB.Event event) {
     Map char = event.snapshot.val();
-    charModel[getCharID(char)] = char;
+//    charModel[getCharID(char)] = char;
+    charModel[getCharID(char)] = new Character.fromMap(null, char);
     renderCharacters();
   });
 
@@ -56,17 +58,23 @@ void main() {
   });
 }
 
-String getCharID(Map char) => (char['entries']['name']['value'] as String).toLowerCase().trim();
+String getCharID(Map char) => (char['entries']['name']['value'] as String)?.toLowerCase()?.trim();
 
 void renderCharacters() {
   if (charModel != null) {
     initList.children.clear();
 
-    charModel.forEach((String charID, Map char) {
-      String name = char['entries']['name']['value'];
-      var roll = char['mods']['-JwnoPlDzNETWJ3aXle9']['affectedStats'][0]['value'];
-      var dexMod = char['mods']['-JwnoPlFx3hz9pwAAYHn']['affectedStats'][0]['value'];
-      var initTotal = char['entries']['initiativeTotal']['value'];
+    charModel.forEach((String charID, Character char) {
+//      String name = char['entries']['name']['value'];
+//      var roll = char['mods']['-JxlER7yTbE8jkNR0G8U']['affectedStats'][0]['value'];
+//      var dexMod = char['mods']['-JxlER83xf5vPpIlq5hd']['affectedStats'][0]['value'];
+//      var initTotal = char['entries']['initiativeTotal']['value'];
+
+      String name = char.name;
+      int roll = char.getModByID('-JxlER7yTbE8jkNR0G8U')?.value;   // this method is for getting the value of an effect
+      int dexMod = char.getModByID('-JxlER83xf5vPpIlq5hd')?.value;   // this method is for getting the value of an effect
+      String dexMod_str = dexMod != null ? '${dexMod > 0 ? "+" : ""}${dexMod}' : '--';
+      int initTotal = char['initiativeTotal'].value;     // this method works for character entries
 
       initList.appendHtml('''
         <div class="row list-group-item">
@@ -75,11 +83,11 @@ void renderCharacters() {
             <p class="list-group-item-text"></p>
           </div>
           <div class="col-sm-6">
-            <p class="list-group-item-text">Initiative Roll: $roll</p>
-            <p class="list-group-item-text list-group-item-text-small">DEX Modifier: ${dexMod > 0 ? "+" : ""}${dexMod}</p>
+            <p class="list-group-item-text">Initiative Roll: ${roll ?? '--'}</p>
+            <p class="list-group-item-text list-group-item-text-small">DEX Modifier: $dexMod_str</p>
           </div>
           <div class="col-sm-2">
-            <h4 class="list-group-item-heading">$initTotal</h4>
+            <h4 class="list-group-item-heading">${initTotal ?? '--'}</h4>
           </div>
         </div>'''
       );

@@ -23,13 +23,17 @@ class Character {
   }
 
   Character.fromMap(GameModel this._gameModel, Map map) {
+    log.info(map);
+
     // restore master mod list
-    map['mods'].forEach((Map modMap) => _mods[modMap['id']] = new Mod.fromMap(modMap));
+    map['mods'].forEach((String modID, Map modMap) => _mods[modID] = new Mod.fromMap(modMap));
 
     // restore entries
-    _entries['name'] = new Entry.fromMap(map['name']);
-    _entries['size'] = new ModifiableEntry.fromMap(map['size']);
-    _entries['initiativeTotal'] = new InitiativeTotalEntry.fromMap(map['initiativeTotal']);
+    _entries = {};
+    _entries['name'] = new Entry.fromMap(map['entries']['name']);
+    _entries['size'] = new ModifiableEntry.fromMap(map['entries']['size']);
+    _entries['conditions'] = new ListEntry.fromMap(map['entries']['conditions']);
+    _entries['initiativeTotal'] = new InitiativeTotalEntry.fromMap(map['entries']['initiativeTotal']);
 
     // TODO: Test this!
     // when loading a saved character, restore stat ModRef lists (which do not persist)
@@ -106,6 +110,11 @@ class Character {
 
   // for access to individual entries
   Entry operator [](String stat) => _entries[stat];
+
+  // convenience getters
+  String get name => this['name'].value;
+
+  Mod getModByID(String modID) => _mods[modID];
 
   @override String toString() => "${this['name']}-> ${_entries}";
 }

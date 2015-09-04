@@ -10,7 +10,14 @@ class InitiativeTotalEntry<T> extends CalculatedEntry {
   InitiativeTotalEntry.fromMap(Map map) : super.fromMap(map);
 
   @override void calculate() {
-    super.calculate();
+    // check for presence of initiative roll
+    if (containsModByName("Initiative Roll")) {
+      super.calculate();
+    }
+    else {
+      value = null;
+    }
+
     eventBus.fire(new InitiativeTotalCalculatedEvent(value));
     log.info("$runtimeType::calculate() -- $this");
   }
