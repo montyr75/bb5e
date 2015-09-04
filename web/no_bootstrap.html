@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Player References</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="import" href="assets/css/iron-flex-layout/iron-flex-layout.html">
+
+  </head>
+
+  <body id="no-bootstrap-body" class="fullbleed">
+    <div class="flex-container">
+      <div>
+        <div id="test-header"></div>
+        <!-- Start Typical Difficulty Classes Table -->
+        <div id="test-content-background" class="accordion">
+          <span id="accordion" class="target-fix"></span>
+
+          <div>
+            <span id="accordion1" class="target-fix"></span>
+
+            <!-- Link to open accordion, hidden when open-->
+            <a id="open-accordion1" href="#accordion1" title="open">Typical Difficulty Classes</a>
+
+            <!-- link to close accordion, hidden when closed-->
+            <a id="close-accordion1" href="#accordion" title="close">Typical Difficulty Classes</a>
+
+            <!-- 1st accordion content goes in this div -->
+            <div class="accordion-content">
+              <table class="table-left-row">
+                <tr>
+                  <th>Task Difficulty</th>
+                  <th>DC</th>
+                </tr>
+                <tr>
+                  <td>Trivial</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>Easy</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>Moderate</td>
+                  <td>15</td>
+                </tr>
+                <tr>
+                  <td>Hard</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>Very Hard</td>
+                  <td>25</td>
+                </tr>
+                <tr>
+                  <td>Nearly Impossible</td>
+                  <td>30</td>
+                </tr>
+              </table>
+            </div>
+      <!-- End Typical Difficulty Classes Table -->
+
+            <!-- Second Accordion Option -->
+            <!--<div>-->
+            <!--<span class="target-fix" id="accordion2"></span>-->
+            <!--<a href="#accordion2" id="open-accordion2" title="open">Second Accordion</a>-->
+            <!--<a href="#accordion" id="close-accordion2" title="close">Second Accordion</a>-->
+            <!--<div class="accordion-content">-->
+            <!--<p>Accordion 2 Content.</p>-->
+            <!--</div>-->
+          </div>
+        </div>
+        <div id="test-footer"></div>
+      </div>
+
+
+    </div>
+
+  </body>
+</html>
